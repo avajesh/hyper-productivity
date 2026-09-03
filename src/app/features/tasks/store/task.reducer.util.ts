@@ -50,7 +50,9 @@ export const reCalcTimeSpentForParentIfParent = (
       .map((id) => state.entities[id])
       .filter((task): task is Task => !!task);
 
-    const timeSpentOnDayParent: { [key: string]: number } = {};
+    const timeSpentOnDayParent: { [key: string]: number } = parentTask.ownTimeSpentOnDay
+      ? { ...parentTask.ownTimeSpentOnDay }
+      : {};
 
     subTasks.forEach((subTask: Task) => {
       if (subTask.timeSpentOnDay) {

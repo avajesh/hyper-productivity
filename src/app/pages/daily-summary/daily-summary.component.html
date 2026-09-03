@@ -177,6 +177,13 @@
               [isForToday]="isForToday"
               [isShowYesterday]="isForToday && isIncludeYesterday"
             ></tasks-by-tag>
+
+            <tasks-by-project
+              [dayStr]="dayStr"
+              [flatTasks]="tasks"
+              [isForToday]="isForToday"
+              [isShowYesterday]="isForToday && isIncludeYesterday"
+            ></tasks-by-project>
           }
           <section style="margin-top: 48px">
             <h3 style="font-weight: bold; margin-bottom: 4px">

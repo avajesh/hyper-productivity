@@ -88,6 +88,7 @@ export interface TaskCopy
   // Override required fields that are optional in plugin type
   projectId: string;
   timeSpentOnDay: TimeSpentOnDay;
+  ownTimeSpentOnDay?: TimeSpentOnDay;
 
   // Additional app-specific fields
 

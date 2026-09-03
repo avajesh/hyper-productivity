@@ -79,6 +79,7 @@ import {
 } from './simple-counter-summary-item/simple-counter-summary-item.component';
 import { MetricService } from '../../features/metric/metric.service';
 import { isWithinYesterdayMargin } from './is-include-yesterday.util';
+import { TasksByProjectComponent } from '../../features/tasks/tasks-by-project/tasks-by-project.component';
 
 const FINISH_DAY_SYNC_WAIT_TIMEOUT_MS = 30000;
 export const FINISH_DAY_FINAL_SYNC_TIMEOUT_MS = SYNC_WAIT_TIMEOUT_MS;
@@ -104,6 +105,7 @@ export const FINISH_DAY_FINAL_SYNC_TIMEOUT_MS = SYNC_WAIT_TIMEOUT_MS;
     TranslatePipe,
     TaskSummaryTablesComponent,
     TasksByTagComponent,
+    TasksByProjectComponent,
     EvaluationSheetComponent,
     WorklogWeekComponent,
     InlineMarkdownComponent,

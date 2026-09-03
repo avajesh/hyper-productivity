@@ -58,13 +58,11 @@
           (click)="estimateTime()"
           (keydown.enter)="estimateTime()"
           (keydown.space)="$event.preventDefault(); estimateTime()"
-          [attr.role]="!t.subTasks?.length ? 'button' : null"
-          [attr.tabindex]="!t.subTasks?.length ? 0 : null"
-          [attr.aria-label]="
-            !t.subTasks?.length ? (T.F.TASK.CMP.ESTIMATE | translate) : null
-          "
+          [attr.role]="'button'"
+          [attr.tabindex]="0"
+          [attr.aria-label]="T.F.TASK.CMP.ESTIMATE | translate"
           [class.hasNoTimeSpentOrEstimate]="!t.timeSpent && !t.timeEstimate"
-          [class.isEditable]="!t.subTasks?.length"
+          [class.isEditable]="true"
           class="time-wrapper"
         >
           @if (!t.subTasks?.length) {
@@ -82,8 +80,7 @@
             </div>
           }
           @if (t.subTasks?.length) {
-            @let subTaskTimeSpent = t.subTasks | subTaskTotalTimeSpent;
-            @if (subTaskTimeLeft() || subTaskTimeSpent) {
+            @if (subTaskTimeLeft() || t.timeSpent) {
               <div class="time">
                 <div class="time-val">
                   <mat-icon
@@ -91,7 +88,7 @@
                     style="margin-top: -6px"
                     >functions
                   </mat-icon>
-                  <span [innerHTML]="subTaskTimeSpent | msToString"></span>
+                  <span [innerHTML]="t.timeSpent | msToString"></span>
                 </div>
                 <div class="separator">/</div>
                 <div class="time-val">

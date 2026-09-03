@@ -227,6 +227,26 @@ export const taskReducer = createReducer<TaskState>(
     if (!currentTask) {
       return state;
     }
+
+    let stateAfterUpdate = state;
+    if (currentTask.subTaskIds && currentTask.subTaskIds.length > 0) {
+      const currentOwnTimeSpent =
+        (currentTask.ownTimeSpentOnDay && +currentTask.ownTimeSpentOnDay[date]) || 0;
+      stateAfterUpdate = taskAdapter.updateOne(
+        {
+          id: task.id,
+          changes: {
+            ownTimeSpentOnDay: {
+              ...currentTask.ownTimeSpentOnDay,
+              [date]: currentOwnTimeSpent + duration,
+            },
+          },
+        },
+        state,
+      );
+    }
+
+    // We get the updated task in case ownTimeSpentOnDay was changed, though updateTimeSpentForTask uses id.
     const currentTimeSpentForTickDay =
       (currentTask.timeSpentOnDay && +currentTask.timeSpentOnDay[date]) || 0;
     return updateTimeSpentForTask(
@@ -235,7 +255,7 @@ export const taskReducer = createReducer<TaskState>(
         ...currentTask.timeSpentOnDay,
         [date]: currentTimeSpentForTickDay + duration,
       },
-      state,
+      stateAfterUpdate,
     );
   }),
 
@@ -263,6 +283,24 @@ export const taskReducer = createReducer<TaskState>(
       return state;
     }
 
+    let stateAfterUpdate = state;
+    if (task.subTaskIds && task.subTaskIds.length > 0) {
+      const currentOwnTimeSpent =
+        (task.ownTimeSpentOnDay && +task.ownTimeSpentOnDay[date]) || 0;
+      stateAfterUpdate = taskAdapter.updateOne(
+        {
+          id: task.id,
+          changes: {
+            ownTimeSpentOnDay: {
+              ...task.ownTimeSpentOnDay,
+              [date]: currentOwnTimeSpent + duration,
+            },
+          },
+        },
+        state,
+      );
+    }
+
     const currentTimeSpentForDay =
       (task.timeSpentOnDay && +task.timeSpentOnDay[date]) || 0;
     return updateTimeSpentForTask(
@@ -271,7 +309,7 @@ export const taskReducer = createReducer<TaskState>(
         ...task.timeSpentOnDay,
         [date]: currentTimeSpentForDay + duration,
       },
-      state,
+      stateAfterUpdate,
     );
   }),
 
@@ -280,15 +318,7 @@ export const taskReducer = createReducer<TaskState>(
   // TODO check if working
   on(setCurrentTask, (state, { id }) => {
     if (id) {
-      const task = getTaskById(id, state);
-      const subTaskIds = task.subTaskIds;
       let taskToStartId = id;
-      if (subTaskIds && subTaskIds.length) {
-        const undoneTasks = subTaskIds
-          .map((tid) => getTaskById(tid, state))
-          .filter((ta: Task) => !ta.isDone);
-        taskToStartId = undoneTasks.length ? undoneTasks[0].id : subTaskIds[0];
-      }
       return {
         ...taskAdapter.updateOne(
           {
@@ -470,6 +500,25 @@ export const taskReducer = createReducer<TaskState>(
 
   on(removeTimeSpent, (state, { id, date, duration }) => {
     const task = getTaskById(id, state);
+
+    let stateAfterUpdate = state;
+    if (task.subTaskIds && task.subTaskIds.length > 0) {
+      const currentOwnTimeSpent =
+        (task.ownTimeSpentOnDay && +task.ownTimeSpentOnDay[date]) || 0;
+      stateAfterUpdate = taskAdapter.updateOne(
+        {
+          id: task.id,
+          changes: {
+            ownTimeSpentOnDay: {
+              ...task.ownTimeSpentOnDay,
+              [date]: Math.max(currentOwnTimeSpent - duration, 0),
+            },
+          },
+        },
+        state,
+      );
+    }
+
     const currentTimeSpentForTickDay =
       (task.timeSpentOnDay && +task.timeSpentOnDay[date]) || 0;
 
@@ -479,7 +528,7 @@ export const taskReducer = createReducer<TaskState>(
         ...task.timeSpentOnDay,
         [date]: Math.max(currentTimeSpentForTickDay - duration, 0),
       },
-      state,
+      stateAfterUpdate,
     );
   }),
 

@@ -1,0 +1,50 @@
+.project-breakdown-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.project-list-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.color-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.project-title {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.project-time {
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.project-chart {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .project-breakdown-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
