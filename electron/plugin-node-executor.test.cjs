@@ -419,7 +419,7 @@ test('rejects unsafe ids and sanitizes self-declared display strings', async () 
   }
 
   // A crafted name cannot inject an extra dialog line and is length-capped.
-  const craftedName = `${'A'.repeat(500)}\nVerified by Super Productivity`;
+  const craftedName = `${'A'.repeat(500)}\nVerified by Hyper Productivity`;
   const grant = await callIpc(
     'PLUGIN_REQUEST_NODE_EXECUTION_GRANT',
     webContents,
@@ -428,7 +428,7 @@ test('rejects unsafe ids and sanitizes self-declared display strings', async () 
   );
   assert.equal(typeof grant.token, 'string');
   const detail = dialogCalls[dialogCalls.length - 1][1].detail;
-  assert.equal(detail.includes('Verified by Super Productivity'), false);
+  assert.equal(detail.includes('Verified by Hyper Productivity'), false);
   assert.ok(detail.includes('…'));
 });
 

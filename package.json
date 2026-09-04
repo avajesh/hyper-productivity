@@ -15,7 +15,7 @@
     "url": "git://github.com/avajesh/hyper-productivity.git"
   },
   "license": "MIT",
-  "author": "Johannes Millan <contact@super-productivity.com> (https://techeia.com)",
+  "author": "Johannes Millan <contact@hyper-productivity.com> (https://techeia.com)",
   "main": "./electron/main.js",
   "scripts": {
     "env": "node ./tools/load-env.js",
@@ -113,11 +113,11 @@
     "lint:ts": "ng lint",
     "lint:scss": "stylelint \"**/*.scss\" \"src/assets/themes/*.css\" -- --custom-formatter @csstools/stylelint-formatter-github",
     "lint:css-vars": "node tools/check-css-vars.js",
-    "localInstall": "sudo echo 'Starting local install' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildAllElectron:stage && electron-builder --linux deb && sudo dpkg -i .tmp/app-builds/superProductivity*.deb",
-    "localInstall:mac": "sudo echo 'Starting local install MAC. Don`t forget APPLEID & APPLEIDPASS !!' && npm run buildAllElectron:noTests:prod && sudo echo '' && electron-builder && sudo cp -rf .tmp/app-builds/mac/superProductivity.app/ /Applications/superProductivity.app",
-    "localInstall:prod": "sudo echo 'Starting local install PROD' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildAllElectron:prod && electron-builder --linux deb && sudo dpkg -i .tmp/app-builds/superProductivity*.deb",
-    "localInstall:quick": "sudo echo 'Starting local install QUICK' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildFrontend:stage:es6 && npm run electron:build && electron-builder --linux deb && sudo dpkg -i .tmp/app-builds/superProductivity*.deb",
-    "localInstall:test:snap": "sudo echo 'Starting local install SNAP QUICK' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildFrontend:stage:es6 && npm run electron:build && electron-builder --linux snap && sudo snap install --dangerous .tmp/app-builds/superProductivity*.snap",
+    "localInstall": "sudo echo 'Starting local install' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildAllElectron:stage && electron-builder --linux deb && sudo dpkg -i .tmp/app-builds/hyperProductivity*.deb",
+    "localInstall:mac": "sudo echo 'Starting local install MAC. Don`t forget APPLEID & APPLEIDPASS !!' && npm run buildAllElectron:noTests:prod && sudo echo '' && electron-builder && sudo cp -rf .tmp/app-builds/mac/hyperProductivity.app/ /Applications/hyperProductivity.app",
+    "localInstall:prod": "sudo echo 'Starting local install PROD' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildAllElectron:prod && electron-builder --linux deb && sudo dpkg -i .tmp/app-builds/hyperProductivity*.deb",
+    "localInstall:quick": "sudo echo 'Starting local install QUICK' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildFrontend:stage:es6 && npm run electron:build && electron-builder --linux deb && sudo dpkg -i .tmp/app-builds/hyperProductivity*.deb",
+    "localInstall:test:snap": "sudo echo 'Starting local install SNAP QUICK' && rm -Rf ./.tmp/angular-dist/ && rm -Rf ./.tmp/app-builds/ && npm run buildFrontend:stage:es6 && npm run electron:build && electron-builder --linux snap && sudo snap install --dangerous .tmp/app-builds/hyperProductivity*.snap",
     "ng": "ng",
     "pack": "electron-builder --dir",
     "preCheck": "npm run lint && npm run test & npm run int:test && npm run e2e",
@@ -364,7 +364,7 @@
   "publish": [
     {
       "provider": "github",
-      "repo": "super-productivity",
+      "repo": "hyper-productivity",
       "owner": "johannesjo"
     }
   ],

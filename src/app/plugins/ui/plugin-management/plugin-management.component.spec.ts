@@ -88,7 +88,7 @@ describe('PluginManagementComponent', () => {
       minSupVersion: '1.0.0',
       hooks: [],
       permissions: [],
-      author: '  Super Productivity  ',
+      author: '  Hyper Productivity  ',
     };
 
     expect(
@@ -97,7 +97,7 @@ describe('PluginManagementComponent', () => {
         loaded: false,
         isEnabled: false,
       }),
-    ).toBe('Super Productivity');
+    ).toBe('Hyper Productivity');
   });
 
   it('hides missing or blank plugin authors', () => {

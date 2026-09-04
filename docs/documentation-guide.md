@@ -1,6 +1,6 @@
 # Documentation Guide
 
-Rules and conventions for keeping Super Productivity's documentation in sync with the code.
+Rules and conventions for keeping Hyper Productivity's documentation in sync with the code.
 
 ## Why this matters
 

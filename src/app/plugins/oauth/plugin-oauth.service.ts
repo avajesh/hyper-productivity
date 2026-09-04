@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom, Subject } from 'rxjs';
-import { OAuthFlowConfig, OAuthTokenResult } from '@super-productivity/plugin-api';
+import { OAuthFlowConfig, OAuthTokenResult } from '@hyper-productivity/plugin-api';
 import { generateCodeChallenge, generateCodeVerifier } from '@sp/sync-providers/pkce';
 import { PluginOAuthTokens } from './plugin-oauth.model';
 import { IS_ELECTRON } from '../../app.constants';

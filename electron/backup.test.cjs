@@ -11,12 +11,12 @@ const backupModulePath = path.resolve(__dirname, 'backup.ts');
 // Windows-shaped so the `.replace('Roaming', ...)` derivation actually fires on
 // Linux/macOS CI too — otherwise BACKUP_DIR_WINSTORE would equal BACKUP_DIR and
 // every assertion below would pass vacuously.
-const USER_DATA = 'C:\\Users\\testuser\\AppData\\Roaming\\superProductivity';
+const USER_DATA = 'C:\\Users\\testuser\\AppData\\Roaming\\hyperProductivity';
 // path.join, like the module under test — the separator is the host's, not '\'.
 const BACKUP_DIR = path.join(USER_DATA, 'backups');
 const BACKUP_DIR_WINSTORE = BACKUP_DIR.replace(
   'Roaming',
-  'Local\\Packages\\53707johannesjo.SuperProductivity_ch45amy23cdv6\\LocalCache\\Roaming',
+  'Local\\Packages\\53707johannesjo.HyperProductivity_ch45amy23cdv6\\LocalCache\\Roaming',
 );
 
 let existingPaths;

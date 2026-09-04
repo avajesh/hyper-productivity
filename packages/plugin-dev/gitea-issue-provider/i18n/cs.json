@@ -18,5 +18,5 @@
     "LABELS": "Štítky",
     "DESCRIPTION": "Popis"
   },
-  "FORM_HELP": "<p>Zde můžete nakonfigurovat SuperProductivity tak, aby zobrazoval otevřené problémy Gitea pro konkrétní repozitář v panelu vytváření úkolů v denním plánovacím zobrazení. Budou uvedeny jako návrhy a poskytnou odkaz na problém a další informace o něm.</p> <p>Kromě toho můžete automaticky přidat a importovat všechny otevřené problémy.</p><p>Pro překročení omezení a přístup můžete poskytnout přístupový token."
+  "FORM_HELP": "<p>Zde můžete nakonfigurovat HyperProductivity tak, aby zobrazoval otevřené problémy Gitea pro konkrétní repozitář v panelu vytváření úkolů v denním plánovacím zobrazení. Budou uvedeny jako návrhy a poskytnou odkaz na problém a další informace o něm.</p> <p>Kromě toho můžete automaticky přidat a importovat všechny otevřené problémy.</p><p>Pro překročení omezení a přístup můžete poskytnout přístupový token."
 }

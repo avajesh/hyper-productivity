@@ -15,7 +15,7 @@
     "CREATOR": "Created by",
     "DESCRIPTION": "Kuvaus"
   },
-  "FORM_HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan avoimet GitHub-ongelmat tietystä arkistosta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin ongelmaan sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti tuoda kaikki avoimet ongelmat.</p><p>Käyttörajoitusten ja pääsyn saamiseksi voit antaa käyttöoikeustunnuksen. <a href='https://docs.github.com/en/free-pro-team@latest/developers/apps/scopes-for-oauth-apps'>Lisätietoja sen laajuuksista löytyy täältä</a>.",
+  "FORM_HELP": "<p>Tässä voit määrittää HyperProductivityn listamaan avoimet GitHub-ongelmat tietystä arkistosta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin ongelmaan sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti tuoda kaikki avoimet ongelmat.</p><p>Käyttörajoitusten ja pääsyn saamiseksi voit antaa käyttöoikeustunnuksen. <a href='https://docs.github.com/en/free-pro-team@latest/developers/apps/scopes-for-oauth-apps'>Lisätietoja sen laajuuksista löytyy täältä</a>.",
   "ERRORS": {
     "CONFIG_ERROR": "GitHub: Virhe tietojen kartoituksessa. Onko arkistosi nimi oikein?",
     "ERR_UNKNOWN": "GitHub: Tuntematon virhe {{statusCode}} {{errorMsg}}. API-käyttöraja ylitetty?"

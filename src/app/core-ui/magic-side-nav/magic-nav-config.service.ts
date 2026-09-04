@@ -311,7 +311,7 @@ export class MagicNavConfigService {
             id: 'help-reddit',
             label: T.MH.HM.REDDIT_COMMUNITY,
             icon: 'forum',
-            href: 'https://www.reddit.com/r/superProductivity/',
+            href: 'https://www.reddit.com/r/hyperProductivity/',
           },
           {
             type: 'action',

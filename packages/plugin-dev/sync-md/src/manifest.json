@@ -3,8 +3,8 @@
   "manifestVersion": 1,
   "name": "sync.md",
   "version": "2.0.0",
-  "description": "Sync markdown files with SuperProductivity projects",
-  "author": "SuperProductivity",
+  "description": "Sync markdown files with HyperProductivity projects",
+  "author": "HyperProductivity",
   "homepage": "https://github.com/avajesh/hyper-productivity",
   "repository": {
     "type": "git",

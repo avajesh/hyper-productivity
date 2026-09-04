@@ -42,7 +42,7 @@ export class BannerService {
     // FOR DEBUGGING
     // this.open({
     //   id: BannerId.JiraUnblock,
-    //   msg: 'Jira: To prevent shut out from api, access has been blocked by Super Productivity. You probably should check your jira settings!',
+    //   msg: 'Jira: To prevent shut out from api, access has been blocked by Hyper Productivity. You probably should check your jira settings!',
     //   svgIco: 'jira',
     //   action: {
     //     label: 'Unblock',

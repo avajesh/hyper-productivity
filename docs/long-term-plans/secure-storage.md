@@ -180,7 +180,7 @@ Relevant files:
   fail.
 - `android:allowBackup="true"` is set, and backup rule files
   (`data_extraction_rules.xml`, `backup_rules.xml`) already exist — but they
-  do **not** exclude the `SuperProductivitySync` preferences file, so the
+  do **not** exclude the `HyperProductivitySync` preferences file, so the
   (encrypted or fallback-plaintext) token store is currently backed up. The
   fix is one `<exclude>` entry per rules file, not new infrastructure — see
   "Quick Wins".
@@ -275,7 +275,7 @@ Relevant files:
 
 Each is small, has no schema or UX impact, and closes a real hole:
 
-1. Add `<exclude>` entries for the `SuperProductivitySync` preferences file
+1. Add `<exclude>` entries for the `HyperProductivitySync` preferences file
    to `data_extraction_rules.xml` and `backup_rules.xml` (KeyStore keys do
    not survive restore anyway, so backed-up ciphertext is dead weight at
    best and a plaintext-fallback leak at worst).
@@ -409,7 +409,7 @@ Deliberately minimal — the vault holds a handful of sub-kilobyte records, so
 it needs none of the DEK/manifest/epoch machinery of a general vault:
 
 - **Key:** `vaultKey = HKDF-SHA-256(syncE2EEKey, salt = per-vault random salt,
-info = 'super-productivity-portable-vault-v1')`. The salt is random,
+info = 'hyper-productivity-portable-vault-v1')`. The salt is random,
   minted at vault creation, and stored as plaintext metadata in the synced
   vault config record (salts are not secret). Never use the sync content
   key directly. If the E2EE input is a passphrase, it already passes through

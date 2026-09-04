@@ -87,12 +87,12 @@ export class ShareFormatter {
     const url = this._buildUrl(options);
     const text =
       customText ||
-      'Check out Super Productivity - an advanced todo list and time tracking app with focus on flexibility and privacy!';
+      'Check out Hyper Productivity - an advanced todo list and time tracking app with focus on flexibility and privacy!';
 
     return {
       text,
       url,
-      title: 'Super Productivity',
+      title: 'Hyper Productivity',
     };
   }
 
@@ -211,7 +211,7 @@ export class ShareFormatter {
 
     // Hashtags
     if (options.includeHashtags) {
-      parts.push('\n#productivity #timetracking #SuperProductivity');
+      parts.push('\n#productivity #timetracking #HyperProductivity');
     }
 
     let text = parts.join('\n');

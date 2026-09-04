@@ -40,7 +40,7 @@ describe('TaskAttachmentLinkDirective', () => {
 
   it('should block local file urls outside electron', () => {
     fixture.componentInstance.href =
-      'file://c:/Users/Youss/AppData/Roaming/superProductivity/clipboard-images/test.png';
+      'file://c:/Users/Youss/AppData/Roaming/hyperProductivity/clipboard-images/test.png';
     fixture.detectChanges();
     spyOn(window, 'open');
 

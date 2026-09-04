@@ -242,7 +242,7 @@ const installConcurrentTabSupport = async (context: BrowserContext): Promise<voi
 
       constructor(name: string) {
         super(name);
-        this._isSingleInstanceChannel = name === 'superProductivityTab';
+        this._isSingleInstanceChannel = name === 'hyperProductivityTab';
       }
 
       override postMessage(message: unknown): void {

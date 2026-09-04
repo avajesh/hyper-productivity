@@ -18,5 +18,5 @@
     "LABELS": "Etiketter",
     "DESCRIPTION": "Beskrivning"
   },
-  "FORM_HELP": "<p>Här kan du konfigurera SuperProductivity så att öppna Gitea-ärenden för ett specifikt arkiv listas i panelen för uppgiftskapande i den dagliga planeringsvyn. De listas som förslag och innehåller en länk till ärendet samt mer information om det. </p> <p>Dessutom kan du automatiskt lägga till och importera alla öppna ärenden. </p><p>För att komma förbi användningsbegränsningar och få åtkomst kan du ange en åtkomsttoken."
+  "FORM_HELP": "<p>Här kan du konfigurera HyperProductivity så att öppna Gitea-ärenden för ett specifikt arkiv listas i panelen för uppgiftskapande i den dagliga planeringsvyn. De listas som förslag och innehåller en länk till ärendet samt mer information om det. </p> <p>Dessutom kan du automatiskt lägga till och importera alla öppna ärenden. </p><p>För att komma förbi användningsbegränsningar och få åtkomst kan du ange en åtkomsttoken."
 }

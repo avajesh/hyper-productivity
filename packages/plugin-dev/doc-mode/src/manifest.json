@@ -4,7 +4,7 @@
   "name": "Doc Mode (Alpha)",
   "version": "0.1.0",
   "description": "Document-style editor for projects and Today, powered by TipTap.",
-  "author": "SuperProductivity",
+  "author": "HyperProductivity",
   "homepage": "https://github.com/avajesh/hyper-productivity",
   "minSupVersion": "10.0.0",
   "permissions": [

@@ -1,7 +1,7 @@
 import { mdToSp } from './md-to-sp';
 import { spToMd } from './sp-to-md';
 import { LocalUserCfg } from '../local-config';
-import { Task } from '@super-productivity/plugin-api';
+import { Task } from '@hyper-productivity/plugin-api';
 // Import mocked modules
 import {
   ensureDirectoryExists,

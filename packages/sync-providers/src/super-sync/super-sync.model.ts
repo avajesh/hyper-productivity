@@ -1,12 +1,12 @@
 /**
  * Suggested default base URL for hosts that target the
- * Super-Productivity-hosted SuperSync server. This is a hint for the
+ * Hyper-Productivity-hosted SuperSync server. This is a hint for the
  * host application — the package itself never falls back to this URL
  * implicitly. Hosts that point at a different server simply ignore
  * this constant and supply their own `defaultBaseUrl` via
  * `SuperSyncDeps`.
  */
-export const SUPER_SYNC_DEFAULT_BASE_URL = 'https://sync.super-productivity.com';
+export const SUPER_SYNC_DEFAULT_BASE_URL = 'https://sync.hyper-productivity.com';
 
 /**
  * Stable runtime identifier for the SuperSync provider. The string

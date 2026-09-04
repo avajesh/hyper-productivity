@@ -1,8 +1,8 @@
-# Publishing @super-productivity/plugin-api
+# Publishing @hyper-productivity/plugin-api
 
 ## Overview
 
-This package provides TypeScript definitions for Super Productivity plugin development. It's published to npm as `@super-productivity/plugin-api`.
+This package provides TypeScript definitions for Hyper Productivity plugin development. It's published to npm as `@hyper-productivity/plugin-api`.
 
 ## Publishing Process
 
@@ -61,7 +61,7 @@ The main project should import types from this package:
 // import { PluginManifest } from './plugin-api.model';
 
 // Use the npm package:
-import type { PluginManifest } from '@super-productivity/plugin-api';
+import type { PluginManifest } from '@hyper-productivity/plugin-api';
 ```
 
 ## Package Structure

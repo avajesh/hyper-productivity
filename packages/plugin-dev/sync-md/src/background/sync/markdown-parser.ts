@@ -1,4 +1,4 @@
-import { Task } from '@super-productivity/plugin-api';
+import { Task } from '@hyper-productivity/plugin-api';
 
 export interface ParsedTask {
   line: number;

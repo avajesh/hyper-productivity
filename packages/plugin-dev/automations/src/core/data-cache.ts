@@ -1,4 +1,4 @@
-import { PluginAPI, Project, Tag } from '@super-productivity/plugin-api';
+import { PluginAPI, Project, Tag } from '@hyper-productivity/plugin-api';
 
 interface CacheItem<T> {
   data: T;

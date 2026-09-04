@@ -4,7 +4,7 @@
 
 set -e
 
-echo "Building @super-productivity/plugin-api..."
+echo "Building @hyper-productivity/plugin-api..."
 npm run build
 
 echo "Testing the package..."

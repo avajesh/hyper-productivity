@@ -442,7 +442,7 @@ export class CaldavClientService {
         // eslint-disable-next-line prefer-rest-params
         const result = oldOpen.apply(this, arguments);
         // @ts-ignore
-        xhr.setRequestHeader('X-Requested-With', 'SuperProductivity');
+        xhr.setRequestHeader('X-Requested-With', 'HyperProductivity');
         xhr.setRequestHeader(
           'Authorization',
           'Basic ' + btoa(cfg.username + ':' + cfg.password),
@@ -471,7 +471,7 @@ export class CaldavClientService {
     return (): XMLHttpRequest => {
       const headers: Record<string, string> = {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        'X-Requested-With': 'SuperProductivity',
+        'X-Requested-With': 'HyperProductivity',
         Authorization: 'Basic ' + btoa(cfg.username + ':' + cfg.password),
       };
       let method = 'GET';
@@ -728,7 +728,7 @@ export class CaldavClientService {
     todo.updatePropertyWithValue('dtstamp', now);
 
     // https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.7.4
-    // Some calendar clients do not see updates (completion) submitted by SuperProductivity as the 'sequence' number is unchanged.
+    // Some calendar clients do not see updates (completion) submitted by HyperProductivity as the 'sequence' number is unchanged.
     // As 'sequence' starts at 0 and completing probably counts as a major change, then it should be at least 1 in the end,
     // if no other changes have been written.
     const sequence = todo.getFirstPropertyValue('sequence');

@@ -1,4 +1,4 @@
-import { Task } from '@super-productivity/plugin-api';
+import { Task } from '@hyper-productivity/plugin-api';
 import { parseMarkdown } from '../../sync/markdown-parser';
 import { convertTasksToMarkdown } from '../../sync/sp-to-md';
 import { generateTaskOperations } from '../../sync/generate-task-operations';

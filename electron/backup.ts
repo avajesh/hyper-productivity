@@ -39,7 +39,7 @@ export const BACKUP_DIR = path.join(app.getPath('userData'), `backups`);
  */
 const BACKUP_DIR_WINSTORE = BACKUP_DIR.replace(
   'Roaming',
-  `Local\\Packages\\53707johannesjo.SuperProductivity_ch45amy23cdv6\\LocalCache\\Roaming`,
+  `Local\\Packages\\53707johannesjo.HyperProductivity_ch45amy23cdv6\\LocalCache\\Roaming`,
 );
 
 /**

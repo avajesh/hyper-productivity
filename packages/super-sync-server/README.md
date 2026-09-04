@@ -1,8 +1,8 @@
 # SuperSync Server
 
-A custom, high-performance synchronization server for Super Productivity.
+A custom, high-performance synchronization server for Hyper Productivity.
 
-> **Note:** This server implements a custom operation-based synchronization protocol (Event Sourcing), **not** WebDAV. It is designed specifically for the Super Productivity client's efficient sync requirements.
+> **Note:** This server implements a custom operation-based synchronization protocol (Event Sourcing), **not** WebDAV. It is designed specifically for the Hyper Productivity client's efficient sync requirements.
 
 > **Related Documentation:**
 >
@@ -39,7 +39,7 @@ Deploy hosts need Docker with the Compose plugin, `curl`, `git`, and `jq`.
 The image revision check requires Docker Compose support for
 `docker compose config --format json`.
 
-> **There are no release tags.** `ghcr.io/super-productivity/supersync` publishes
+> **There are no release tags.** `ghcr.io/hyper-productivity/supersync` publishes
 > only `latest` and `master-<sha>`, both built from `master`, so a default deploy
 > tracks upstream `master` rather than a released version. Pin `SUPERSYNC_IMAGE`
 > to a `master-<sha>` tag if you need a fixed one.
@@ -47,7 +47,7 @@ The image revision check requires Docker Compose support for
 ```bash
 # 1. Clone the repo (deploy.sh runs from this checkout) and enter this directory
 git clone https://github.com/avajesh/hyper-productivity.git
-cd super-productivity/packages/super-sync-server
+cd hyper-productivity/packages/super-sync-server
 
 # 2. Copy environment example
 cp env.example .env
@@ -267,7 +267,7 @@ All configuration is done via environment variables.
 | `DATABASE_URL`                          | -                                    | PostgreSQL connection string (e.g. `postgresql://user:pass@localhost:5432/db`)                                                                 |
 | `JWT_SECRET`                            | -                                    | **Required.** Secret for signing JWTs (min 32 chars)                                                                                           |
 | `PUBLIC_URL`                            | -                                    | **Required.** Public URL used for email links (e.g. `https://sync.example.com`)                                                                |
-| `CORS_ORIGINS`                          | `https://app.super-productivity.com` | Allowed CORS origins. `*` allows any origin — never do this in production, CORS runs with `credentials: true`.                                 |
+| `CORS_ORIGINS`                          | `https://app.hyper-productivity.com` | Allowed CORS origins. `*` allows any origin — never do this in production, CORS runs with `credentials: true`.                                 |
 | `SMTP_HOST`                             | -                                    | SMTP Server for emails                                                                                                                         |
 | `WEBAUTHN_RP_ID`                        | `localhost`                          | **Required for passkeys.** Your domain, without protocol or port. Passkeys bind to this — changing it invalidates every registered credential. |
 | `WEBAUTHN_ORIGIN`                       | `http://localhost:1900`              | **Required for passkeys.** Where users reach the auth UI, with protocol.                                                                       |
@@ -368,7 +368,7 @@ GET /api/sync/status
 
 ## Client Configuration
 
-In Super Productivity, configure the Custom Sync provider with:
+In Hyper Productivity, configure the Custom Sync provider with:
 
 - **Base URL**: `https://sync.your-domain.com` (or your deployed URL)
 - **Auth Token**: JWT token from login

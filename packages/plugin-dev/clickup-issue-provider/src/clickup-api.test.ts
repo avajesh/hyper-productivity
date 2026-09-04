@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import type { PluginHttp } from '@super-productivity/plugin-api';
+import type { PluginHttp } from '@hyper-productivity/plugin-api';
 import {
   parseTeamIds,
   mapSearchResult,
@@ -357,10 +357,7 @@ describe('searchTasksInTeam', () => {
   });
 
   it('should return all tasks when search term is empty', async () => {
-    const tasks = [
-      mockTask({ id: '1', name: 'A' }),
-      mockTask({ id: '2', name: 'B' }),
-    ];
+    const tasks = [mockTask({ id: '1', name: 'A' }), mockTask({ id: '2', name: 'B' })];
     const http = mockHttp({ '/team/T1/task': { tasks } });
 
     const result = await searchTasksInTeam('', 'T1', cfg, http);
@@ -409,7 +406,12 @@ describe('getTeamIds', () => {
 
   it('should fetch teams from API when none configured', async () => {
     const http = mockHttp({
-      '/team': { teams: [{ id: 'A1', name: 'Alpha' }, { id: 'B2', name: 'Beta' }] },
+      '/team': {
+        teams: [
+          { id: 'A1', name: 'Alpha' },
+          { id: 'B2', name: 'Beta' },
+        ],
+      },
     });
     const result = await getTeamIds({ apiKey: 'key' }, http);
     expect(result).toEqual(['A1', 'B2']);

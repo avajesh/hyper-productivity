@@ -1,11 +1,11 @@
-# @super-productivity/plugin-api
+# @hyper-productivity/plugin-api
 
-Official TypeScript definitions for developing [Super Productivity](https://github.com/avajesh/hyper-productivity) plugins.
+Official TypeScript definitions for developing [Hyper Productivity](https://github.com/avajesh/hyper-productivity) plugins.
 
 ## Installation
 
 ```bash
-npm install @super-productivity/plugin-api
+npm install @hyper-productivity/plugin-api
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ import type {
   PluginAPI,
   PluginManifest,
   PluginHooks,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 
 // Your plugin code with full type support
 PluginAPI.registerHook(PluginHooks.TASK_COMPLETE, (taskData) => {
@@ -61,7 +61,7 @@ PluginAPI.registerShortcut({
   "manifestVersion": 1,
   "version": "1.0.0",
   "minSupVersion": "13.0.0",
-  "description": "An awesome plugin for Super Productivity",
+  "description": "An awesome plugin for Hyper Productivity",
   "hooks": ["taskComplete", "taskUpdate"],
   "permissions": ["showSnack", "getTasks", "addTask", "showIndexHtmlAsView"],
   "iFrame": true,
@@ -182,8 +182,8 @@ const state = await PluginAPI.getAppState();
 
 ## License
 
-MIT - See the main Super Productivity repository for details.
+MIT - See the main Hyper Productivity repository for details.
 
 ## Contributing
 
-Please contribute to the main [Super Productivity repository](https://github.com/avajesh/hyper-productivity).
+Please contribute to the main [Hyper Productivity repository](https://github.com/avajesh/hyper-productivity).

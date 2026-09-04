@@ -5,7 +5,7 @@ import {
   BatchTaskReorder,
   BatchTaskUpdate,
   Task,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 import { ParsedTask } from './markdown-parser';
 
 interface ValidationResult {
@@ -80,7 +80,7 @@ const validateOperations = (
 };
 
 /**
- * Generate batch operations to sync markdown tasks to Super Productivity
+ * Generate batch operations to sync markdown tasks to Hyper Productivity
  */
 export const generateTaskOperations = (
   mdTasks: ParsedTask[],

@@ -10,7 +10,7 @@ import { getDbDateStr } from '../../util/get-db-date-str';
 
 /**
  * Creates a minimal v10-era legacy backup structure.
- * This matches the shape of backups exported by Super Productivity v10-v13.
+ * This matches the shape of backups exported by Hyper Productivity v10-v13.
  */
 const createLegacyBackup = (
   overrides: Record<string, any> = {},

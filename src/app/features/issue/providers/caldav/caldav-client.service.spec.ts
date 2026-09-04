@@ -314,7 +314,7 @@ describe('CaldavClientService._getXhrProvider – web platform', () => {
     );
     xhr.open('REPORT', 'https://cal.example.com/');
     expect(headers['Authorization']).toBe(EXPECTED_AUTH);
-    expect(headers['X-Requested-With']).toBe('SuperProductivity');
+    expect(headers['X-Requested-With']).toBe('HyperProductivity');
   });
 
   it('returns an empty DAV response header when the server does not expose it', () => {
@@ -711,7 +711,7 @@ describe('CaldavClientService._getNativeXhrProvider – native platform', () => 
     await Promise.resolve();
     const callArgs = svc.webDavRequestSpy.calls.mostRecent().args[0];
     expect(callArgs.headers?.['Authorization']).toBe(EXPECTED_AUTH);
-    expect(callArgs.headers?.['X-Requested-With']).toBe('SuperProductivity');
+    expect(callArgs.headers?.['X-Requested-With']).toBe('HyperProductivity');
   });
 
   it('send() passes extra headers set via setRequestHeader()', async () => {

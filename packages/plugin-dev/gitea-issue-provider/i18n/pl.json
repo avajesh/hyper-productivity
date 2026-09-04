@@ -18,5 +18,5 @@
     "LABELS": "Etykiety",
     "DESCRIPTION": "Opis"
   },
-  "FORM_HELP": "<p>Tutaj można skonfigurować SuperProductivity tak, aby wyświetlał listę otwartych zgłoszeń Gitea dla określonego repozytorium w panelu tworzenia zadań w widoku planowania dziennego. Będą one wyświetlane jako sugestie i będą zawierać link do zgłoszenia oraz więcej informacji na jego temat.</p> <p>Ponadto możesz automatycznie dodawać i importować wszystkie otwarte zgłoszenia.</p><p>Aby ominąć limity użytkowania i uzyskać dostęp, możesz podać token dostępu."
+  "FORM_HELP": "<p>Tutaj można skonfigurować HyperProductivity tak, aby wyświetlał listę otwartych zgłoszeń Gitea dla określonego repozytorium w panelu tworzenia zadań w widoku planowania dziennego. Będą one wyświetlane jako sugestie i będą zawierać link do zgłoszenia oraz więcej informacji na jego temat.</p> <p>Ponadto możesz automatycznie dodawać i importować wszystkie otwarte zgłoszenia.</p><p>Aby ominąć limity użytkowania i uzyskać dostęp, możesz podać token dostępu."
 }

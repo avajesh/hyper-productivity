@@ -4,7 +4,7 @@ import { openRecurDialog, saveRecurDialog } from '../../utils/recurring-task-hel
 /**
  * Bug: https://github.com/avajesh/hyper-productivity/issues/4559
  *
- * Reported in v13.0.10: when the user did NOT open Super Productivity on the
+ * Reported in v13.0.10: when the user did NOT open Hyper Productivity on the
  * scheduled day of a recurring task (e.g. the 1st of the month falls on a
  * weekend, or Monday is a public holiday), no instance for the missed day
  * was created when the app was reopened later that week. The recurring task

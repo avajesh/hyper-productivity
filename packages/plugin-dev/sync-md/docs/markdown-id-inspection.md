@@ -2,7 +2,7 @@
 
 ## Overview
 
-The SuperProductivity sync-md plugin uses HTML comments embedded in task notes to track the relationship between SuperProductivity tasks and their corresponding markdown file entries.
+The HyperProductivity sync-md plugin uses HTML comments embedded in task notes to track the relationship between HyperProductivity tasks and their corresponding markdown file entries.
 
 ## ID Format
 
@@ -12,7 +12,7 @@ The plugin uses the following format to store markdown IDs in task notes:
 <!-- sp:id -->
 ```
 
-Where `id` is typically the task ID from SuperProductivity, creating a bidirectional link between the task and its markdown representation.
+Where `id` is typically the task ID from HyperProductivity, creating a bidirectional link between the task and its markdown representation.
 
 ## How It Works
 
@@ -23,11 +23,11 @@ Where `id` is typically the task ID from SuperProductivity, creating a bidirecti
    - [x] <!-- sp:task-id-456 --> Completed task
    ```
 
-2. **In SuperProductivity**: The same ID is stored in the task's notes field, allowing the sync process to match tasks between the two systems.
+2. **In HyperProductivity**: The same ID is stored in the task's notes field, allowing the sync process to match tasks between the two systems.
 
 ## Inspection Script
 
-A script has been created at `/scripts/inspect-sync.ts` that can be run within the SuperProductivity plugin context to:
+A script has been created at `/scripts/inspect-sync.ts` that can be run within the HyperProductivity plugin context to:
 
 - Count total tasks and how many have markdown IDs
 - Find duplicate IDs (potential sync issues)
@@ -39,7 +39,7 @@ A script has been created at `/scripts/inspect-sync.ts` that can be run within t
 
 To run the inspection script:
 
-1. Ensure the sync-md plugin is loaded in SuperProductivity
+1. Ensure the sync-md plugin is loaded in HyperProductivity
 2. The script will automatically execute when loaded in the plugin context
 3. Check the console output for detailed results
 

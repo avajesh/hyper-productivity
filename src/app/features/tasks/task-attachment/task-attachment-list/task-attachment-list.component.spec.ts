@@ -78,7 +78,7 @@ describe('TaskAttachmentListComponent', () => {
 
     it('treats clipboard-images file:/// paths as resolvable (returns raw path until async resolved)', () => {
       const path =
-        'file:///C:/Users/user/AppData/Roaming/superProductivity/clipboard-images/abc123.png';
+        'file:///C:/Users/user/AppData/Roaming/hyperProductivity/clipboard-images/abc123.png';
       fixture.componentRef.setInput('attachments', [imgAttachment(path)]);
       // Before async resolution the raw path is returned; isPathSafeToOpen passes it through
       expect(component.resolvedAttachments()[0].resolvedOriginalPath).toBe(path);

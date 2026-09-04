@@ -18,5 +18,5 @@
     "LABELS": "Etiquetas",
     "DESCRIPTION": "Descripción"
   },
-  "FORM_HELP": "<p>Aquí puedes configurar SuperProductivity para listar las incidencias de Gitea abiertas para un repositorio específico en el panel de creación de tareas en la vista de planificación diaria. Se listarán como sugerencias y proporcionarán un enlace a la incidencia así como más información sobre ella.</p> <p>Además, puedes añadir e importar automáticamente todas las incidencias abiertas.</p><p>Para superar los límites de uso y acceder puedes proporcionar un token de acceso."
+  "FORM_HELP": "<p>Aquí puedes configurar HyperProductivity para listar las incidencias de Gitea abiertas para un repositorio específico en el panel de creación de tareas en la vista de planificación diaria. Se listarán como sugerencias y proporcionarán un enlace a la incidencia así como más información sobre ella.</p> <p>Además, puedes añadir e importar automáticamente todas las incidencias abiertas.</p><p>Para superar los límites de uso y acceder puedes proporcionar un token de acceso."
 }

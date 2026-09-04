@@ -7,7 +7,7 @@
 
 ## [[2.00-How_To]]
 
-### Using Super-Productivity
+### Using Hyper-Productivity
 
 - [[2.01-Downloads and Install]]
 - [[2.02-Restore-Data-From-Backup]]
@@ -23,7 +23,7 @@
 - [[2.21-Manage-Plugins]]
 - [[2.13-Run-with-Docker]]
 
-### Contributing to Super-Productivity
+### Contributing to Hyper-Productivity
 
 - [[2.18-Contribute-Translations]]
 - [[2.11-Run-the-Development-Server]]

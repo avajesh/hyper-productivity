@@ -1,6 +1,6 @@
-# Super Productivity Packages
+# Hyper Productivity Packages
 
-This directory contains plugin packages and the plugin API for Super Productivity.
+This directory contains plugin packages and the plugin API for Hyper Productivity.
 
 ## Structure
 

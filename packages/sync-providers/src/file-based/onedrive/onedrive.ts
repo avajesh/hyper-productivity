@@ -46,7 +46,7 @@ const ONEDRIVE_PROTOCOL = {
 
 const ONEDRIVE_DEFAULTS = {
   tenantId: 'common',
-  syncFolderPath: 'Super Productivity',
+  syncFolderPath: 'Hyper Productivity',
 } as const;
 
 // Hard cap on listFiles pagination iterations. ~200 items per page × 500 pages

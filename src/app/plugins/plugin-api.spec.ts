@@ -7,7 +7,7 @@ import {
   DialogCfg,
   DialogResult,
   NotifyCfg,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 
 describe('PluginAPI', () => {
   let pluginAPI: PluginAPI;

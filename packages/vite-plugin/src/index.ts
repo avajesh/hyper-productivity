@@ -2,7 +2,7 @@ import { Plugin } from 'vite';
 import path from 'path';
 import fs from 'fs';
 
-export interface SuperProductivityPluginOptions {
+export interface HyperProductivityPluginOptions {
   /**
    * Whether to inline assets (JS/CSS) into index.html.
    * Useful for plugins with UI that need to be single-file.
@@ -16,13 +16,13 @@ export interface SuperProductivityPluginOptions {
   copyTo?: string;
 }
 
-export const superProductivityPlugin = (
-  options: SuperProductivityPluginOptions = {},
+export const hyperProductivityPlugin = (
+  options: HyperProductivityPluginOptions = {},
 ): Plugin => {
   const { inlineAssets = true, copyTo } = options;
 
   return {
-    name: 'super-productivity-plugin',
+    name: 'hyper-productivity-plugin',
     config: () => {
       return {
         build: {

@@ -21,7 +21,7 @@ import {
   type ActiveWorkContext,
   type PluginAPI,
   type WorkContextChangePayload,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 import {
   loadEnabledCtxIds,
   migrateToKeyedPersistence,

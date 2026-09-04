@@ -1,5 +1,5 @@
 /**
- * Mobile-touch reel — four-beat choreography demonstrating Super Productivity
+ * Mobile-touch reel — four-beat choreography demonstrating Hyper Productivity
  * on a phone. The fixture enables `hasTouch` and `isMobile` for this variant
  * so the context dispatches real touch events; each beat uses
  * `page.touchscreen.tap()` and the fixture's tap-ripple init script spawns a
@@ -144,7 +144,7 @@ test.describe('@video mobile reel', () => {
       {
         logo: {
           src: '/assets/icons/sp.svg',
-          alt: 'Super Productivity',
+          alt: 'Hyper Productivity',
           monochrome: true,
         },
         title: 'Take it anywhere.',

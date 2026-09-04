@@ -5,7 +5,7 @@
 ### Installation
 
 ```bash
-npm install @super-productivity/plugin-api
+npm install @hyper-productivity/plugin-api
 ```
 
 ### TypeScript Setup
@@ -46,8 +46,8 @@ my-plugin/
 ### Development Workflow
 
 1. **Write TypeScript code** with full type safety
-2. **Compile to JavaScript** for Super Productivity
-3. **Test in Super Productivity** plugin system
+2. **Compile to JavaScript** for Hyper Productivity
+3. **Test in Hyper Productivity** plugin system
 
 ### Example Build Script
 
@@ -61,7 +61,7 @@ Add to your `package.json`:
     "dev": "tsc --watch"
   },
   "devDependencies": {
-    "@super-productivity/plugin-api": "^1.0.0",
+    "@hyper-productivity/plugin-api": "^1.0.0",
     "typescript": "^5.0.0"
   }
 }
@@ -86,21 +86,21 @@ When adding new features to the plugin system:
 
 ### Syncing with Main Project
 
-The main Super Productivity project should eventually import types from this package instead of maintaining local definitions:
+The main Hyper Productivity project should eventually import types from this package instead of maintaining local definitions:
 
 ```typescript
 // Before:
 import { PluginManifest } from './plugin-api.model';
 
 // After:
-import type { PluginManifest } from '@super-productivity/plugin-api';
+import type { PluginManifest } from '@hyper-productivity/plugin-api';
 ```
 
 ### Testing Changes
 
 1. Build the package: `npm run build`
 2. Test locally: `npm link` in this directory
-3. In test project: `npm link @super-productivity/plugin-api`
+3. In test project: `npm link @hyper-productivity/plugin-api`
 4. Verify types work correctly
 
 ### Release Process

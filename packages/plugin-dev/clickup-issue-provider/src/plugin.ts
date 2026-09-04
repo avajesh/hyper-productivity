@@ -4,7 +4,7 @@ import type {
   PluginHttp,
   PluginIssue,
   PluginSearchResult,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 import {
   API_BASE,
   ClickUpConfig,
@@ -60,8 +60,7 @@ const fetchTasks = async (
 
   return settled
     .filter(
-      (r): r is PromiseFulfilledResult<ClickUpTaskReduced[]> =>
-        r.status === 'fulfilled',
+      (r): r is PromiseFulfilledResult<ClickUpTaskReduced[]> => r.status === 'fulfilled',
     )
     .flatMap((r) => r.value)
     .map(mapSearchResult);

@@ -18,5 +18,5 @@
     "LABELS": "Label",
     "DESCRIPTION": "Deskripsi"
   },
-  "FORM_HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar open Gitea issues untuk repositori tertentu di panel pembuatan tugas dalam tampilan perencanaan harian. Mereka akan dicantumkan sebagai saran dan akan memberikan tautan ke masalah tersebut serta informasi lebih lanjut tentangnya.</p> <p>Selain itu, Anda dapat secara otomatis menambahkan dan menyinkronkan semua open issues ke backlog tugas Anda.</p><p>Untuk mencapai batas penggunaan dan untuk mengakses, Anda dapat memberikan token akses.</p>"
+  "FORM_HELP": "<p>Di sini Anda dapat mengonfigurasi HyperProductivity untuk membuat daftar open Gitea issues untuk repositori tertentu di panel pembuatan tugas dalam tampilan perencanaan harian. Mereka akan dicantumkan sebagai saran dan akan memberikan tautan ke masalah tersebut serta informasi lebih lanjut tentangnya.</p> <p>Selain itu, Anda dapat secara otomatis menambahkan dan menyinkronkan semua open issues ke backlog tugas Anda.</p><p>Untuk mencapai batas penggunaan dan untuk mengakses, Anda dapat memberikan token akses.</p>"
 }

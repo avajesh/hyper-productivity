@@ -2,7 +2,7 @@ import {
   PluginBaseCfg,
   PluginIframeMessageType,
   PluginManifest,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 import { PluginBridgeService } from '../plugin-bridge.service';
 import {
   buildPluginIframeHtml,

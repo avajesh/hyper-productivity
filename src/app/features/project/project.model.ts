@@ -5,7 +5,7 @@ import {
 } from '../work-context/work-context.model';
 import { EntityState } from '@ngrx/entity';
 // Import the unified Project type from plugin-api
-import { Project as PluginProject } from '@super-productivity/plugin-api';
+import { Project as PluginProject } from '@hyper-productivity/plugin-api';
 
 // Lives in util/ so pure rounding helpers (round-time, round-duration) can
 // consume it without importing from features/ (layer boundary). Re-exported

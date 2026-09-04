@@ -298,7 +298,7 @@ export class StartupService {
   }
 
   private async _checkIsSingleInstance(): Promise<boolean> {
-    const channel = new BroadcastChannel('superProductivityTab');
+    const channel = new BroadcastChannel('hyperProductivityTab');
     let isAnotherInstanceActive = false;
     let resolved = false;
 
@@ -347,7 +347,7 @@ export class StartupService {
 
   private _showMultiInstanceBlocker(): void {
     const msg =
-      'Super Productivity is already running in another tab. Please close this tab or the other one.';
+      'Hyper Productivity is already running in another tab. Please close this tab or the other one.';
     const style =
       'display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; font-family: sans-serif; padding: 2rem;';
     document.body.innerHTML = `

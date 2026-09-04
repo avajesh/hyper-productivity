@@ -18,5 +18,5 @@
     "LABELS": "Tunnisteet",
     "DESCRIPTION": "Kuvaus"
   },
-  "FORM_HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan avoimet Gitea-ongelmat tietystä arkistosta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin ongelmaan sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti lisätä ja tuoda kaikki avoimet ongelmat.</p><p>Käyttörajoitusten ja pääsyn saamiseksi voit antaa käyttöoikeustunnuksen."
+  "FORM_HELP": "<p>Tässä voit määrittää HyperProductivityn listamaan avoimet Gitea-ongelmat tietystä arkistosta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin ongelmaan sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti lisätä ja tuoda kaikki avoimet ongelmat.</p><p>Käyttörajoitusten ja pääsyn saamiseksi voit antaa käyttöoikeustunnuksen."
 }

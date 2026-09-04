@@ -15,7 +15,7 @@
     "CREATOR": "Created by",
     "DESCRIPTION": "Descrizione"
   },
-  "FORM_HELP": "<p>Qui puoi configurare SuperProductivity per aggiungere la lista degli issue di una specifica repository nel pannello di creazione attività nella vista pianificazione giornaliera. Saranno mostrati come suggerimenti e forniranno un link all'issue ed alcune informazioni su di esso.</p> <p>Inoltre puoi aggiungere e sincronizzare automaticamente tutti gli issue aperti alle attività arretrate.</p>",
+  "FORM_HELP": "<p>Qui puoi configurare HyperProductivity per aggiungere la lista degli issue di una specifica repository nel pannello di creazione attività nella vista pianificazione giornaliera. Saranno mostrati come suggerimenti e forniranno un link all'issue ed alcune informazioni su di esso.</p> <p>Inoltre puoi aggiungere e sincronizzare automaticamente tutti gli issue aperti alle attività arretrate.</p>",
   "ERRORS": {
     "CONFIG_ERROR": "GitHub: Errore durante la mappatura dati. Il nome del tuo repository è corretto?",
     "ERR_UNKNOWN": "GitHub: Errore sconosciuto {{statusCode}} {{errorMsg}}. Limite di frequenza API superato?"

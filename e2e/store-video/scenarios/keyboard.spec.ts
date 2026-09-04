@@ -1,5 +1,5 @@
 /**
- * Keyboard reel — five-beat choreography demonstrating Super Productivity's
+ * Keyboard reel — five-beat choreography demonstrating Hyper Productivity's
  * keyboard-first design. Each beat anchors a visible keycap chip to a real
  * `page.keyboard.press()` so the cause-and-effect reads honestly: the chip
  * appears, the shortcut fires, the app reacts.
@@ -315,7 +315,7 @@ test.describe('@video keyboard reel', () => {
       {
         logo: {
           src: '/assets/icons/sp.svg',
-          alt: 'Super Productivity',
+          alt: 'Hyper Productivity',
           monochrome: true,
         },
         title: 'Made for keyboards.',

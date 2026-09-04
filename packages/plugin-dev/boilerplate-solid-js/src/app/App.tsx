@@ -1,5 +1,5 @@
 import { createSignal, createEffect, For, Show, onMount } from 'solid-js';
-import { Task, Project } from '@super-productivity/plugin-api';
+import { Task, Project } from '@hyper-productivity/plugin-api';
 import { useTranslate } from '../utils/useTranslate';
 import './App.css';
 
@@ -84,7 +84,7 @@ function App() {
     }
   });
 
-  // Refresh data from Super Productivity
+  // Refresh data from Hyper Productivity
   const refreshData = async () => {
     try {
       const [tasksData, projectsData] = await Promise.all([
@@ -244,7 +244,7 @@ function App() {
       </Show>
 
       <footer class="app-footer">
-        <p>Built with Solid.js and Super Productivity Plugin API</p>
+        <p>Built with Solid.js and Hyper Productivity Plugin API</p>
       </footer>
     </div>
   );

@@ -337,7 +337,7 @@ test.describe('@video reel', () => {
       {
         logo: {
           src: '/assets/icons/sp.svg',
-          alt: 'Super Productivity',
+          alt: 'Hyper Productivity',
           monochrome: true,
         },
         title: 'Free and open source.',

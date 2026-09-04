@@ -1,5 +1,5 @@
 /**
- * Script to inspect SuperProductivity tasks and their markdown sync IDs
+ * Script to inspect HyperProductivity tasks and their markdown sync IDs
  * This script checks how tasks are linked to markdown files through IDs stored in their notes
  */
 
@@ -22,15 +22,15 @@ interface MarkdownIdInfo {
 }
 
 async function inspectMarkdownSync() {
-  console.log('=== SuperProductivity Markdown Sync Inspection ===\n');
+  console.log('=== HyperProductivity Markdown Sync Inspection ===\n');
 
   // Check if running in plugin context
   if (typeof PluginAPI === 'undefined') {
     console.error(
-      'ERROR: This script must be run within the SuperProductivity plugin context',
+      'ERROR: This script must be run within the HyperProductivity plugin context',
     );
     console.error(
-      'Please run this script through the sync-md plugin in SuperProductivity',
+      'Please run this script through the sync-md plugin in HyperProductivity',
     );
     return;
   }

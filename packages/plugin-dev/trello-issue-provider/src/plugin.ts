@@ -4,7 +4,7 @@ import type {
   PluginHttp,
   PluginIssue,
   PluginSearchResult,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 
 declare const PluginAPI: {
   registerIssueProvider(definition: IssueProviderPluginDefinition): void;

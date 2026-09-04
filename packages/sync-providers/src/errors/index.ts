@@ -2,7 +2,7 @@ import { extractErrorMessage as extractGenericErrorMessage } from '@sp/sync-core
 
 /**
  * Best-effort extraction of a meaningful message string from an unknown
- * thrown value, with one Super-Productivity-specific rewrite: zlib `Z_*`
+ * thrown value, with one Hyper-Productivity-specific rewrite: zlib `Z_*`
  * error codes get translated into a human-readable "compression error: …"
  * form. Used as the message-derivation entry point for the privacy-safe
  * error classes below.

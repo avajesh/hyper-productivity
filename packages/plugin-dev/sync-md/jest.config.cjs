@@ -24,7 +24,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    '^@super-productivity/plugin-api$':
-      '<rootDir>/node_modules/@super-productivity/plugin-api/src/index.ts',
+    '^@hyper-productivity/plugin-api$':
+      '<rootDir>/node_modules/@hyper-productivity/plugin-api/src/index.ts',
   },
 };

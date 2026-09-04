@@ -1,4 +1,4 @@
-import { PluginAPI } from '@super-productivity/plugin-api';
+import { PluginAPI } from '@hyper-productivity/plugin-api';
 import { Condition, TaskEvent } from '../types';
 import { DataCache } from './data-cache';
 

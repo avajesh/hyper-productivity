@@ -1,4 +1,4 @@
-import { OAuthFlowConfig } from '@super-productivity/plugin-api';
+import { OAuthFlowConfig } from '@hyper-productivity/plugin-api';
 import { IssueLog } from '../../../core/log';
 
 /**

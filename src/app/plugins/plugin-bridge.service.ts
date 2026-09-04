@@ -40,7 +40,7 @@ import {
   PluginSimpleCounterFull,
   PluginTaskRepeatCfg,
   SnackCfg,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 import { snackCfgToSnackParams } from './plugin-api-mapper';
 import { PluginHooksService } from './plugin-hooks';
 import { TaskService } from '../features/tasks/task.service';

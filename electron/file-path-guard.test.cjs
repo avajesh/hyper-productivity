@@ -16,7 +16,7 @@ const { isPathInsideDir, assertPathOutside } = require(
   path.resolve(__dirname, 'file-path-guard.ts'),
 );
 
-const DIR = path.resolve('/home/user/.config/superProductivity/backups');
+const DIR = path.resolve('/home/user/.config/hyperProductivity/backups');
 
 test('accepts a file directly inside the directory', () => {
   assert.equal(isPathInsideDir(DIR, path.join(DIR, '2026-01-01.json')), true);

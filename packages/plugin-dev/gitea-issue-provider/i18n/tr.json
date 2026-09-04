@@ -18,5 +18,5 @@
     "LABELS": "Etiketler",
     "DESCRIPTION": "Açıklama"
   },
-  "FORM_HELP": "<p>Burada SuperProductivity'yi, günlük planlama görünümündeki görev oluşturma panelinde belirli bir depo için açık Gitea sorunlarını listeleyecek şekilde yapılandırabilirsiniz. Öneriler olarak listelenecekler ve konuyla ilgili bir bağlantının yanı sıra konuyla ilgili daha fazla bilgi sağlayacaklar.</p> <p>Ek olarak, tüm açık sorunları otomatik olarak görev biriktirme listenize ekleyebilir ve senkronize edebilirsiniz.</p><p>Kullanım sınırlarını aşmak ve erişim sağlamak için bir erişim jetonu sağlayabilirsiniz."
+  "FORM_HELP": "<p>Burada HyperProductivity'yi, günlük planlama görünümündeki görev oluşturma panelinde belirli bir depo için açık Gitea sorunlarını listeleyecek şekilde yapılandırabilirsiniz. Öneriler olarak listelenecekler ve konuyla ilgili bir bağlantının yanı sıra konuyla ilgili daha fazla bilgi sağlayacaklar.</p> <p>Ek olarak, tüm açık sorunları otomatik olarak görev biriktirme listenize ekleyebilir ve senkronize edebilirsiniz.</p><p>Kullanım sınırlarını aşmak ve erişim sağlamak için bir erişim jetonu sağlayabilirsiniz."
 }

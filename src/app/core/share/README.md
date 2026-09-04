@@ -1,6 +1,6 @@
 # Share Component
 
-Multi-platform share functionality for Super Productivity.
+Multi-platform share functionality for Hyper Productivity.
 
 ## Overview
 
@@ -74,7 +74,6 @@ Main service for sharing content.
 #### Methods
 
 - `share(payload: SharePayload, target?: ShareTarget): Promise<ShareResult>`
-
   - Main share method that automatically detects platform and uses best method
   - If target is specified, shares directly to that target
   - Otherwise, tries native share first, then shows dialog
@@ -89,11 +88,9 @@ Utility class for formatting content into shareable payloads.
 #### Methods
 
 - `formatWorkSummary(data: WorkSummaryData, options?: ShareFormatterOptions): SharePayload`
-
   - Formats work statistics as shareable text with time spent, tasks completed, etc.
 
 - `formatPromotion(customText?: string, options?: ShareFormatterOptions): SharePayload`
-
   - Creates a promotional share payload for the app
 
 - `optimizeForTwitter(payload: SharePayload): SharePayload`
@@ -245,4 +242,4 @@ When adding new share targets:
 
 ## License
 
-Part of Super Productivity - see main project LICENSE.
+Part of Hyper Productivity - see main project LICENSE.

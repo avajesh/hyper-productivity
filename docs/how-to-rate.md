@@ -1,14 +1,14 @@
-# How to Rate **_Super Productivity_**
+# How to Rate **_Hyper Productivity_**
 
 ## How ratings affect app discoverability
 
 App store ranking algorithms favor apps with higher average ratings. For a small project, even a few low ratings can have an outsized effect on the average and on how often the app is recommended or featured.
 
-If you've found Super Productivity useful, an honest rating or short review helps the project reach more people.
+If you've found Hyper Productivity useful, an honest rating or short review helps the project reach more people.
 
 ## 🪟 Windows (Microsoft Store)
 
-1. Go to the [Microsoft Store page](https://apps.microsoft.com/detail/9nhfvg8361tw) OR open the **Microsoft Store** app and search for **Super Productivity**
+1. Go to the [Microsoft Store page](https://apps.microsoft.com/detail/9nhfvg8361tw) OR open the **Microsoft Store** app and search for **Hyper Productivity**
 2. Scroll to the **Rate and review** section
 3. Click the number of ⭐ stars you want to give
 4. (Optional) Write a review
@@ -48,8 +48,8 @@ If you've found Super Productivity useful, an honest rating or short review help
 ## 🐧 Ubuntu Software Center
 
 1. Open **Ubuntu Software**
-2. Search for **Super Productivity**
-3. Click the Super Productivity result to view its page
+2. Search for **Hyper Productivity**
+3. Click the Hyper Productivity result to view its page
 4. Under the title, click the number of ⭐ stars you want to give
 5. Sign in with your Ubuntu One account if prompted
 6. (Optional) Write a review
@@ -60,8 +60,8 @@ If you've found Super Productivity useful, an honest rating or short review help
 ## 🧩 GNOME Software Center
 
 1. Open **GNOME Software**
-2. Search for **Super Productivity**
-3. Click the Super Productivity result to view its page
+2. Search for **Hyper Productivity**
+3. Click the Hyper Productivity result to view its page
 4. Tap the number of ⭐ stars you want to give
 5. Authenticate if prompted
 6. (Optional) Write a review
@@ -71,7 +71,7 @@ If you've found Super Productivity useful, an honest rating or short review help
 
 ## 🌐 alternativeto.net
 
-1. Go to [the AlternativeTo page](https://alternativeto.net/software/super-productivity/about/)
+1. Go to [the AlternativeTo page](https://alternativeto.net/software/hyper-productivity/about/)
 2. Scroll to "Comments and Reviews"
 3. Click on "Post comment/review"
 4. Write a review
@@ -82,5 +82,5 @@ If you've found Super Productivity useful, an honest rating or short review help
 ## Other places that help the project
 
 - ⭐ Star us on GitHub: https://github.com/avajesh/hyper-productivity
-- https://www.producthunt.com/products/super-productivity
+- https://www.producthunt.com/products/hyper-productivity
 - https://www.pling.com/p/1352584/

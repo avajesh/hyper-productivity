@@ -26,7 +26,7 @@ import { evaluateGpuStartupGuard } from './gpu-startup-guard';
 import * as fs from 'fs';
 
 const ICONS_FOLDER = __dirname + '/assets/icons/';
-const APP_DISPLAY_NAME = 'Super Productivity';
+const APP_DISPLAY_NAME = 'Hyper Productivity';
 // Filename of the .desktop entry electron-builder installs, i.e.
 // `${linux.executableName}.desktop`. The `.desktop` suffix is required and is
 // what Electron's own default uses: `Browser::SetAsDefaultProtocolClient` hands
@@ -167,7 +167,7 @@ export const startApp = (): void => {
     // `GetXdgAppId().value_or(Browser::GetName())`, so the app id wins and
     // `setName` below no longer reaches the window identity. Electron's own
     // inference (`lib/browser/init.ts`) slugifies the app name, which happens to
-    // produce the same value today but would become `super-productivity` the
+    // produce the same value today but would become `hyper-productivity` the
     // moment a `productName` is added to package.json, detaching every window
     // from `hyperproductivity.desktop`. Must run before the first window is
     // created. #9674, #9450.

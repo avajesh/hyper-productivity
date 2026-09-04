@@ -6,7 +6,7 @@ import type {
   PluginHttp,
   PluginIssue,
   PluginSearchResult,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 
 declare const PluginAPI: {
   registerIssueProvider(definition: IssueProviderPluginDefinition): void;
@@ -241,7 +241,7 @@ const isDeclined = (event: GoogleCalendarEvent): boolean =>
   event.attendees?.some((a) => a.self && a.responseStatus === 'declined') ?? false;
 
 /**
- * True for events SuperProductivity itself wrote as auto-time-block mirrors of a
+ * True for events HyperProductivity itself wrote as auto-time-block mirrors of a
  * local task (tagged with `extendedProperties.private.spTaskId` in
  * `timeBlock.upsertEvent`). When a read calendar overlaps the time-block
  * calendar, these mirror events get fetched back and would render in the

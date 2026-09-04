@@ -117,7 +117,7 @@ Center.
 - A plain `master` push builds desktop artifacts, uploads a development Android
   build to the Play `internal` track, and publishes the branch Snap to `edge`.
 - A `master` push that changes SuperSync server inputs publishes
-  `ghcr.io/super-productivity/supersync:latest`; this image is not release-tagged.
+  `ghcr.io/hyper-productivity/supersync:latest`; this image is not release-tagged.
 - Pre-release and manual Apple workflows upload builds without submitting them for
   App Review. See [the TestFlight plan](plans/2026-07-14-ios-testflight-master-builds.md)
   for proposed additional branch behavior; it is not current behavior.
@@ -178,7 +178,7 @@ for development-only labels, secrets, and personal data before upload.
 - Reducing a new request does not restore quota already consumed. Check the
   SignPath organization page for the active quota period and remaining bytes;
   request an exception from SignPath or wait for the period reset if necessary.
-  Also verify that `SIGNPATH_API_TOKEN` is valid, that the `super-productivity`
+  Also verify that `SIGNPATH_API_TOKEN` is valid, that the `hyper-productivity`
   project, `release-signing` policy, and `github-zip-pe` artifact configuration
   still exist under those exact slugs, and that the GitHub trusted build system
   is authorized for the organization. If those checks do not explain a rejection,

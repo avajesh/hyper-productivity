@@ -1,10 +1,10 @@
 # Sync-MD Plugin v2.0.0
 
-A SuperProductivity plugin that enables bidirectional synchronization between markdown files and project tasks.
+A HyperProductivity plugin that enables bidirectional synchronization between markdown files and project tasks.
 
 ## Features
 
-- **Bidirectional Sync**: Keep markdown files and SuperProductivity tasks in sync
+- **Bidirectional Sync**: Keep markdown files and HyperProductivity tasks in sync
 - **Batch API Integration**: Efficient bulk operations for better performance
 - **Smart Debouncing**: 10-second delays prevent conflicts during active editing
 - **Real-time Monitoring**: File system watching with automatic sync triggers

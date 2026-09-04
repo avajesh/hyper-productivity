@@ -4,7 +4,7 @@ import {
   TaskCompletePayload,
   TaskUpdatePayload,
   TaskCreatedPayload,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 
 declare const plugin: PluginAPI;
 

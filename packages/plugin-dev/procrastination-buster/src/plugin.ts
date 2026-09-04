@@ -1,5 +1,5 @@
-// Procrastination Buster Plugin for Super Productivity
-import type { PluginAPI } from '@super-productivity/plugin-api';
+// Procrastination Buster Plugin for Hyper Productivity
+import type { PluginAPI } from '@hyper-productivity/plugin-api';
 
 declare const plugin: PluginAPI;
 

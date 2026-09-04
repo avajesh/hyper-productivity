@@ -4,8 +4,8 @@
   "name": "Todoist Import",
   "version": "1.0.0",
   "minSupVersion": "18.0.0",
-  "description": "One-time import of your active Todoist projects, tasks, sub-tasks, labels and due dates. Additive — your existing Super Productivity data is never touched.",
-  "author": "SuperProductivity",
+  "description": "One-time import of your active Todoist projects, tasks, sub-tasks, labels and due dates. Additive — your existing Hyper Productivity data is never touched.",
+  "author": "HyperProductivity",
   "homepage": "https://github.com/avajesh/hyper-productivity",
   "hooks": [],
   "permissions": [

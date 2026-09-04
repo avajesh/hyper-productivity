@@ -202,7 +202,7 @@ const getPlatformLabel = (): string => {
 };
 
 export const buildFeedbackMailto = (): string => {
-  const subject = 'Super Productivity feedback';
+  const subject = 'Hyper Productivity feedback';
   const body = `What I'd like to share:\n\n\n---\nApp version: ${getAppVersionStr()}\nPlatform: ${getPlatformLabel()}`;
   return `mailto:${MAINTAINER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 };

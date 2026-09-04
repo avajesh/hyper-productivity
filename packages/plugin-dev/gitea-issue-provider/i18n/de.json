@@ -18,5 +18,5 @@
     "LABELS": "Beschriftungen",
     "DESCRIPTION": "Beschreibung"
   },
-  "FORM_HELP": "<p>Hier kannst du SuperProductivity so konfigurieren, dass offene Gitea-Issues für ein bestimmtes Repository im Aufgabenerstellungsfenster in der Tagesplanungsansicht aufgelistet werden. Sie werden als Vorschläge angezeigt und enthalten einen Link zum Issue sowie weitere Informationen dazu.</p><p> Darüber hinaus kannst du alle offenen Issues automatisch hinzufügen und importieren.</p><p> Um Nutzungsbeschränkungen zu umgehen und Zugriff zu erhalten, kannst du ein Zugriffstoken bereitstellen."
+  "FORM_HELP": "<p>Hier kannst du HyperProductivity so konfigurieren, dass offene Gitea-Issues für ein bestimmtes Repository im Aufgabenerstellungsfenster in der Tagesplanungsansicht aufgelistet werden. Sie werden als Vorschläge angezeigt und enthalten einen Link zum Issue sowie weitere Informationen dazu.</p><p> Darüber hinaus kannst du alle offenen Issues automatisch hinzufügen und importieren.</p><p> Um Nutzungsbeschränkungen zu umgehen und Zugriff zu erhalten, kannst du ein Zugriffstoken bereitstellen."
 }

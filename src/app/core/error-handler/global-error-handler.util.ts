@@ -183,7 +183,7 @@ export const createErrorAlert = (
     btnExport.addEventListener('click', async () => {
       try {
         await download(
-          'super-productivity-crash-user-data-export.json',
+          'hyper-productivity-crash-user-data-export.json',
           JSON.stringify(userData),
         );
       } catch (e) {
@@ -200,7 +200,7 @@ export const createErrorAlert = (
       // Type assertion needed for privacy export function
       try {
         await download(
-          'ANONYMIZED-super-productivity-crash-user-data-export.json',
+          'ANONYMIZED-hyper-productivity-crash-user-data-export.json',
           privacyExport(userData as Parameters<typeof privacyExport>[0]),
         );
       } catch (e) {
@@ -274,7 +274,7 @@ export const getGithubErrorUrl = (
 ): string => {
   return newGithubIssueUrl({
     user: 'johannesjo',
-    repo: 'super-productivity',
+    repo: 'hyper-productivity',
     title: '💥 ' + title,
     template: 'in_app_bug_report.md',
     body: getGithubIssueErrorMarkdown(stackTrace, origErr, isHideActionsBeforeError),

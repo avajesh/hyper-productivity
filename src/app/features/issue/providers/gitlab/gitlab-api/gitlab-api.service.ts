@@ -166,7 +166,7 @@ export class GitlabApiService {
         method: 'POST',
         data: {
           duration: duration,
-          summary: 'Submitted via Super Productivity on ' + new Date(),
+          summary: 'Submitted via Hyper Productivity on ' + new Date(),
         },
       },
       cfg,

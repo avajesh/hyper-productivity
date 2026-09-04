@@ -49,16 +49,16 @@
   },
   {
     "name": "MCP",
-    "shortDescription": "Bridge between the Super Productivity app and MCP (Model Context Protocol) servers for Claude Desktop integration.",
+    "shortDescription": "Bridge between the Hyper Productivity app and MCP (Model Context Protocol) servers for Claude Desktop integration.",
     "url": "https://github.com/organicmoron/SP-MCP",
     "author": "organicmoron",
     "authorUrl": "https://github.com/organicmoron",
     "stars": 68
   },
   {
-    "name": "Super Productivity MCP",
+    "name": "Hyper Productivity MCP",
     "shortDescription": "Feature-rich MCP server with 19 tools covering full task CRUD, time tracking summaries, project/tag management, and notifications.",
-    "url": "https://github.com/b0x42/Super-Productivity-MCP",
+    "url": "https://github.com/b0x42/Hyper-Productivity-MCP",
     "author": "b0x42",
     "authorUrl": "https://github.com/b0x42",
     "stars": 11
@@ -73,7 +73,7 @@
   },
   {
     "name": "Invoicer",
-    "shortDescription": "Generate client invoices from tracked time in Super Productivity, with flexible billing periods, itemization levels, and PDF export.",
+    "shortDescription": "Generate client invoices from tracked time in Hyper Productivity, with flexible billing periods, itemization levels, and PDF export.",
     "url": "https://github.com/1jamesthompson1/sp-invoicer",
     "author": "1jamesthompson1",
     "authorUrl": "https://github.com/1jamesthompson1",
@@ -81,7 +81,7 @@
   },
   {
     "name": "StudyForge Leaderboard",
-    "shortDescription": "Syncs your daily study time from Super Productivity to the StudyForge leaderboard. Compete with friends, track streaks, and join 7-day study war challenges.",
+    "shortDescription": "Syncs your daily study time from Hyper Productivity to the StudyForge leaderboard. Compete with friends, track streaks, and join 7-day study war challenges.",
     "url": "https://github.com/dhananajay-030/studyforge-plugin",
     "author": "dhananajay-030",
     "authorUrl": "https://github.com/dhananajay-030",
@@ -89,7 +89,7 @@
   },
   {
     "name": "Print Tasks",
-    "shortDescription": "Want to go offline but take Super Productivity with you? This plugin provides print layouts for Today, All Tasks, All Projects, by Tag etc.",
+    "shortDescription": "Want to go offline but take Hyper Productivity with you? This plugin provides print layouts for Today, All Tasks, All Projects, by Tag etc.",
     "url": "https://codeberg.org/sinenomine/sp-task-print",
     "author": "sinenomine",
     "authorUrl": "https://codeberg.org/sinenomine/",
@@ -105,24 +105,24 @@
   },
   {
     "name": "Memos Sync",
-    "shortDescription": "Syncs plugin-owned notes between Super Productivity and Memos with attachments, auto-sync, and conflict handling.",
+    "shortDescription": "Syncs plugin-owned notes between Hyper Productivity and Memos with attachments, auto-sync, and conflict handling.",
     "url": "https://github.com/giba0/memos-sync",
     "author": "giba0",
     "authorUrl": "https://github.com/giba0",
     "stars": 2
   },
   {
-    "name": "YouTrack Importer for SuperProductivity",
-    "shortDescription": "Bring YouTrack issues into SuperProductivity, either as a one-off CSV import or as a live, repeatable sync directly against the YouTrack REST API.",
-    "url": "https://github.com/coissay/superProductivity-YoutrackPlugin",
+    "name": "YouTrack Importer for HyperProductivity",
+    "shortDescription": "Bring YouTrack issues into HyperProductivity, either as a one-off CSV import or as a live, repeatable sync directly against the YouTrack REST API.",
+    "url": "https://github.com/coissay/hyperProductivity-YoutrackPlugin",
     "author": "coissay",
     "authorUrl": "https://github.com/coissay",
     "stars": 0
   },
   {
     "name": "Home Assistant Bridge",
-    "shortDescription": "Bidirectional bridge between Super Productivity and Home Assistant. Rules-based automation engine: control lights, scenes, media, and notifications based on your tasks. Auto-focus mode, break reminders, daily summaries, and live HA sensor display.",
-    "url": "https://github.com/jloops412/ha-super-productivity",
+    "shortDescription": "Bidirectional bridge between Hyper Productivity and Home Assistant. Rules-based automation engine: control lights, scenes, media, and notifications based on your tasks. Auto-focus mode, break reminders, daily summaries, and live HA sensor display.",
+    "url": "https://github.com/jloops412/ha-hyper-productivity",
     "author": "jloops412",
     "authorUrl": "https://github.com/jloops412",
     "stars": 0
@@ -130,14 +130,14 @@
   {
     "name": "Goals Vision Board",
     "shortDescription": "A customizable two-page visual board for long-term goals, reminders, notes, images, tags, checklists, and metrics.",
-    "url": "https://github.com/CuriousChipmunk/vision-board-super-productivity",
+    "url": "https://github.com/CuriousChipmunk/vision-board-hyper-productivity",
     "author": "CuriousChipmunk",
     "authorUrl": "https://github.com/CuriousChipmunk",
     "stars": 0
   },
   {
     "name": "sync.md Multi",
-    "shortDescription": "Sync multiple SuperProductivity projects with their own markdown files (bidirectional).",
+    "shortDescription": "Sync multiple HyperProductivity projects with their own markdown files (bidirectional).",
     "url": "https://codeberg.org/fpindado/sync-md-multi",
     "author": "Fernando Pindado",
     "authorUrl": "https://codeberg.org/fpindado",

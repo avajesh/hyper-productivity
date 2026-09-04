@@ -6,7 +6,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import type { PluginAPI } from '@super-productivity/plugin-api';
+import type { PluginAPI } from '@hyper-productivity/plugin-api';
 import {
   docKey,
   loadContextDoc,

@@ -1,4 +1,4 @@
-// Types for Super Productivity Plugin API
+// Types for Hyper Productivity Plugin API
 // This package provides TypeScript types for developing plugins
 
 import {
@@ -719,7 +719,7 @@ export interface PluginAPI {
   // secret storage
   //
   // Local-only, per-plugin credential storage (IMAP passwords, API tokens, …).
-  // Stored in a dedicated store that is never part of Super Productivity's
+  // Stored in a dedicated store that is never part of Hyper Productivity's
   // sync, exports, or backups, so secrets are per-device — the user re-enters
   // them on each device. (This is not protection against OS-level device
   // backups; values are stored unencrypted at rest, like plugin OAuth tokens.)
@@ -733,7 +733,7 @@ export interface PluginAPI {
   deleteSecret(key: string): Promise<void>;
 
   /**
-   * Issue a host-side HTTP request through Super Productivity's guarded HTTP bridge.
+   * Issue a host-side HTTP request through Hyper Productivity's guarded HTTP bridge.
    * Plugins must provide any Authorization headers themselves; the host only executes
    * the request and applies existing URL/private-network protections.
    *

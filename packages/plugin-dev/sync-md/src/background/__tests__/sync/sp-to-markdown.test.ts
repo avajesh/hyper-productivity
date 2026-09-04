@@ -1,5 +1,5 @@
 import { convertTasksToMarkdown, formatTask } from '../../sync/sp-to-md';
-import { Task } from '@super-productivity/plugin-api';
+import { Task } from '@hyper-productivity/plugin-api';
 
 describe('convertTasksToMarkdown', () => {
   it('should convert simple tasks', () => {

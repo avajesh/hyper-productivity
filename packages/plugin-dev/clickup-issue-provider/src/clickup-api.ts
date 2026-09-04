@@ -2,7 +2,7 @@ import type {
   PluginHttp,
   PluginIssue,
   PluginSearchResult,
-} from '@super-productivity/plugin-api';
+} from '@hyper-productivity/plugin-api';
 
 export const API_BASE = 'https://api.clickup.com/api/v2';
 export const MAX_RETRIES = 3;

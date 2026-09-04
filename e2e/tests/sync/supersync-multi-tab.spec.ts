@@ -37,7 +37,7 @@ const installSecondTabTestInit = async (context: BrowserContext): Promise<void> 
 
       constructor(name: string) {
         super(name);
-        this._isSingleInstanceChannel = name === 'superProductivityTab';
+        this._isSingleInstanceChannel = name === 'hyperProductivityTab';
       }
 
       override postMessage(message: unknown): void {

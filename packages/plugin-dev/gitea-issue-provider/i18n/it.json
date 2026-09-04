@@ -18,5 +18,5 @@
     "LABELS": "Etichette",
     "DESCRIPTION": "Descrizione"
   },
-  "FORM_HELP": "<p>Qui è possibile configurare SuperProductivity in modo che elenchi le issue aperte di Gitea per uno specifico repository nel pannello di creazione delle attività nella vista di pianificazione giornaliera. Saranno elencati come suggerimenti e forniranno un link all'issue e ulteriori informazioni su di esso.</p> <p>Inoltre è possibile aggiungere e importare automaticamente tutte le issue aperte.</p><p>Per superare i limiti di utilizzo e accedere è possibile fornire un token di accesso."
+  "FORM_HELP": "<p>Qui è possibile configurare HyperProductivity in modo che elenchi le issue aperte di Gitea per uno specifico repository nel pannello di creazione delle attività nella vista di pianificazione giornaliera. Saranno elencati come suggerimenti e forniranno un link all'issue e ulteriori informazioni su di esso.</p> <p>Inoltre è possibile aggiungere e importare automaticamente tutte le issue aperte.</p><p>Per superare i limiti di utilizzo e accedere è possibile fornire un token di accesso."
 }

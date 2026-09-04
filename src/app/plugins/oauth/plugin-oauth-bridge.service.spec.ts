@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
-import type { OAuthFlowConfig } from '@super-productivity/plugin-api';
+import type { OAuthFlowConfig } from '@hyper-productivity/plugin-api';
 import { PluginOAuthBridgeService } from './plugin-oauth-bridge.service';
 import { deleteOAuthTokens, loadOAuthTokens } from './plugin-oauth-token-store';
 import { PluginOAuthService } from './plugin-oauth.service';
