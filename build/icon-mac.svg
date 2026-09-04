@@ -12,7 +12,7 @@
       width="822"
       height="822"
       rx="183"
-      fill="#0B77D2"
+      fill="url(#emerald-gradient)"
     />
   </g>
   <path
@@ -20,6 +20,10 @@
     fill="white"
   />
   <defs>
+    <linearGradient id="emerald-gradient" x1="101" y1="101" x2="923" y2="923" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
     <filter
       id="app-icon-shadow"
       x="79"
