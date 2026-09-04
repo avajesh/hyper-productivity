@@ -898,7 +898,7 @@
         "TOKEN": "Token de Acesso"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Aqui você pode configurar SuperProductivity para listar pacotes de trabalho OpenProject abertos. Observe que, para que isso funcione no navegador, você provavelmente precisará configurar o CORS para o servidor OpenProject, para permitir o acesso de app.super-productivity.com</p>"
+        "HELP": "<p>Aqui você pode configurar SuperProductivity para listar pacotes de trabalho OpenProject abertos. Observe que, para que isso funcione no navegador, você provavelmente precisará configurar o CORS para o servidor OpenProject, para permitir o acesso de app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Responsável",
@@ -2350,7 +2350,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importar de URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importar de URL",
     "PRIVACY_EXPORT": "Exportar dados (anonimizados)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Exportar dados anonimizados (para enviar para contact@super-productivity.com para depuração)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Exportar dados anonimizados (para enviar para contact@techeia.com para depuração)",
     "S_BACKUP_DOWNLOADED": "Backup baixado para a pasta de documentos do Android",
     "S_ERR_IMPORT_FAILED": "Falha na importação de dados",
     "S_ERR_INVALID_DATA": "Falha na importação: JSON inválido",
@@ -2448,7 +2448,7 @@
       "S_RESTORE_SUCCESS": "Cópia de segurança restaurada com sucesso."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "<b>Provavelmente isso NÃO funcionará com a versão para navegador do Super Productivity.<br /> <a href=\"https://super-productivity.com/download/\">Baixe a versão para desktop</a> para usar este recurso!</b>",
+      "BROWSER_WARNING": "<b>Provavelmente isso NÃO funcionará com a versão para navegador do Super Productivity.<br /> <a href=\"https://techeia.com/download/\">Baixe a versão para desktop</a> para usar este recurso!</b>",
       "CAL_PATH": "URL da fonte iCal",
       "CHECK_UPDATES": "Verifique se há atualizações remotas a cada X",
       "HELP": "Você pode integrar calendários para ser lembrado e adicioná-los como tarefas dentro do Super Productivity. A integração funciona usando o formato iCal. Para que isso funcione, seus calendários precisam estar acessíveis pela internet ou pelo sistema de arquivos.",

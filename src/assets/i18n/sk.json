@@ -201,7 +201,7 @@
         "POLL_INTERVAL_MINUTES": "Interval zisťovania zmien (v minútach)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Here you can configure SuperProductivity to list uncompleted CalDav todos for a specific project in the task creation panel in the daily planning view. They will be listed as suggestions and will provide a link to the todo as well as more information about it.</p> <p>In addition you can automatically add and sync all uncompleted todos to your task backlog.</p><p>To make it work for nextcloud on mobile and web, you might need to whitelist \"https://app.super-productivity.com\" via the nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
+        "HELP": "<p>Here you can configure SuperProductivity to list uncompleted CalDav todos for a specific project in the task creation panel in the daily planning view. They will be listed as suggestions and will provide a link to the todo as well as more information about it.</p> <p>In addition you can automatically add and sync all uncompleted todos to your task backlog.</p><p>To make it work for nextcloud on mobile and web, you might need to whitelist \"https://app.techeia.com\" via the nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Popis",
@@ -898,7 +898,7 @@
         "TOKEN": "Access Token"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Here you can configure SuperProductivity to list open OpenProject work packages. Please Note that for this to work in the browser you need to probably configure CORS for your OpenProject server, to allow access from app.super-productivity.com</p>"
+        "HELP": "<p>Here you can configure SuperProductivity to list open OpenProject work packages. Please Note that for this to work in the browser you need to probably configure CORS for your OpenProject server, to allow access from app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Príjemca",
@@ -1411,7 +1411,7 @@
         },
         "TITLE": "Synchronizácia",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Making it work on MOBILE and in the browser:</strong> To make this work for mobile or the browser you need to whitelist Super Productivity for CORS requests for your Nextcloud instance. This can have negative security implications! Please <a href='https://github.com/nextcloud/server/issues/3131'>refer to this thread for more information</a>. One approach to make this work on mobile is whitelisting \"https://app.super-productivity.com\" via the nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Use at your own risk!</p>",
+          "CORS_INFO": "<strong>Making it work on MOBILE and in the browser:</strong> To make this work for mobile or the browser you need to whitelist Super Productivity for CORS requests for your Nextcloud instance. This can have negative security implications! Please <a href='https://github.com/nextcloud/server/issues/3131'>refer to this thread for more information</a>. One approach to make this work on mobile is whitelisting \"https://app.techeia.com\" via the nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Use at your own risk!</p>",
           "D_SYNC_FOLDER_PATH": "Cesta relatívna k koreňu WebDAV servera, kde budú uložené synchronizačné súbory (napr. ' /super-productivity' alebo ' /'). Toto NIE je interná cesta vášho servera.",
           "INFO": "Implementácie WebDAV sa bohužiaľ veľmi líšia. Super Productivity je známy tým, že dobre funguje s Nextcloud, <strong>ale nemusí fungovať s vaším poskytovateľom</strong>.",
           "L_BASE_URL": "Základná URL adresa",
@@ -2351,7 +2351,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importovať z URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importovať z URL",
     "PRIVACY_EXPORT": "Exportovať údaje (anonymizované)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Exportovať anonymizované údaje (na odoslanie na contact@super-productivity.com na ladenie)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Exportovať anonymizované údaje (na odoslanie na contact@techeia.com na ladenie)",
     "S_BACKUP_DOWNLOADED": "Záloha stiahnutá do priečinka dokumentov Android",
     "S_ERR_IMPORT_FAILED": "Import údajov zlyhal",
     "S_ERR_INVALID_DATA": "Import failed: Invalid JSON",
@@ -2449,7 +2449,7 @@
       "S_RESTORE_SUCCESS": "Záloha bola úspešne obnovená."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Vzhľadom na obmedzenia týkajúce sa rôznych pôvodov <b>to pravdepodobne nebude fungovať s verziou prehliadača Super Productivity.<br /> Ak chcete túto funkciu používať, stiahnite si prosím <a href=\"https://super-productivity.com/download/\">verziu pre počítače</a> !</b>",
+      "BROWSER_WARNING": "Vzhľadom na obmedzenia týkajúce sa rôznych pôvodov <b>to pravdepodobne nebude fungovať s verziou prehliadača Super Productivity.<br /> Ak chcete túto funkciu používať, stiahnite si prosím <a href=\"https://techeia.com/download/\">verziu pre počítače</a> !</b>",
       "CAL_PATH": "URL zdroja iCal",
       "CHECK_UPDATES": "Kontrola vzdialených aktualizácií každých X",
       "HELP": "V aplikácii Super Productivity môžete integrovať kalendáre, ktoré vám budú pripomínať a pridávať ich ako úlohy. Integrácia funguje pomocou formátu iCal. Aby to fungovalo, musia byť vaše kalendáre prístupné buď cez internet, alebo prostredníctvom súborového systému.",

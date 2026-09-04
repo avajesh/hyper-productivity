@@ -201,7 +201,7 @@
         "POLL_INTERVAL_MINUTES": "Interval polling (menit)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar tugas CalDav yang belum selesai untuk proyek tertentu di panel pembuatan tugas dalam tampilan perencanaan harian. Mereka akan terdaftar sebagai saran dan akan memberikan tautan ke todo serta informasi lebih lanjut tentangnya.</p> <p>Selain itu, Anda dapat secara otomatis menambahkan dan menyinkronkan semua tugas yang belum selesai ke backlog tugas Anda</p><p>Agar berfungsi untuk nextcloud di aplikasi web, Anda mungkin perlu memasukkannya ke daftar putih (whitelist) \"https://app.super-productivity.com\" melalui aplikasi Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
+        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar tugas CalDav yang belum selesai untuk proyek tertentu di panel pembuatan tugas dalam tampilan perencanaan harian. Mereka akan terdaftar sebagai saran dan akan memberikan tautan ke todo serta informasi lebih lanjut tentangnya.</p> <p>Selain itu, Anda dapat secara otomatis menambahkan dan menyinkronkan semua tugas yang belum selesai ke backlog tugas Anda</p><p>Agar berfungsi untuk nextcloud di aplikasi web, Anda mungkin perlu memasukkannya ke daftar putih (whitelist) \"https://app.techeia.com\" melalui aplikasi Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Deskripsi",
@@ -898,7 +898,7 @@
         "TOKEN": "Akses Token"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar work packages OpenProject yang terbuka. Harap Perhatikan bahwa agar ini berfungsi di browser, Anda mungkin perlu mengonfigurasi CORS untuk server OpenProject Anda, untuk mengizinkan akses dari app.super-productivity.com</p>"
+        "HELP": "<p>Di sini Anda dapat mengonfigurasi SuperProductivity untuk membuat daftar work packages OpenProject yang terbuka. Harap Perhatikan bahwa agar ini berfungsi di browser, Anda mungkin perlu mengonfigurasi CORS untuk server OpenProject Anda, untuk mengizinkan akses dari app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Penerima tugas",
@@ -1415,7 +1415,7 @@
         },
         "TITLE": "Sinkronisasi",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Membuatnya berfungsi di browser:</strong> Agar ini berfungsi di browser, Anda perlu memasukkan Super Productivity untuk permintaan CORS ke whitelist untuk instans Nextcloud Anda. Ini dapat memiliki implikasi keamanan negatif! Silahkan <a href='https://github.com/nextcloud/server/issues/3131'>lihat utas ini untuk informasi lebih lanjut</a>. Salah satu pendekatan untuk membuat ini berfungsi di seluler adalah memasukkannya ke whitelist \"https://app.super-productivity.com\" lewat nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Gunakan dengan risiko Anda sendiri!</p>",
+          "CORS_INFO": "<strong>Membuatnya berfungsi di browser:</strong> Agar ini berfungsi di browser, Anda perlu memasukkan Super Productivity untuk permintaan CORS ke whitelist untuk instans Nextcloud Anda. Ini dapat memiliki implikasi keamanan negatif! Silahkan <a href='https://github.com/nextcloud/server/issues/3131'>lihat utas ini untuk informasi lebih lanjut</a>. Salah satu pendekatan untuk membuat ini berfungsi di seluler adalah memasukkannya ke whitelist \"https://app.techeia.com\" lewat nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Gunakan dengan risiko Anda sendiri!</p>",
           "D_SYNC_FOLDER_PATH": "Jalur relatif terhadap root server WebDAV tempat file sinkronisasi akan disimpan (misalnya, ' /super-productivity' atau '/'). Ini BUKAN jalur direktori internal server Anda.",
           "INFO": "Implementasi WebDAV sangat bervariasi sayangnya. Super Productivity dikenal bekerja dengan baik dengan Nextcloud, <strong>tetapi mungkin tidak bekerja dengan penyedia Anda</strong>.",
           "L_BASE_URL": "URL Dasar",
@@ -2350,7 +2350,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Impor dari URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Impor dari URL",
     "PRIVACY_EXPORT": "Ekspor data (anonim)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Ekspor data anonim (untuk dikirim ke contact@super-productivity.com untuk debugging)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Ekspor data anonim (untuk dikirim ke contact@techeia.com untuk debugging)",
     "S_BACKUP_DOWNLOADED": "Cadangan diunduh ke folder dokumen android",
     "S_ERR_IMPORT_FAILED": "Mengimpor data gagal",
     "S_ERR_INVALID_DATA": "Impor gagal: JSON tidak valid",
@@ -2448,7 +2448,7 @@
       "S_RESTORE_SUCCESS": "Cadangan berhasil dipulihkan."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Karena pembatasan asal silang <b>, ini kemungkinan TIDAK akan berfungsi dengan Super Productivity versi Browser.<br /> Silakan <a href=\"https://super-productivity.com/download/\">unduh versi desktop</a> untuk menggunakan fitur ini!</b>",
+      "BROWSER_WARNING": "Karena pembatasan asal silang <b>, ini kemungkinan TIDAK akan berfungsi dengan Super Productivity versi Browser.<br /> Silakan <a href=\"https://techeia.com/download/\">unduh versi desktop</a> untuk menggunakan fitur ini!</b>",
       "CAL_PATH": "URL sumber iCal",
       "CHECK_UPDATES": "Periksa pembaruan jarak jauh setiap X",
       "HELP": "Anda dapat mengintegrasikan kalender untuk diingatkan dan menambahkannya sebagai tugas dalam Super Productivity. Integrasi ini bekerja dengan menggunakan format iCal. Agar dapat berfungsi, kalender Anda harus dapat diakses melalui internet atau sistem file.",

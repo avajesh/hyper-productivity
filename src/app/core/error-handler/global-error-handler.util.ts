@@ -195,7 +195,7 @@ export const createErrorAlert = (
     const btnPrivacyExport = document.createElement('BUTTON');
     btnPrivacyExport.innerText = 'PE';
     btnPrivacyExport.title =
-      'Export anonymized data (to send to contact@super-productivity.com for debugging)';
+      'Export anonymized data (to send to contact@techeia.com for debugging)';
     btnPrivacyExport.addEventListener('click', async () => {
       // Type assertion needed for privacy export function
       try {

@@ -185,7 +185,7 @@
         "POLL_INTERVAL_MINUTES": "확인 간격(분)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>여기에서 일일 계획 보기의 작업 생성 패널에서 특정 프로젝트에 대해 완료되지 않은 CalDav 할 일을 나열하도록 SuperProductivity를 구성할 수 있습니다. 제안 사항으로 나열되며 할 일에 대한 링크와 이에 대한 추가 정보를 제공합니다.</p> <p>또한 완료되지 않은 모든 할 일을 작업 백로그에 자동으로 추가하고 동기화할 수 있습니다.</p><p>모바일 및 웹의 nextcloud에서 작동하도록 하려면 nextcloud 앱 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>를 통해 \"https://app.super-productivity.com\"을 허용 목록에 추가해야 할 수 있습니다.</p>"
+        "HELP": "<p>여기에서 일일 계획 보기의 작업 생성 패널에서 특정 프로젝트에 대해 완료되지 않은 CalDav 할 일을 나열하도록 SuperProductivity를 구성할 수 있습니다. 제안 사항으로 나열되며 할 일에 대한 링크와 이에 대한 추가 정보를 제공합니다.</p> <p>또한 완료되지 않은 모든 할 일을 작업 백로그에 자동으로 추가하고 동기화할 수 있습니다.</p><p>모바일 및 웹의 nextcloud에서 작동하도록 하려면 nextcloud 앱 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>를 통해 \"https://app.techeia.com\"을 허용 목록에 추가해야 할 수 있습니다.</p>"
       },
       "S": {
         "CALENDAR_NOT_FOUND": "CalDav : 캘린더 \"{{calendarName}}\"을 (를) 찾을 수 없음",
@@ -850,7 +850,7 @@
         "TOKEN": "액세스 토큰"
       },
       "FORM_SECTION": {
-        "HELP": "<p>여기에서 열려 있는 OpenProject 작업 패키지를 나열하도록 SuperProductivity를 구성할 수 있습니다. 이것이 브라우저에서 작동하려면 app.super-productivity.com</p>에서 액세스를 허용하도록 OpenProject 서버에 대해 CORS를 구성해야 합니다."
+        "HELP": "<p>여기에서 열려 있는 OpenProject 작업 패키지를 나열하도록 SuperProductivity를 구성할 수 있습니다. 이것이 브라우저에서 작동하려면 app.techeia.com</p>에서 액세스를 허용하도록 OpenProject 서버에 대해 CORS를 구성해야 합니다."
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "담당자",
@@ -2334,7 +2334,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "URL에서 가져오기",
     "OPEN_IMPORT_FROM_URL_DIALOG": "URL에서 가져오기",
     "PRIVACY_EXPORT": "데이터 내보내기(익명화됨)",
-    "PRIVACY_EXPORT_DESCRIPTION": "익명화된 데이터 내보내기(디버깅을 위해 contact@super-productivity.com 으로 보내기)",
+    "PRIVACY_EXPORT_DESCRIPTION": "익명화된 데이터 내보내기(디버깅을 위해 contact@techeia.com 으로 보내기)",
     "S_BACKUP_DOWNLOADED": "백업은 안드로이드 문서 폴더에 다운로드되었습니다.",
     "S_ERR_IMPORT_FAILED": "데이터 가져오기 실패",
     "S_ERR_INVALID_DATA": "가져 오기 실패 : 잘못된 JSON",
@@ -2410,7 +2410,7 @@
       "S_RESTORE_SUCCESS": "백업을 복원했습니다."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "교차 출처 제한 <b>으로 인해 브라우저 버전의 Super Productivity에서는 작동하지 않을 수 있습니다.<br /> 이 기능을 사용하려면 데스크톱 버전</a> 을 <a href=\"https://super-productivity.com/download/\">다운로드하세요!</b>",
+      "BROWSER_WARNING": "교차 출처 제한 <b>으로 인해 브라우저 버전의 Super Productivity에서는 작동하지 않을 수 있습니다.<br /> 이 기능을 사용하려면 데스크톱 버전</a> 을 <a href=\"https://techeia.com/download/\">다운로드하세요!</b>",
       "CAL_PATH": "ICal 소스의 URL",
       "CHECK_UPDATES": "X마다 원격 업데이트 확인",
       "HELP": "캘린더를 통합하여 알림을 받고 Super Productivity 내에서 작업으로 추가할 수 있습니다. 통합은 iCal 형식을 사용하여 작동합니다. 이 기능을 사용하려면 인터넷이나 파일 시스템을 통해 캘린더에 액세스할 수 있어야 합니다.",

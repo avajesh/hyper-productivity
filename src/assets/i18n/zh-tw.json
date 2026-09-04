@@ -201,7 +201,7 @@
         "POLL_INTERVAL_MINUTES": "輪詢間隔（分鐘）"
       },
       "FORM_SECTION": {
-        "HELP": "<p>在此您可以設定 Super Productivity 在每日規劃檢視的工作建立面板中列出特定專案的未完成 CalDAV 待辦事項。它們將作為建議列出，並提供待辦事項的連結以及更多相關資訊。</p> <p>此外，您可以自動新增並同步所有未完成的待辦事項到您的工作待辦事項。</p><p>要在網頁應用程式中讓 Nextcloud 運作，您可能需要透過 Nextcloud 應用程式 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> 將 \"https://app.super-productivity.com\" 加入白名單。</p>"
+        "HELP": "<p>在此您可以設定 Super Productivity 在每日規劃檢視的工作建立面板中列出特定專案的未完成 CalDAV 待辦事項。它們將作為建議列出，並提供待辦事項的連結以及更多相關資訊。</p> <p>此外，您可以自動新增並同步所有未完成的待辦事項到您的工作待辦事項。</p><p>要在網頁應用程式中讓 Nextcloud 運作，您可能需要透過 Nextcloud 應用程式 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> 將 \"https://app.techeia.com\" 加入白名單。</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "描述",
@@ -903,7 +903,7 @@
         "TOKEN": "存取權杖"
       },
       "FORM_SECTION": {
-        "HELP": "<p>在此您可以設定 Super Productivity 列出開放的 OpenProject 工作套件。請注意，要在瀏覽器中運作，您可能需要為 OpenProject 伺服器設定 CORS，以允許從 app.super-productivity.com 存取</p>"
+        "HELP": "<p>在此您可以設定 Super Productivity 列出開放的 OpenProject 工作套件。請注意，要在瀏覽器中運作，您可能需要為 OpenProject 伺服器設定 CORS，以允許從 app.techeia.com 存取</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "受託人",
@@ -1511,7 +1511,7 @@
         "WEB_DAV": {
           "CONDITIONAL_HEADER_WARNING_MSG": "您的 WebDAV 伺服器不支援條件式標頭（If-Unmodified-Since）。這表示 Super Productivity 無法在上傳期間偵測來自其他裝置的並行變更。<br><br>同步仍然可以運作，但如果您同時在多個裝置上進行變更，則存在資料衝突的小風險。",
           "CONDITIONAL_HEADER_WARNING_TITLE": "降低的同步安全性",
-          "CORS_INFO": "<strong>在瀏覽器中使用：</strong>允許 Super Productivity 向您的 WebDAV 伺服器發送 CORS 請求。這可能會帶來安全隱患！對於 Nextcloud，請參考 <a href='https://github.com/nextcloud/server/issues/3131'>此 GitHub 討論串</a>以取得更多資訊。在行動裝置上使此功能運作的一種方法是透過 Nextcloud 應用程式 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> 將 \"https://app.super-productivity.com\" 加入白名單。風險自負！</p>",
+          "CORS_INFO": "<strong>在瀏覽器中使用：</strong>允許 Super Productivity 向您的 WebDAV 伺服器發送 CORS 請求。這可能會帶來安全隱患！對於 Nextcloud，請參考 <a href='https://github.com/nextcloud/server/issues/3131'>此 GitHub 討論串</a>以取得更多資訊。在行動裝置上使此功能運作的一種方法是透過 Nextcloud 應用程式 <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> 將 \"https://app.techeia.com\" 加入白名單。風險自負！</p>",
           "D_SYNC_FOLDER_PATH": "相對於 WebDAV 伺服器根目錄的路徑，用於儲存同步檔案（例如 '/super-productivity' 或 '/'）。這不是伺服器的內部目錄路徑。",
           "INFO": "<strong>警告：</strong>WebDAV 的實作方式差異很大。Super Productivity 已知可與 Nextcloud 良好配合，<strong>但可能無法與您的提供者一起使用</strong>。在正式使用前請徹底測試。",
           "L_BASE_URL": "基本網址",
@@ -2351,7 +2351,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "從網址匯入",
     "OPEN_IMPORT_FROM_URL_DIALOG": "從網址匯入",
     "PRIVACY_EXPORT": "匯出資料（匿名）",
-    "PRIVACY_EXPORT_DESCRIPTION": "匯出匿名資料（傳送至 contact@super-productivity.com 以進行除錯）",
+    "PRIVACY_EXPORT_DESCRIPTION": "匯出匿名資料（傳送至 contact@techeia.com 以進行除錯）",
     "S_BACKUP_DOWNLOADED": "備份已下載至 Android 文件資料夾",
     "S_ERR_IMPORT_FAILED": "匯入資料失敗",
     "S_ERR_INVALID_DATA": "匯入失敗：無效的 JSON",
@@ -2448,7 +2448,7 @@
       "S_RESTORE_SUCCESS": "備份已成功還原。"
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "由於跨來源限制，<b>這可能無法在 Super Productivity 的網頁瀏覽器版本中運作。<br />請<a href=\"https://super-productivity.com/download/\">下載桌面版</a>以使用此功能！</b>",
+      "BROWSER_WARNING": "由於跨來源限制，<b>這可能無法在 Super Productivity 的網頁瀏覽器版本中運作。<br />請<a href=\"https://techeia.com/download/\">下載桌面版</a>以使用此功能！</b>",
       "CAL_PATH": "iCal 來源的網址",
       "CHECK_UPDATES": "每 X 檢查遠端更新一次",
       "HELP": "您可以整合行事曆以在 Super Productivity 中收到提醒並將其新增為工作。此整合使用 iCal 格式運作。為此，您的行事曆必須可透過網際網路或檔案系統存取。",

@@ -879,7 +879,7 @@
         "TOKEN": "نشانه دسترسی"
       },
       "FORM_SECTION": {
-        "HELP": "<p>در اینجا می توانید SuperProductivity را برای لیست بسته های کاری OpenProject باز شده پیکربندی کنید. لطفاً توجه داشته باشید که برای کارکردن در مرورگر ، احتمالاً باید CORS را برای سرور OpenProject خود پیکربندی کنید ، تا از app.super-productivity.com اجازه دسترسی داشته باشید</p>"
+        "HELP": "<p>در اینجا می توانید SuperProductivity را برای لیست بسته های کاری OpenProject باز شده پیکربندی کنید. لطفاً توجه داشته باشید که برای کارکردن در مرورگر ، احتمالاً باید CORS را برای سرور OpenProject خود پیکربندی کنید ، تا از app.techeia.com اجازه دسترسی داشته باشید</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "اختصاص دهنده",
@@ -2352,7 +2352,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "وارد کردن از URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "وارد کردن از URL",
     "PRIVACY_EXPORT": "صادر کردن داده ها (ناشناس)",
-    "PRIVACY_EXPORT_DESCRIPTION": "صادر کردن داده های ناشناس (برای ارسال به contact@super-productivity.com برای اشکال زدایی)",
+    "PRIVACY_EXPORT_DESCRIPTION": "صادر کردن داده های ناشناس (برای ارسال به contact@techeia.com برای اشکال زدایی)",
     "S_BACKUP_DOWNLOADED": "پشتیبان گیری در پوشه اسناد اندروید دانلود شده است",
     "S_ERR_IMPORT_FAILED": "وارد کردن داده ها انجام نشد",
     "S_ERR_INVALID_DATA": "وارد کردن انجام نشد: JSON نامعتبر",
@@ -2428,7 +2428,7 @@
     },
     "CALENDARS": {
       "AUTO_IMPORT_FOR_CURRENT_DAY": "وارد کردن خودکار رویدادها به‌عنوان وظیفه برای روز جاری",
-      "BROWSER_WARNING": "به دلیل محدودیت‌های متقاطع <b>این احتمالاً با نسخه مرورگر Super Productivity کار نخواهد کرد.<br /> لطفاً برای استفاده از این ویژگی <a href=\"https://super-productivity.com/download/\">نسخه دسکتاپ</a> را دانلود کنید!</b>",
+      "BROWSER_WARNING": "به دلیل محدودیت‌های متقاطع <b>این احتمالاً با نسخه مرورگر Super Productivity کار نخواهد کرد.<br /> لطفاً برای استفاده از این ویژگی <a href=\"https://techeia.com/download/\">نسخه دسکتاپ</a> را دانلود کنید!</b>",
       "CAL_COLOR": "رنگ تقویم",
       "CAL_PATH": "آدرس منبع iCal",
       "CHECK_UPDATES": "هر X به‌روزرسانی‌های راه دور را بررسی کنید",

@@ -904,7 +904,7 @@
         "TOKEN": "Jeton d'accès"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Ici, vous pouvez configurer SuperProductivity pour répertorier les packages de travail OpenProject ouverts. Veuillez noter que pour que cela fonctionne dans le navigateur, vous devez probablement configurer CORS pour votre serveur OpenProject, pour autoriser l'accès depuis app.super-productivity.com</p>"
+        "HELP": "<p>Ici, vous pouvez configurer SuperProductivity pour répertorier les packages de travail OpenProject ouverts. Veuillez noter que pour que cela fonctionne dans le navigateur, vous devez probablement configurer CORS pour votre serveur OpenProject, pour autoriser l'accès depuis app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Cessionnaire",
@@ -2352,7 +2352,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importer depuis l'URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importer depuis l'URL",
     "PRIVACY_EXPORT": "Exporter les données (anonymisées)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Exporter les données anonymisées (pour envoyer à contact@super-productivity.com dans un but de débogage)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Exporter les données anonymisées (pour envoyer à contact@techeia.com dans un but de débogage)",
     "S_BACKUP_DOWNLOADED": "Sauvegarde téléchargée dans le dossier documents d'android",
     "S_ERR_IMPORT_FAILED": "L'importation des données a échoué",
     "S_ERR_INVALID_DATA": "Échec de l'importation: JSON non valide",
@@ -2449,7 +2449,7 @@
       "TITLE": "Sauvegardes automatiques"
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "<b>Cela ne fonctionnera probablement PAS avec la version navigateur de Super Productivity.<br /> Veuillez <a href=\"https://super-productivity.com/download/\">télécharger la version de bureau</a> pour utiliser cette fonctionnalité !</b>",
+      "BROWSER_WARNING": "<b>Cela ne fonctionnera probablement PAS avec la version navigateur de Super Productivity.<br /> Veuillez <a href=\"https://techeia.com/download/\">télécharger la version de bureau</a> pour utiliser cette fonctionnalité !</b>",
       "CAL_PATH": "URL de la source iCal",
       "CHECK_UPDATES": "Vérifier les mises à jour distantes tous les X",
       "FILTER_EXCLUDE_REGEX": "Exclure les événements correspondant à l'expression régulière (facultatif)",

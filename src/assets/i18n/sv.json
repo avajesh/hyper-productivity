@@ -213,7 +213,7 @@
         "TWO_WAY_SYNC_TITLE": "Synkroniseringsriktning för titel"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Här kan du konfigurera SuperProductivity till att lista icke slutförda CalDav-uppgifter för ett specifikt projekt på panelen för uppgiftsskapande i den dagliga planeringsvyn. De kommer att listas som förslag och kommer att länka till uppgiften samt mer information om den.</p> <p>Dessutom kan du automatiskt lägga till och synkronisera alla icke slutförda uppgifter med din lista med eftersläpande uppgifter.</p><p>För att det ska fungera med Nextcloud i webbappen kan du behöva vitlista \"https://app.super-productivity.com\" via Nextcloud-appen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
+        "HELP": "<p>Här kan du konfigurera SuperProductivity till att lista icke slutförda CalDav-uppgifter för ett specifikt projekt på panelen för uppgiftsskapande i den dagliga planeringsvyn. De kommer att listas som förslag och kommer att länka till uppgiften samt mer information om den.</p> <p>Dessutom kan du automatiskt lägga till och synkronisera alla icke slutförda uppgifter med din lista med eftersläpande uppgifter.</p><p>För att det ska fungera med Nextcloud i webbappen kan du behöva vitlista \"https://app.techeia.com\" via Nextcloud-appen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Beskrivning",
@@ -912,7 +912,7 @@
         "TOKEN": "Åtkomsttoken"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Här kan du konfigurera SuperProductivity så att öppna OpenProject-arbetspaket listas. Observera att för att detta ska fungera i webbläsaren måste du troligen konfigurera CORS för din OpenProject-server, för att tillåta åtkomst från app.super-productivity.com</p>"
+        "HELP": "<p>Här kan du konfigurera SuperProductivity så att öppna OpenProject-arbetspaket listas. Observera att för att detta ska fungera i webbläsaren måste du troligen konfigurera CORS för din OpenProject-server, för att tillåta åtkomst från app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Mottagare",
@@ -1583,7 +1583,7 @@
         },
         "TITLE": "Synkronisera",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Få det att fungera i webbläsaren:</strong> För att detta ska fungera i webbläsaren måste du vitlista Super Productivity för CORS-förfrågningar för din webdav-server. Detta kan ha negativa säkerhetskonsekvenser! För nextcloud, <a href=’https://github.com/nextcloud/server/issues/3131’>se denna tråd för mer information</a>. Ett sätt att få detta att fungera på mobilen är att vitlista \"https://app.super-productivity.com\" via Nextcloud-appen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Använd på egen risk!</p>",
+          "CORS_INFO": "<strong>Få det att fungera i webbläsaren:</strong> För att detta ska fungera i webbläsaren måste du vitlista Super Productivity för CORS-förfrågningar för din webdav-server. Detta kan ha negativa säkerhetskonsekvenser! För nextcloud, <a href=’https://github.com/nextcloud/server/issues/3131’>se denna tråd för mer information</a>. Ett sätt att få detta att fungera på mobilen är att vitlista \"https://app.techeia.com\" via Nextcloud-appen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Använd på egen risk!</p>",
           "D_SYNC_FOLDER_PATH": "Sökväg relativt till WebDAV-serverns rot där synkfiler lagras (t.ex. '/super-productivity' eller '/'). Detta är INTE din servers interna katalogsökväg.",
           "INFO": "WebDAV-implementeringar skiljer sig tyvärr mycket åt. Super Productivity fungerar bra med Nextcloud, <strong>men kanske inte med din leverantör</strong>.",
           "L_BASE_URL": "Bas-URL",
@@ -2306,7 +2306,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importera från URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importera från URL",
     "PRIVACY_EXPORT": "Exportera data (anonymiserad)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Exportera anonymiserade data (för att skicka till contact@super-productivity.com för felsökning)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Exportera anonymiserade data (för att skicka till contact@techeia.com för felsökning)",
     "S_BACKUP_DOWNLOADED": "Säkerhetskopia nedladdad till Android-dokumentmappen",
     "S_ERR_IMPORT_FAILED": "Import av data misslyckades",
     "S_ERR_INVALID_DATA": "Import misslyckades: Ogiltig JSON",
@@ -2403,7 +2403,7 @@
     },
     "CALENDARS": {
       "AUTO_IMPORT_FOR_CURRENT_DAY": "Importera automatiskt händelser som uppgifter för aktuell dag",
-      "BROWSER_WARNING": "På grund av begränsningar för korsreferenser <b>kommer detta sannolikt INTE att fungera med webbläsarversionen av Super Productivity.<br /> Vänligen <a href=\"https://super-productivity.com/download/\">ladda ner desktopversionen</a> för att kunna använda denna funktion!</b>",
+      "BROWSER_WARNING": "På grund av begränsningar för korsreferenser <b>kommer detta sannolikt INTE att fungera med webbläsarversionen av Super Productivity.<br /> Vänligen <a href=\"https://techeia.com/download/\">ladda ner desktopversionen</a> för att kunna använda denna funktion!</b>",
       "CAL_COLOR": "Kalenderfärg",
       "CAL_PATH": "iCal-källans URL",
       "CHECK_UPDATES": "Kontrollera efter fjärruppdateringar var X:e gång",

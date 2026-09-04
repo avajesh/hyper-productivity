@@ -213,7 +213,7 @@
         "TWO_WAY_SYNC_TITLE": "Direcție sincronizare titlu"
       },
       "FORM_SECTION": {
-        "HELP": "<p>De aici poți configura Super Productivity pentru a lista sarcinile CalDAV nefinalizate pentru un anumit proiect în panoul de creare a sarcinilor din vizualizarea planificării zilnice. Acestea vor fi listate ca sugestii și vor oferi o legătură către sarcină, precum și mai multe informații despre aceasta.</p><p>În plus, poți adăuga automat și sincroniza toate sarcinile nefinalizate în lista ta de sarcini restante.</p><p>Pentru a funcționa cu Nextcloud în aplicația web, este posibil să fie nevoie să oferi permisiune pentru \"https://app.super-productivity.com\" în aplicația Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
+        "HELP": "<p>De aici poți configura Super Productivity pentru a lista sarcinile CalDAV nefinalizate pentru un anumit proiect în panoul de creare a sarcinilor din vizualizarea planificării zilnice. Acestea vor fi listate ca sugestii și vor oferi o legătură către sarcină, precum și mai multe informații despre aceasta.</p><p>În plus, poți adăuga automat și sincroniza toate sarcinile nefinalizate în lista ta de sarcini restante.</p><p>Pentru a funcționa cu Nextcloud în aplicația web, este posibil să fie nevoie să oferi permisiune pentru \"https://app.techeia.com\" în aplicația Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Descriere",
@@ -912,7 +912,7 @@
         "TOKEN": "Token de acces"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Aici poți configura Super Productivity să listeze pachetele de lucru OpenProject deschise. Reține că pentru a funcționa în versiunea web, probabil trebuie să configurezi CORS pe serverul OpenProject pentru a permite accesul de la app.super-productivity.com</p>"
+        "HELP": "<p>Aici poți configura Super Productivity să listeze pachetele de lucru OpenProject deschise. Reține că pentru a funcționa în versiunea web, probabil trebuie să configurezi CORS pe serverul OpenProject pentru a permite accesul de la app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Responsabil",
@@ -1584,7 +1584,7 @@
         },
         "TITLE": "Sincronizare",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Ca să funcționeze în browser:</strong> Trebuie să permiți Super Productivity să facă cereri CORS către serverul tău. Pentru Nextcloud, o abordare este să permiți \"https://app.super-productivity.com\" prin aplicația <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>. Consultă <a href='https://github.com/nextcloud/server/issues/3131'>această discuție GitHub</a> pentru mai multe informații.",
+          "CORS_INFO": "<strong>Ca să funcționeze în browser:</strong> Trebuie să permiți Super Productivity să facă cereri CORS către serverul tău. Pentru Nextcloud, o abordare este să permiți \"https://app.techeia.com\" prin aplicația <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>. Consultă <a href='https://github.com/nextcloud/server/issues/3131'>această discuție GitHub</a> pentru mai multe informații.",
           "D_SYNC_FOLDER_PATH": "Calea relativă la rădăcina serverului WebDAV unde vor fi stocate fișierele de sincronizare (de ex. '/super-productivity' sau '/'). Aceasta NU este calea internă a directorului serverului tău.",
           "INFO": "<strong>Avertisment:</strong> Sincronizarea generică WebDAV este oferită <strong>așa cum este, fără suport</strong>. Dacă folosești Nextcloud, te rog folosește opțiunea de sincronizare Nextcloud în schimb.",
           "L_BASE_URL": "URL de bază",
@@ -2308,7 +2308,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importă din URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importă din URL",
     "PRIVACY_EXPORT": "Exportă date (anonimizate)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Exportă date anonimizate (pentru trimitere la contact@super-productivity.com pentru depanare)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Exportă date anonimizate (pentru trimitere la contact@techeia.com pentru depanare)",
     "S_BACKUP_DOWNLOADED": "Backup descărcat în folderul de documente Android",
     "S_ERR_IMPORT_FAILED": "Importarea datelor a eșuat",
     "S_ERR_INVALID_DATA": "Importarea a eșuat: JSON invalid",
@@ -2405,7 +2405,7 @@
     },
     "CALENDARS": {
       "AUTO_IMPORT_FOR_CURRENT_DAY": "Importă automat evenimentele ca sarcini pentru ziua curentă",
-      "BROWSER_WARNING": "Din cauza restricțiilor cross-origin <b>acest lucru va fi probabil NEFUNCȚIONAL cu versiunea browser a Super Productivity.<br /> Te rog <a href=\"https://super-productivity.com/download/\">descarcă versiunea desktop</a> pentru a utiliza această funcție!</b>",
+      "BROWSER_WARNING": "Din cauza restricțiilor cross-origin <b>acest lucru va fi probabil NEFUNCȚIONAL cu versiunea browser a Super Productivity.<br /> Te rog <a href=\"https://techeia.com/download/\">descarcă versiunea desktop</a> pentru a utiliza această funcție!</b>",
       "CAL_COLOR": "Culoarea calendarului",
       "CAL_PATH": "URL-ul sursei iCal",
       "CHECK_UPDATES": "Verifică actualizările la distanță la fiecare X",

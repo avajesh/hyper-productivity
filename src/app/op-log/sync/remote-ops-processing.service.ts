@@ -549,8 +549,7 @@ export class RemoteOpsProcessingService {
           type: 'ERROR',
           msg: T.F.SYNC.S.VERSION_TOO_OLD,
           actionStr: T.PS.UPDATE_APP,
-          actionFn: () =>
-            window.open('https://super-productivity.com/download', '_blank'),
+          actionFn: () => window.open('https://techeia.com/download', '_blank'),
         });
       }
     }

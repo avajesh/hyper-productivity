@@ -898,7 +898,7 @@
         "TOKEN": "Token di accesso"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Qui puoi configurare SuperProductivity per elencare i pacchetti di lavoro OpenProject aperti. Nota che per farlo funzionare nel browser devi probabilmente configurare CORS per il tuo server OpenProject, per consentire l'accesso da app.super-productivity.com</p>"
+        "HELP": "<p>Qui puoi configurare SuperProductivity per elencare i pacchetti di lavoro OpenProject aperti. Nota che per farlo funzionare nel browser devi probabilmente configurare CORS per il tuo server OpenProject, per consentire l'accesso da app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Assegnatario",
@@ -1416,7 +1416,7 @@
         },
         "TITLE": "Sincronizzazione",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Per farlo funzionare nel browser:</strong> Per far funzionare questo nel browser devi inserire Super Productivity nella whitelist per le richieste CORS per la tua istanza Nextcloud. Questo può avere implicazioni negative per la sicurezza! <a href='https://github.com/nextcloud/server/issues/3131'>Fai riferimento a questo thread per maggiori informazioni</a>. Un approccio per farlo funzionare su mobile è inserire nella whitelist \"https://app.super-productivity.com\" tramite l'app nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Usa a tuo rischio e pericolo!</p>",
+          "CORS_INFO": "<strong>Per farlo funzionare nel browser:</strong> Per far funzionare questo nel browser devi inserire Super Productivity nella whitelist per le richieste CORS per la tua istanza Nextcloud. Questo può avere implicazioni negative per la sicurezza! <a href='https://github.com/nextcloud/server/issues/3131'>Fai riferimento a questo thread per maggiori informazioni</a>. Un approccio per farlo funzionare su mobile è inserire nella whitelist \"https://app.techeia.com\" tramite l'app nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Usa a tuo rischio e pericolo!</p>",
           "D_SYNC_FOLDER_PATH": "Percorso relativo alla radice del server WebDAV dove verranno archiviati i file di sincronizzazione (es. ' /super-productivity' o ' /'). Questo NON è il percorso della directory interna del tuo server.",
           "INFO": "Le implementazioni WebDAV differiscono notevolmente purtroppo. Super Productivity funziona bene con Nextcloud, ma potrebbe non funzionare con il tuo provider.",
           "L_BASE_URL": "URL di base",
@@ -2350,7 +2350,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importa da URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importa da URL",
     "PRIVACY_EXPORT": "Esporta dati (anonimizzati)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Esporta dati anonimizzati (da inviare a contact@super-productivity.com per il debug)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Esporta dati anonimizzati (da inviare a contact@techeia.com per il debug)",
     "S_BACKUP_DOWNLOADED": "Fai backup dei download nella cartella dei documenti di Android",
     "S_ERR_IMPORT_FAILED": "Importazione dei dati fallita",
     "S_ERR_INVALID_DATA": "Importazione fallita: JSON non valido",
@@ -2448,7 +2448,7 @@
       "S_RESTORE_SUCCESS": "Backup ripristinato correttamente."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "<b>Questo NON funzionerà con la versione Browser di Super Productivity.<br /> <a href=\"https://super-productivity.com/download/\">Scarica la versione desktop</a> per usare questa funzionalità!</b>",
+      "BROWSER_WARNING": "<b>Questo NON funzionerà con la versione Browser di Super Productivity.<br /> <a href=\"https://techeia.com/download/\">Scarica la versione desktop</a> per usare questa funzionalità!</b>",
       "CAL_PATH": "URL della sorgente iCal",
       "CHECK_UPDATES": "Verifica aggiornamenti remoti ogni X tempo",
       "HELP": "Puoi integrare calendari per essere ricordati e aggiungerli come attività con Super Productivity. L'integrazione funziona usando il formato iCal. Affinché questo funzioni, il tuo calendario deve essere accessibile sia da Internet che da file system.",

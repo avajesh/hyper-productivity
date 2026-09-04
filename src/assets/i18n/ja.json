@@ -866,7 +866,7 @@
         "TOKEN": "アクセストークン"
       },
       "FORM_SECTION": {
-        "HELP": "<p>ここでは、開いているOpenProjectワークパッケージを一覧表示するようにSuperProductivityを構成できます。これがブラウザで機能するためには、おそらくOpenProjectサーバーのCORSを構成して、app.super-productivity.comからのアクセスを許可する必要があることに注意してください</p>"
+        "HELP": "<p>ここでは、開いているOpenProjectワークパッケージを一覧表示するようにSuperProductivityを構成できます。これがブラウザで機能するためには、おそらくOpenProjectサーバーのCORSを構成して、app.techeia.comからのアクセスを許可する必要があることに注意してください</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "譲受人",
@@ -2345,7 +2345,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "URLからインポート",
     "OPEN_IMPORT_FROM_URL_DIALOG": "URLからインポート",
     "PRIVACY_EXPORT": "データをエクスポート（匿名化）",
-    "PRIVACY_EXPORT_DESCRIPTION": "匿名化されたデータをエクスポートする（デバッグ用に contact@super-productivity.com に送信する）。",
+    "PRIVACY_EXPORT_DESCRIPTION": "匿名化されたデータをエクスポートする（デバッグ用に contact@techeia.com に送信する）。",
     "S_BACKUP_DOWNLOADED": "バックアップをAndroidドキュメントフォルダにダウンロードしました",
     "S_ERR_IMPORT_FAILED": "データのインポートに失敗しました",
     "S_ERR_INVALID_DATA": "インポートに失敗しました：無効なJSON",
@@ -2421,7 +2421,7 @@
       "S_RESTORE_SUCCESS": "バックアップを復元しました。"
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "クロスオリジン制限 <b>のため、これは Super Productivity のブラウザ バージョンでは動作しない可能性があります。<br /> この機能を使用するには、 <a href=\"https://super-productivity.com/download/\">デスクトップ バージョン</a> をダウンロードしてください。</b>",
+      "BROWSER_WARNING": "クロスオリジン制限 <b>のため、これは Super Productivity のブラウザ バージョンでは動作しない可能性があります。<br /> この機能を使用するには、 <a href=\"https://techeia.com/download/\">デスクトップ バージョン</a> をダウンロードしてください。</b>",
       "CAL_PATH": "ICalソースのURL",
       "CHECK_UPDATES": "リモートのアップデートを毎X回チェックする",
       "HELP": "カレンダーを統合してリマインドしたり、Super Productivity内でタスクとして追加することができます。統合はiCal形式を使用して動作します。この機能を使用するには、カレンダーにインターネット経由またはファイルシステム経由でアクセスできる必要があります。",

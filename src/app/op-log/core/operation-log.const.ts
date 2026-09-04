@@ -302,7 +302,7 @@ export const POST_SYNC_COOLDOWN_MS = 2000;
  * On Linux desktop environments, session logout/login with autostart can leave
  * stale LevelDB locks for 5-15+ seconds, so the total retry window must be long
  * enough to outlast this.
- * @see https://github.com/johannesjo/super-productivity/issues/6255
+ * @see https://github.com/avajesh/supertasks/issues/6255
  * @see https://github.com/super-productivity/super-productivity/issues/7191
  */
 export const IDB_OPEN_RETRIES = 5;

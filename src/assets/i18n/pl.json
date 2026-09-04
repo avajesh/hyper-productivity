@@ -902,7 +902,7 @@
         "TOKEN": "Token dostępu"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Tutaj można skonfigurować SuperProductivity do wyświetlania listy otwartych pakietów roboczych OpenProject. Należy pamiętać, że aby to działało w przeglądarce, należy prawdopodobnie skonfigurować CORS dla serwera OpenProject, aby umożliwić dostęp z app.super-productivity.com</p>"
+        "HELP": "<p>Tutaj można skonfigurować SuperProductivity do wyświetlania listy otwartych pakietów roboczych OpenProject. Należy pamiętać, że aby to działało w przeglądarce, należy prawdopodobnie skonfigurować CORS dla serwera OpenProject, aby umożliwić dostęp z app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Osoba przypisana",
@@ -1511,7 +1511,7 @@
         "WEB_DAV": {
           "CONDITIONAL_HEADER_WARNING_MSG": "Twój serwer WebDAV nie obsługuje nagłówków warunkowych (If-Unmodified-Since). Oznacza to, że Super Productivity nie może wykryć jednoczesnych zmian z innych urządzeń podczas przesyłania.<br><br>Synchronizacja będzie nadal działać, ale istnieje niewielkie ryzyko konfliktów danych, jeśli jednocześnie wprowadzasz zmiany na wielu urządzeniach.",
           "CONDITIONAL_HEADER_WARNING_TITLE": "Zmniejszone bezpieczeństwo synchronizacji",
-          "CORS_INFO": "<strong>Making it work on MOBILE and in the browser:</strong> To make this work for mobile or the browser you need to whitelist Super Productivity for CORS requests for your Nextcloud instance. This can have negative security implications! Please <a href='https://github.com/nextcloud/server/issues/3131'>refer to this thread for more information</a>. One approach to make this work on mobile is whitelisting \"https://app.super-productivity.com\" via the nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Use at your own risk!</p>",
+          "CORS_INFO": "<strong>Making it work on MOBILE and in the browser:</strong> To make this work for mobile or the browser you need to whitelist Super Productivity for CORS requests for your Nextcloud instance. This can have negative security implications! Please <a href='https://github.com/nextcloud/server/issues/3131'>refer to this thread for more information</a>. One approach to make this work on mobile is whitelisting \"https://app.techeia.com\" via the nextcloud app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>. Use at your own risk!</p>",
           "D_SYNC_FOLDER_PATH": "Ścieżka względem katalogu głównego serwera WebDAV, gdzie będą przechowywane pliki synchronizacji (np. ' /super-productivity' lub ' /'). To NIE jest wewnętrzna ścieżka katalogu Twojego serwera.",
           "INFO": "Implementacje WebDAV różnią się niestety znacznie. Super Productivity jest znane z dobrej współpracy z Nextcloud, <strong>ale może nie działać z Twoim dostawcą</strong>.",
           "L_BASE_URL": "Adres bazowy URL",
@@ -2334,7 +2334,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importuj z URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importuj z URL",
     "PRIVACY_EXPORT": "Eksportuj dane (anonimowe)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Eksport anonimowych danych (do wysłania na adres contact@super-productivity.com w celu debugowania)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Eksport anonimowych danych (do wysłania na adres contact@techeia.com w celu debugowania)",
     "S_BACKUP_DOWNLOADED": "Kopia zapasowa pobrana do folderu dokumentów Androida",
     "S_ERR_IMPORT_FAILED": "Importowanie danych nie powiodło się",
     "S_ERR_INVALID_DATA": "Nieprawidłowe dane w pliku",
@@ -2430,7 +2430,7 @@
       "S_RESTORE_SUCCESS": "Pomyślnie przywrócono kopię zapasową."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Ze względu na ograniczenia dotyczące różnych źródeł <b>prawdopodobnie NIE będzie to działać z wersją Super Productivity na przeglądarkę.<br /> Prosimy <a href=\"https://super-productivity.com/download/\">o pobranie wersji desktopowej</a> , aby korzystać z tej funkcji!</b>",
+      "BROWSER_WARNING": "Ze względu na ograniczenia dotyczące różnych źródeł <b>prawdopodobnie NIE będzie to działać z wersją Super Productivity na przeglądarkę.<br /> Prosimy <a href=\"https://techeia.com/download/\">o pobranie wersji desktopowej</a> , aby korzystać z tej funkcji!</b>",
       "CAL_PATH": "Adres URL źródła iCal",
       "CHECK_UPDATES": "Sprawdzanie zdalnych aktualizacji co X",
       "HELP": "Możesz zintegrować kalendarze, aby otrzymywać przypomnienia i dodawać je jako zadania w Super Productivity. Integracja działa przy użyciu formatu iCal. Aby to zadziałało, kalendarze muszą być dostępne przez Internet lub za pośrednictwem systemu plików.",

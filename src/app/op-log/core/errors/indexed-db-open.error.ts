@@ -16,7 +16,7 @@ import { HANDLED_ERROR_PROP_STR } from '../../../app.constants';
  * them to file what is usually a known transient platform issue (e.g. WebKit
  * bug 273827 on iOS).
  *
- * @see https://github.com/johannesjo/super-productivity/issues/6255
+ * @see https://github.com/avajesh/supertasks/issues/6255
  * @see https://github.com/super-productivity/super-productivity/issues/7415
  */
 export class IndexedDBOpenError extends Error {

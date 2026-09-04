@@ -15,7 +15,7 @@
 /**
  * Error thrown when attempting to append a duplicate operation to the log.
  * Usually indicates a race condition where multiple syncs tried to write the same ops.
- * @see https://github.com/johannesjo/super-productivity/issues/6213
+ * @see https://github.com/avajesh/supertasks/issues/6213
  */
 export const DUPLICATE_OPERATION_ERROR_MSG =
   '[OpLogStore] Duplicate operation detected (likely race condition). See #6213.';
@@ -42,7 +42,7 @@ export const ARCHIVE_STORE_NOT_INITIALIZED =
 
 /**
  * Error thrown when IndexedDB fails to open after all retry attempts.
- * @see https://github.com/johannesjo/super-productivity/issues/6255
+ * @see https://github.com/avajesh/supertasks/issues/6255
  */
 export const IDB_OPEN_ERROR_MSG =
   '[OpLogStore] Failed to open IndexedDB after multiple retries. See #6255.';
@@ -148,7 +148,7 @@ export const isIdbVersionError = (err: unknown): boolean =>
  * references stale, causing all subsequent operations to fail with:
  *   "Failed to execute 'transaction' on 'IDBDatabase': The database connection is closing."
  *
- * @see https://github.com/johannesjo/super-productivity/issues/6643
+ * @see https://github.com/avajesh/supertasks/issues/6643
  */
 export const isConnectionClosingError = (e: unknown): boolean => {
   if (e instanceof DOMException) {

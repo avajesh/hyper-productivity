@@ -898,7 +898,7 @@
         "TOKEN": "Toegangstoken"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Hier kunt u SuperProductivity configureren om open OpenProject-werkpakketten weer te geven. Houd er rekening mee dat om dit in de browser te laten werken, u waarschijnlijk CORS moet configureren voor uw OpenProject-server, om toegang te verlenen vanaf app.super-productivity.com</p>"
+        "HELP": "<p>Hier kunt u SuperProductivity configureren om open OpenProject-werkpakketten weer te geven. Houd er rekening mee dat om dit in de browser te laten werken, u waarschijnlijk CORS moet configureren voor uw OpenProject-server, om toegang te verlenen vanaf app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Cessionaris",
@@ -2350,7 +2350,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importeren van URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importeren van URL",
     "PRIVACY_EXPORT": "Gegevens exporteren (geanonimiseerd)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Geanonimiseerde gegevens exporteren (om naar contact@super-productivity.com te sturen voor debugging)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Geanonimiseerde gegevens exporteren (om naar contact@techeia.com te sturen voor debugging)",
     "S_BACKUP_DOWNLOADED": "Back-up gedownload naar de map met Android-documenten",
     "S_ERR_IMPORT_FAILED": "Het importeren van gegevens is mislukt",
     "S_ERR_INVALID_DATA": "Importeren mislukt: ongeldige JSON",
@@ -2448,7 +2448,7 @@
       "S_RESTORE_SUCCESS": "Back-up succesvol hersteld."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Vanwege cross origin beperkingen <b>zal dit waarschijnlijk NIET werken met de browserversie van Super Productivity.<br />  <a href=\"https://super-productivity.com/download/\">Download de desktopversie</a> om deze functie te gebruiken!</b>",
+      "BROWSER_WARNING": "Vanwege cross origin beperkingen <b>zal dit waarschijnlijk NIET werken met de browserversie van Super Productivity.<br />  <a href=\"https://techeia.com/download/\">Download de desktopversie</a> om deze functie te gebruiken!</b>",
       "CAL_PATH": "URL van de iCal-bron",
       "CHECK_UPDATES": "Elke X controleren op updates op afstand",
       "HELP": "Je kunt kalenders integreren om eraan herinnerd te worden en ze toevoegen als taken binnen Super Productivity. De integratie maakt gebruik van de iCal-indeling. Om dit te laten werken moeten uw agenda's toegankelijk zijn via het internet of via het bestandssysteem.",

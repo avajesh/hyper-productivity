@@ -178,7 +178,7 @@ export class ArchiveStoreService {
    * If the operation fails because iOS closed the connection, invalidates the
    * cached db reference and retries once after re-opening.
    *
-   * @see https://github.com/johannesjo/super-productivity/issues/6643
+   * @see https://github.com/avajesh/supertasks/issues/6643
    */
   private async _withRetryOnClose<T>(fn: () => Promise<T>): Promise<T> {
     try {

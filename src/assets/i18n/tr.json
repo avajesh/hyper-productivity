@@ -919,7 +919,7 @@
         "TOKEN": "Erişim Jetonu"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Burada SuperProductivity'yi açık OpenProject iş paketlerini listeleyecek şekilde yapılandırabilirsiniz. Lütfen bunun tarayıcıda çalışması için, app.super-productivity.com adresinden erişime izin vermek üzere OpenProject sunucunuz için CORS'u yapılandırmanız gerektiğini unutmayın</p>"
+        "HELP": "<p>Burada SuperProductivity'yi açık OpenProject iş paketlerini listeleyecek şekilde yapılandırabilirsiniz. Lütfen bunun tarayıcıda çalışması için, app.techeia.com adresinden erişime izin vermek üzere OpenProject sunucunuz için CORS'u yapılandırmanız gerektiğini unutmayın</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Atanan",
@@ -1612,7 +1612,7 @@
         },
         "TITLE": "Senkronize et",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Tarayıcıda çalışmasını sağlamak:</strong> Bunun tarayıcıda çalışmasını sağlamak için Nextcloud örneğiniz için CORS isteklerine yönelik Süper Üretkenliği beyaz listeye almanız gerekir. Bunun olumsuz güvenlik etkileri olabilir! Lütfen <a href='https://github.com/nextcloud/server/issues/3131'>daha fazla bilgi için bu konuya bakın</a>. Bunun mobil cihazlarda çalışmasını sağlamanın bir yolu, nextcloud uygulaması <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword aracılığıyla \"https://app.super-productivity.com\" adresini beyaz listeye eklemektir. <a>. Kullanım riski size aittir!</p>",
+          "CORS_INFO": "<strong>Tarayıcıda çalışmasını sağlamak:</strong> Bunun tarayıcıda çalışmasını sağlamak için Nextcloud örneğiniz için CORS isteklerine yönelik Süper Üretkenliği beyaz listeye almanız gerekir. Bunun olumsuz güvenlik etkileri olabilir! Lütfen <a href='https://github.com/nextcloud/server/issues/3131'>daha fazla bilgi için bu konuya bakın</a>. Bunun mobil cihazlarda çalışmasını sağlamanın bir yolu, nextcloud uygulaması <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword aracılığıyla \"https://app.techeia.com\" adresini beyaz listeye eklemektir. <a>. Kullanım riski size aittir!</p>",
           "D_SYNC_FOLDER_PATH": "Senkronizasyon dosyalarının depolanacağı WebDAV sunucu köküne göreli yol (örneğin '/super-productivity' veya '/'). Bu, sunucunuzun dahili dizin yolu DEĞİLDİR.",
           "INFO": "WebDAV uygulamaları ne yazık ki çılgınca farklılık gösteriyor. Süper Verimliliğin Nextcloud ile iyi çalıştığı biliniyor, <strong> ancak sağlayıcınızla çalışmayabilir</strong>.",
           "L_BASE_URL": "Temel URL",
@@ -2366,7 +2366,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "URL'den İçe Aktar",
     "OPEN_IMPORT_FROM_URL_DIALOG": "URL'den İçe Aktar",
     "PRIVACY_EXPORT": "Verileri Dışa Aktar (Anonimleştirilmiş)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Anonimleştirilmiş verileri dışa aktarın (hata ayıklama için contact@super-productivity.com adresine göndermek üzere)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Anonimleştirilmiş verileri dışa aktarın (hata ayıklama için contact@techeia.com adresine göndermek üzere)",
     "S_BACKUP_DOWNLOADED": "Android belgeler klasörüne indirilen yedekleme",
     "S_ERR_IMPORT_FAILED": "Verileri içeri aktarma başarısız oldu",
     "S_ERR_INVALID_DATA": "İçe aktarma başarısız oldu: Geçersiz JSON",
@@ -2463,7 +2463,7 @@
     },
     "CALENDARS": {
       "AUTO_IMPORT_FOR_CURRENT_DAY": "Bugün için olan etkinlikleri görev olarak otomatik içe aktar",
-      "BROWSER_WARNING": "Çapraz kaynak kısıtlamaları nedeniyle <b>bu muhtemelen Super Productivity'nin Tarayıcı sürümüyle ÇALIŞMAYACAKTIR.<br /> Bu özelliği kullanmak için lütfen <a href=\"https://super-productivity.com/download/\">masaüstü sürümünü indirin</a>!</b>",
+      "BROWSER_WARNING": "Çapraz kaynak kısıtlamaları nedeniyle <b>bu muhtemelen Super Productivity'nin Tarayıcı sürümüyle ÇALIŞMAYACAKTIR.<br /> Bu özelliği kullanmak için lütfen <a href=\"https://techeia.com/download/\">masaüstü sürümünü indirin</a>!</b>",
       "CAL_COLOR": "Takvim rengi",
       "CAL_PATH": "iCal kaynağının URL'si",
       "CHECK_UPDATES": "Her X'te bir uzaktan güncellemeleri kontrol edin",

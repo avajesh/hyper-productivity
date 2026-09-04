@@ -253,7 +253,7 @@ export const DEFAULT_GLOBAL_CONFIG: GlobalConfigState = {
 
     superSync: {
       baseUrl: environment.production
-        ? 'https://sync.super-productivity.com'
+        ? 'https://sync.techeia.com'
         : 'http://localhost:1901',
       userName: null,
       password: null,

@@ -904,7 +904,7 @@
         "TOKEN": "Токен доступа"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Здесь вы можете настроить Super Productivity для вывода списка открытых рабочих пакетов OpenProject. Обратите внимание, что для того, чтобы это работало в браузере, вам, вероятно, потребуется настроить CORS для вашего сервера OpenProject, чтобы разрешить доступ с app.super-productivity.com</p>"
+        "HELP": "<p>Здесь вы можете настроить Super Productivity для вывода списка открытых рабочих пакетов OpenProject. Обратите внимание, что для того, чтобы это работало в браузере, вам, вероятно, потребуется настроить CORS для вашего сервера OpenProject, чтобы разрешить доступ с app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Уполномоченный",
@@ -2353,7 +2353,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Импорт из URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Импорт из URL",
     "PRIVACY_EXPORT": "Экспортировать данные (обезличенные)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Экспортировать обезличенные данные (отправить contact@super-productivity.com для отладки)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Экспортировать обезличенные данные (отправить contact@techeia.com для отладки)",
     "S_BACKUP_DOWNLOADED": "Резервная копия загружена в папку с документами Android",
     "S_ERR_IMPORT_FAILED": "Ошибка импорта данных",
     "S_ERR_INVALID_DATA": "Ошибка импорта: неверный JSON",
@@ -2450,7 +2450,7 @@
       "TITLE": "Автоматическое резервное копирование"
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "<b>Скорее всего, это НЕ будет работать с браузерной версией Super Productivity.<br /> Пожалуйста, <a href=\"https://super-productivity.com/download/\">загрузите настольную версию</a>, чтобы использовать эту функцию!</b>",
+      "BROWSER_WARNING": "<b>Скорее всего, это НЕ будет работать с браузерной версией Super Productivity.<br /> Пожалуйста, <a href=\"https://techeia.com/download/\">загрузите настольную версию</a>, чтобы использовать эту функцию!</b>",
       "CAL_PATH": "URL-адрес iCal",
       "CHECK_UPDATES": "Проверять обновления каждые Х",
       "FILTER_EXCLUDE_REGEX": "Исключать события по регулярному выражению (необязательно)",

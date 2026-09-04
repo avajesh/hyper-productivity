@@ -201,7 +201,7 @@
         "POLL_INTERVAL_MINUTES": "Kyselyväli (minuutteina)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan keskeneräiset CalDav-tehtävät tietyn projektin osalta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin tehtävään sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti lisätä ja synkronoida kaikki keskeneräiset tehtävät taakkaputkeesi.</p><p>Jotta se toimisi nextcloudissa verkkosovelluksessa, sinun on ehkä sallittava \"https://app.super-productivity.com\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> kautta.</p>"
+        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan keskeneräiset CalDav-tehtävät tietyn projektin osalta tehtävänluontipaneelissa päivittäisessä suunnittelinäkymässä. Ne listataan ehdotuksina ja tarjoavat linkin tehtävään sekä lisätietoja siitä.</p> <p>Lisäksi voit automaattisesti lisätä ja synkronoida kaikki keskeneräiset tehtävät taakkaputkeesi.</p><p>Jotta se toimisi nextcloudissa verkkosovelluksessa, sinun on ehkä sallittava \"https://app.techeia.com\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> kautta.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Kuvaus",
@@ -871,7 +871,7 @@
         "TOKEN": "Käyttöoikeustunnus"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan avoimet OpenProject-työpaketit. Huomaa, että jotta tämä toimisi selaimessa, sinun on todennäköisesti määritettävä CORS OpenProject-palvelimellesi, jotta pääsy app.super-productivity.com:sta sallitaan</p>"
+        "HELP": "<p>Tässä voit määrittää SuperProductivityn listamaan avoimet OpenProject-työpaketit. Huomaa, että jotta tämä toimisi selaimessa, sinun on todennäköisesti määritettävä CORS OpenProject-palvelimellesi, jotta pääsy app.techeia.com:sta sallitaan</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Vastuuhenkilö",
@@ -1383,7 +1383,7 @@
         },
         "TITLE": "Synkronointi",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Saadaksesi sen toimimaan selaimessa:</strong> Jotta tämä toimisi selaimessa, sinun on sallittava Super Productivity CORS-pyynnöille webdav-palvelimellasi. Tällä voi olla negatiivisia tietoturvavaikutuksia! Nextcloudille katso <a href='https://github.com/nextcloud/server/issues/3131'>tämä ketju lisätietoja varten</a>. Yksi tapa saada tämä toimimaan mobiilissa on sallia \"https://app.super-productivity.com\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> kautta. Käytä omalla vastuullasi!</p>",
+          "CORS_INFO": "<strong>Saadaksesi sen toimimaan selaimessa:</strong> Jotta tämä toimisi selaimessa, sinun on sallittava Super Productivity CORS-pyynnöille webdav-palvelimellasi. Tällä voi olla negatiivisia tietoturvavaikutuksia! Nextcloudille katso <a href='https://github.com/nextcloud/server/issues/3131'>tämä ketju lisätietoja varten</a>. Yksi tapa saada tämä toimimaan mobiilissa on sallia \"https://app.techeia.com\" nextcloud-sovelluksen <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a> kautta. Käytä omalla vastuullasi!</p>",
           "D_SYNC_FOLDER_PATH": "Polku suhteessa WebDAV-palvelimen juureen, johon synkronointitiedostot tallennetaan (esim. '\\/super-productivity' tai '\\/'). Tämä EI ole palvelimesi sisäinen hakemistopolku.",
           "INFO": "WebDAV-toteutukset valitettavasti eroavat toisistaan paljon. Super Productivity tiedetään toimivan hyvin Nextcloudin kanssa, <strong>mutta se ei välttämättä toimi tarjoajasi kanssa</strong>.",
           "L_BASE_URL": "Perus-URL",
@@ -2350,7 +2350,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Tuo URL-osoitteesta",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Tuo URL-osoitteesta",
     "PRIVACY_EXPORT": "Vie tiedot (anonyymit)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Vie anonyymit tiedot (lähetettäväksi osoitteeseen contact@super-productivity.com vianetsintää varten)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Vie anonyymit tiedot (lähetettäväksi osoitteeseen contact@techeia.com vianetsintää varten)",
     "S_BACKUP_DOWNLOADED": "Varmuuskopio ladattu android-asiakirjakansioon",
     "S_ERR_IMPORT_FAILED": "Tietojen tuonti epäonnistui",
     "S_ERR_INVALID_DATA": "Tuonti epäonnistui: Virheellinen JSON",
@@ -2448,7 +2448,7 @@
       "S_RESTORE_SUCCESS": "Varmuuskopio palautettiin onnistuneesti."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Alkuperäisen rajoitusten vuoksi <b>tämä todennäköisesti EI toimi Super Productivityn selainversiossa.<br /> Ole hyvä <a href=\"https://super-productivity.com/download/\">lataa työpöytäversio</a> käyttääksesi tätä ominaisuutta!</b>",
+      "BROWSER_WARNING": "Alkuperäisen rajoitusten vuoksi <b>tämä todennäköisesti EI toimi Super Productivityn selainversiossa.<br /> Ole hyvä <a href=\"https://techeia.com/download/\">lataa työpöytäversio</a> käyttääksesi tätä ominaisuutta!</b>",
       "CAL_PATH": "iCal-lähteen URL",
       "CHECK_UPDATES": "Tarkista etäpäivitykset joka X",
       "HELP": "Voit integroida kalenterit saadaksesi muistutuksia ja lisätäksesi niitä tehtävinä Super Productivityyn. Integraatio toimii käyttämällä iCal-muotoa. Jotta tämä toimii, kalenterisi täytyy olla saatavilla joko internetin kautta tai tiedostojärjestelmän kautta.",

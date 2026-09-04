@@ -200,7 +200,7 @@
         "POLL_INTERVAL_MINUTES": "Intervalo de verificação (minutos)"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Aqui você pode configurar o Super Productivity para listar tarefas CalDAV não concluídas de um projeto específico no painel de criação de tarefas na visualização de agendamento diário. Elas serão listadas como sugestões e fornecerão um link para a tarefa, bem como mais informações sobre ela.</p><p>Além disso, você pode adicionar e sincronizar automaticamente todas as tarefas não concluídas ao seu backlog de tarefas.</p><p>Para fazer funcionar com o Nextcloud no webapp, você pode precisar permitir \"https://app.super-productivity.com\" no app do Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
+        "HELP": "<p>Aqui você pode configurar o Super Productivity para listar tarefas CalDAV não concluídas de um projeto específico no painel de criação de tarefas na visualização de agendamento diário. Elas serão listadas como sugestões e fornecerão um link para a tarefa, bem como mais informações sobre ela.</p><p>Além disso, você pode adicionar e sincronizar automaticamente todas as tarefas não concluídas ao seu backlog de tarefas.</p><p>Para fazer funcionar com o Nextcloud no webapp, você pode precisar permitir \"https://app.techeia.com\" no app do Nextcloud <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword<a>.</p>"
       },
       "ISSUE_CONTENT": {
         "DESCRIPTION": "Descrição",
@@ -902,7 +902,7 @@
         "TOKEN": "Token de Acesso"
       },
       "FORM_SECTION": {
-        "HELP": "<p>Aqui você pode configurar o Super Productivity para listar pacotes de trabalho (work packages) abertos do OpenProject. Por favor, note que para isto funcionar na versão de navegador, você provavelmente precisará configurar o CORS no seu servidor OpenProject para permitir o acesso de app.super-productivity.com</p>"
+        "HELP": "<p>Aqui você pode configurar o Super Productivity para listar pacotes de trabalho (work packages) abertos do OpenProject. Por favor, note que para isto funcionar na versão de navegador, você provavelmente precisará configurar o CORS no seu servidor OpenProject para permitir o acesso de app.techeia.com</p>"
       },
       "ISSUE_CONTENT": {
         "ASSIGNEE": "Responsável",
@@ -1522,7 +1522,7 @@
         },
         "TITLE": "Sincronização",
         "WEB_DAV": {
-          "CORS_INFO": "<strong>Para funcionar no navegador:</strong> Você precisa permitir que o Super Productivity faça requisições CORS para o seu servidor. No Nextcloud, uma abordagem é permitir \"https://app.super-productivity.com\" via o app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>. Consulte <a href='https://github.com/nextcloud/server/issues/3131'>este tópico do GitHub</a> para mais informações.",
+          "CORS_INFO": "<strong>Para funcionar no navegador:</strong> Você precisa permitir que o Super Productivity faça requisições CORS para o seu servidor. No Nextcloud, uma abordagem é permitir \"https://app.techeia.com\" via o app <a href='https://apps.nextcloud.com/apps/webapppassword'>webapppassword</a>. Consulte <a href='https://github.com/nextcloud/server/issues/3131'>este tópico do GitHub</a> para mais informações.",
           "D_SYNC_FOLDER_PATH": "Caminho relativo à raiz do servidor WebDAV onde os arquivos de sincronização serão armazenados (ex: '/super-productivity' ou '/'). Este NÃO é o caminho do diretório interno do seu servidor.",
           "INFO": "<strong>Aviso:</strong> A sincronização WebDAV genérica é fornecida <strong>como está, sem suporte</strong>. Se você estiver usando Nextcloud, por favor, utilize a opção de sincronização específica para Nextcloud.",
           "L_BASE_URL": "URL Base",
@@ -2330,7 +2330,7 @@
     "IMPORT_FROM_URL_DIALOG_TITLE": "Importar de URL",
     "OPEN_IMPORT_FROM_URL_DIALOG": "Importar de URL",
     "PRIVACY_EXPORT": "Exportar Dados (anônimo)",
-    "PRIVACY_EXPORT_DESCRIPTION": "Exportar dados anonimizados (para enviar para contact@super-productivity.com para depuração)",
+    "PRIVACY_EXPORT_DESCRIPTION": "Exportar dados anonimizados (para enviar para contact@techeia.com para depuração)",
     "S_BACKUP_DOWNLOADED": "Backup baixado na pasta de documentos do Android",
     "S_ERR_IMPORT_FAILED": "Falha ao importar dados",
     "S_ERR_INVALID_DATA": "Falha na importação: JSON inválido",
@@ -2427,7 +2427,7 @@
       "S_RESTORE_SUCCESS": "Backup restaurado com sucesso."
     },
     "CALENDARS": {
-      "BROWSER_WARNING": "Devido a restrições de cross-origin, <b>isso provavelmente NÃO funcionará na versão de navegador do Super Productivity.<br /> Por favor, <a href=\"https://super-productivity.com/download/\">baixe a versão desktop</a> para usar este recurso!</b>",
+      "BROWSER_WARNING": "Devido a restrições de cross-origin, <b>isso provavelmente NÃO funcionará na versão de navegador do Super Productivity.<br /> Por favor, <a href=\"https://techeia.com/download/\">baixe a versão desktop</a> para usar este recurso!</b>",
       "CAL_PATH": "URL da fonte iCal",
       "CHECK_UPDATES": "Verificar atualizações remotas a cada X",
       "HELP": "Você pode integrar calendários para receber lembretes e adicioná-los como tarefas no Super Productivity. A integração utiliza o formato iCal. Para funcionar, seus calendários precisam estar acessíveis pela internet ou via sistema de arquivos.",
