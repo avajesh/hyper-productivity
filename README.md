@@ -33,7 +33,7 @@ Whether you are managing complex software projects, studying, or just organizing
 ## ✨ What makes Hyper Productivity better?
 
 - **Infinite Task Hierarchies (Nested Subtasks):** The #1 most requested feature by the productivity community is here. You are no longer restricted to a flat list of subtasks. Break your work down into subtasks, sub-sub-tasks, and sub-sub-sub-tasks!
-- **Accurate Time Rollups:** Time tracking and time estimates automatically bubble up through every level of your deep task hierarchies.
+- **Recursive Time Tracking & Rollups:** Tracking time is no longer restricted to simple tasks! When you log time or set estimates on a deep sub-sub-task, those numbers automatically bubble up and aggregate at every parent level. You get a perfect, real-time picture of exactly how much time an entire massive project or feature is taking.
 - **Modernized UI:** Updated color palettes (Emerald/Deep Teal) for better focus and less eye strain.
 - **Privacy First, Always:** No tracking, no data mining, and everything is stored locally on your device by default. Cloud sync is completely optional.
 
