@@ -1,5 +1,5 @@
 appId: supertasks
-productName: Super Productivity
+productName: Supertasks
 artifactName: ${name}-${arch}.${ext}
 
 files:
@@ -69,7 +69,7 @@ nsis:
   # so keeping only it halves the signing volume without asking users which
   # architecture they are on. Do not reintroduce ${arch} without re-checking
   # the quota headroom.
-  artifactName: Super-Productivity-Setup.${ext}
+  artifactName: Supertasks-Setup.${ext}
   # allow to install to custom location
   oneClick: false
   allowToChangeInstallationDirectory: true

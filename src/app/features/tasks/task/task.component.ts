@@ -101,7 +101,7 @@ import { ShortPlannedAtPipe } from '../../../ui/pipes/short-planned-at.pipe';
 import { LocalDateStrPipe } from '../../../ui/pipes/local-date-str.pipe';
 import { LocaleDatePipe } from '../../../ui/pipes/locale-date.pipe';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { SubTaskTotalTimeSpentPipe } from '../pipes/sub-task-total-time-spent.pipe';
+
 import { TagListComponent } from '../../tag/tag-list/tag-list.component';
 import { TagToggleMenuListComponent } from '../../tag/tag-toggle-menu-list/tag-toggle-menu-list.component';
 import { Store } from '@ngrx/store';
@@ -160,7 +160,6 @@ import { getSubTaskTimeLeftForDisplay } from '../util/get-sub-task-time-left-for
     LocalDateStrPipe,
     TranslatePipe,
     MatTooltip,
-    SubTaskTotalTimeSpentPipe,
     TagListComponent,
     ShortPlannedAtPipe,
     TagToggleMenuListComponent,

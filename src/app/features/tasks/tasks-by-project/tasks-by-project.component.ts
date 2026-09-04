@@ -43,26 +43,27 @@ export class TasksByProjectComponent {
   flatTasks: Task[] = [];
   todaysTasksProjectIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  projectsWithTimeSpent$: Observable<ProjectWithTimeSpent[]> = this.todaysTasksProjectIds$.pipe(
-    withLatestFrom(this._store.select(selectAllProjects)),
-    map(([projectIds, allProjects]) => {
-      // Find time spent per project ID
-      const mappedProjects: ProjectWithTimeSpent[] = projectIds
-        .map((projectId) => {
-          const project = allProjects.find((p) => p.id === projectId);
-          return this._mapToProjectWithTasks(projectId, project);
-        })
-        .filter((p) => p.timeSpentToday > 0);
-      return mappedProjects.sort((a, b) => b.timeSpentToday - a.timeSpentToday);
-    }),
-  );
+  projectsWithTimeSpent$: Observable<ProjectWithTimeSpent[]> =
+    this.todaysTasksProjectIds$.pipe(
+      withLatestFrom(this._store.select(selectAllProjects)),
+      map(([projectIds, allProjects]) => {
+        // Find time spent per project ID
+        const mappedProjects: ProjectWithTimeSpent[] = projectIds
+          .map((projectId) => {
+            const project = allProjects.find((p) => p.id === projectId);
+            return this._mapToProjectWithTasks(projectId, project);
+          })
+          .filter((p) => p.timeSpentToday > 0);
+        return mappedProjects.sort((a, b) => b.timeSpentToday - a.timeSpentToday);
+      }),
+    );
 
   pieChartData$: Observable<ChartData<'pie'> | null> = this.projectsWithTimeSpent$.pipe(
     map((projectsWithTimeSpent) => {
       if (!projectsWithTimeSpent || projectsWithTimeSpent.length === 0) {
         return null;
       }
-      
+
       return {
         labels: projectsWithTimeSpent.map((p) => p.title),
         datasets: [
@@ -77,9 +78,7 @@ export class TasksByProjectComponent {
 
   @Input('flatTasks') set flatTasksIn(tasks: Task[]) {
     this.flatTasks = tasks;
-    const projectIds: string[] = unique(
-      tasks.map((t) => t.projectId || 'NO_PROJECT'),
-    );
+    const projectIds: string[] = unique(tasks.map((t) => t.projectId || 'NO_PROJECT'));
     this.todaysTasksProjectIds$.next(projectIds);
   }
 
@@ -87,7 +86,10 @@ export class TasksByProjectComponent {
     return item.id;
   }
 
-  private _mapToProjectWithTasks(projectId: string, project?: Project): ProjectWithTimeSpent {
+  private _mapToProjectWithTasks(
+    projectId: string,
+    project?: Project,
+  ): ProjectWithTimeSpent {
     const yesterdayDate = new Date();
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
     const yesterdayDayStr = getDbDateStr(yesterdayDate);
@@ -111,4 +113,3 @@ export class TasksByProjectComponent {
     };
   }
 }
-

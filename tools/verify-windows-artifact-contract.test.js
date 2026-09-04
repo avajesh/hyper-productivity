@@ -12,7 +12,7 @@ const BUILDER_YAML = readRoot('electron-builder.yaml');
 const RELEASE_WORKFLOW = readRoot('.github', 'workflows', 'build.yml');
 
 const sectionValue = (sectionName, key) => {
-  const lines = BUILDER_YAML.split('\n');
+  const lines = BUILDER_YAML.split(/\r?\n/);
   const sectionStart = lines.indexOf(`${sectionName}:`);
   assert.notEqual(sectionStart, -1, `${sectionName} section not found`);
 
@@ -31,7 +31,7 @@ const sectionValue = (sectionName, key) => {
 };
 
 test('Windows release builds only the two universal executables', () => {
-  assert.equal(sectionValue('nsis', 'artifactName'), 'Super-Productivity-Setup.${ext}');
+  assert.equal(sectionValue('nsis', 'artifactName'), 'Supertasks-Setup.${ext}');
   assert.equal(sectionValue('portable', 'artifactName'), '${name}.${ext}');
 });
 
@@ -73,10 +73,10 @@ test('signed universal executables are published under compatibility aliases', (
   assert.ok(publishStep > signatureStep, 'publish only after signature verification');
 
   for (const alias of [
-    'Super-Productivity-Setup-x64.exe',
-    'Super-Productivity-Setup-arm64.exe',
-    'superProductivity-x64.exe',
-    'superProductivity-arm64.exe',
+    'Supertasks-Setup-x64.exe',
+    'Supertasks-Setup-arm64.exe',
+    'supertasks-x64.exe',
+    'supertasks-arm64.exe',
   ]) {
     assert.match(RELEASE_WORKFLOW, new RegExp(`Copy-Item.*${alias}`));
   }

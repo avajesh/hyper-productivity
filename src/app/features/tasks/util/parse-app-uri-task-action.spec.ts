@@ -22,9 +22,7 @@ describe('parseAppUriTaskAction', () => {
 
   it('parses a complete-task action', () => {
     expect(
-      parseAppUriTaskAction(
-        'com.supertasks.app://complete-task?title=Buy%20milk',
-      ),
+      parseAppUriTaskAction('com.supertasks.app://complete-task?title=Buy%20milk'),
     ).toEqual({ type: 'complete', title: 'Buy milk' });
   });
 
@@ -42,24 +40,27 @@ describe('parseAppUriTaskAction', () => {
   // surfaces the empty-title error snack, matching the desktop path. Only a
   // completely missing param yields no action.
   it('forwards a present-but-empty title (title=) for the service to reject', () => {
-    expect(
-      parseAppUriTaskAction('com.supertasks.app://create-task?title='),
-    ).toEqual({ type: 'add', title: '' });
+    expect(parseAppUriTaskAction('com.supertasks.app://create-task?title=')).toEqual({
+      type: 'add',
+      title: '',
+    });
   });
 
   // A present-but-whitespace-only title is forwarded (not nulled) so the service
   // surfaces the empty-title error snack — matching the desktop path, which
   // forwards a truthy ' '. The service does the trimming/rejection.
   it('forwards a whitespace-only title (%20) for the service to reject', () => {
-    expect(
-      parseAppUriTaskAction('com.supertasks.app://create-task?title=%20'),
-    ).toEqual({ type: 'add', title: ' ' });
+    expect(parseAppUriTaskAction('com.supertasks.app://create-task?title=%20')).toEqual({
+      type: 'add',
+      title: ' ',
+    });
   });
 
   it('forwards a lone "+" title (decodes to a space) for the service to reject', () => {
-    expect(
-      parseAppUriTaskAction('com.supertasks.app://create-task?title=+'),
-    ).toEqual({ type: 'add', title: ' ' });
+    expect(parseAppUriTaskAction('com.supertasks.app://create-task?title=+')).toEqual({
+      type: 'add',
+      title: ' ',
+    });
   });
 
   it('forwards a whitespace-only complete-task title for the service to reject', () => {
@@ -70,9 +71,7 @@ describe('parseAppUriTaskAction', () => {
 
   it('forwards the title untrimmed (the service trims)', () => {
     expect(
-      parseAppUriTaskAction(
-        'com.supertasks.app://create-task?title=%20Buy%20milk%20',
-      ),
+      parseAppUriTaskAction('com.supertasks.app://create-task?title=%20Buy%20milk%20'),
     ).toEqual({ type: 'add', title: ' Buy milk ' });
   });
 

@@ -27,8 +27,8 @@
 const { promises: fs } = require('fs');
 const { join } = require('path');
 
-const BIN_NAME = 'superproductivity'; // must match linux.executableName
-const RENAMED = 'superproductivity-bin';
+const BIN_NAME = 'supertasks'; // must match linux.executableName
+const RENAMED = 'supertasks-bin';
 const WRAPPER_SRC = join(__dirname, '..', 'build', 'linux', 'snap-wrapper.sh');
 const WAYLAND_IDLE_HELPER_SRC = join(
   __dirname,

@@ -39,8 +39,7 @@ export const ERROR_SUPPRESSION_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 export const FEEDBACK_SUPPRESSION_STARTS = 90;
 
 export const MAINTAINER_EMAIL = 'contact@super-productivity.com';
-const PLAY_STORE_URL =
-  'https://play.google.com/store/apps/details?id=com.supertasks.app';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.supertasks.app';
 const APP_STORE_URL = 'https://apps.apple.com/app/id1482572463';
 const HOW_TO_RATE_URL =
   'https://github.com/super-productivity/super-productivity/blob/master/docs/how-to-rate.md';
