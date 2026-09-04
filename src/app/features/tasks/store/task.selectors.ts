@@ -39,19 +39,19 @@ export const mapSubTasksToTask = (
   if (!task) {
     return null;
   }
-  const subTasks: Task[] = [];
+  const subTasks: TaskWithSubTasks[] = [];
   for (const id of task.subTaskIds) {
     const subTask = s.entities[id];
     if (subTask) {
-      subTasks.push(subTask);
+      const mappedSubTask = mapSubTasksToTask(subTask, s);
+      if (mappedSubTask) {
+        subTasks.push(mappedSubTask);
+      }
     } else {
       devError('Task data not found for ' + id);
     }
   }
-  return {
-    ...task,
-    subTasks,
-  };
+  return { ...task, subTasks };
 };
 
 export const flattenTasks = (tasksIN: TaskWithSubTasks[]): TaskWithSubTasks[] => {
