@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.superproductivity.superproductivity", appContext.getPackageName());
+        assertEquals("com.supertasks.superproductivity", appContext.getPackageName());
     }
 }

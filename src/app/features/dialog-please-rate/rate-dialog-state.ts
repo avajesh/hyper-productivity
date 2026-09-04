@@ -40,7 +40,7 @@ export const FEEDBACK_SUPPRESSION_STARTS = 90;
 
 export const MAINTAINER_EMAIL = 'contact@super-productivity.com';
 const PLAY_STORE_URL =
-  'https://play.google.com/store/apps/details?id=com.superproductivity.superproductivity';
+  'https://play.google.com/store/apps/details?id=com.supertasks.app';
 const APP_STORE_URL = 'https://apps.apple.com/app/id1482572463';
 const HOW_TO_RATE_URL =
   'https://github.com/super-productivity/super-productivity/blob/master/docs/how-to-rate.md';

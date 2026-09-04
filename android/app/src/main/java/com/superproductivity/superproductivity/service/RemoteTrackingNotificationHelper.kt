@@ -32,7 +32,7 @@ object RemoteTrackingNotificationHelper {
     const val CHANNEL_ID = "sp_remote_tracking_channel"
     const val NOTIFICATION_ID = 1004
     const val ACTION_REMOTE_STOP =
-        "com.superproductivity.superproductivity.REMOTE_TRACKING_STOP"
+        "com.supertasks.superproductivity.REMOTE_TRACKING_STOP"
 
     /** Self-destruct after ~2.5 missed heartbeats (heartbeat = 60s). */
     private const val TIMEOUT_MS = 150_000L

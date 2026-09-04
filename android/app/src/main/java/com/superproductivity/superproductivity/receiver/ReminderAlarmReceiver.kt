@@ -22,7 +22,7 @@ class ReminderAlarmReceiver : BroadcastReceiver() {
 
     companion object {
         const val TAG = "ReminderAlarmReceiver"
-        const val ACTION_SHOW_REMINDER = "com.superproductivity.ACTION_SHOW_REMINDER"
+        const val ACTION_SHOW_REMINDER = "com.supertasks.ACTION_SHOW_REMINDER"
         const val EXTRA_NOTIFICATION_ID = "notification_id"
         const val EXTRA_REMINDER_ID = "reminder_id"
         const val EXTRA_RELATED_ID = "related_id"

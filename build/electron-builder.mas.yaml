@@ -1,4 +1,4 @@
-appId: com.super-productivity.app
+appId: com.supertasks.app
 productName: Super Productivity
 artifactName: ${name}-${arch}.${ext}
 files:
@@ -46,7 +46,7 @@ mac:
 
 mas:
   type: distribution
-  appId: com.super-productivity.app
+  appId: com.supertasks.app
   category: public.app-category.productivity
   gatekeeperAssess: false
   darkModeSupport: true

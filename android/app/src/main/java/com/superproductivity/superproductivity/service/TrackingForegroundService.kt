@@ -11,12 +11,12 @@ class TrackingForegroundService : Service() {
     companion object {
         const val TAG = "TrackingService"
 
-        const val ACTION_START = "com.superproductivity.ACTION_START_TRACKING"
-        const val ACTION_STOP = "com.superproductivity.ACTION_STOP_TRACKING"
-        const val ACTION_UPDATE = "com.superproductivity.ACTION_UPDATE_TRACKING"
-        const val ACTION_PAUSE = "com.superproductivity.ACTION_PAUSE_TRACKING"
-        const val ACTION_DONE = "com.superproductivity.ACTION_MARK_DONE"
-        const val ACTION_GET_ELAPSED = "com.superproductivity.ACTION_GET_ELAPSED"
+        const val ACTION_START = "com.supertasks.ACTION_START_TRACKING"
+        const val ACTION_STOP = "com.supertasks.ACTION_STOP_TRACKING"
+        const val ACTION_UPDATE = "com.supertasks.ACTION_UPDATE_TRACKING"
+        const val ACTION_PAUSE = "com.supertasks.ACTION_PAUSE_TRACKING"
+        const val ACTION_DONE = "com.supertasks.ACTION_MARK_DONE"
+        const val ACTION_GET_ELAPSED = "com.supertasks.ACTION_GET_ELAPSED"
 
         const val EXTRA_TASK_ID = "task_id"
         const val EXTRA_TASK_TITLE = "task_title"

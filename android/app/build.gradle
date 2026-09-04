@@ -16,7 +16,7 @@ def releaseConfigFields = getBuildConfigFields(appConfig, false)
 
 android {
     defaultConfig {
-        applicationId "com.superproductivity.superproductivity"
+        applicationId "com.supertasks.app"
         minSdkVersion 24
         targetSdkVersion 36
         compileSdk 36

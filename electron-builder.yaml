@@ -1,4 +1,4 @@
-appId: superProductivity
+appId: supertasks
 productName: Super Productivity
 artifactName: ${name}-${arch}.${ext}
 
@@ -86,28 +86,28 @@ portable:
   # release workflow creates the old architecture-specific names after signing.
   artifactName: ${name}.${ext}
 appx:
-  applicationId: SuperProductivity
+  applicationId: supertasks
   displayName: Super Productivity
   publisherDisplayName: johannesjo
   publisher: CN=___-___
-  identityName: ___johannesjo.SuperProductivity
+  identityName: ___johannesjo.supertasks
 
 linux:
   # Fix for issue #5259: Set executable name without spaces for snap compatibility
-  executableName: superproductivity
+  executableName: supertasks
   category: Office;ProjectManagement
   mimeTypes:
-    - x-scheme-handler/superproductivity
+    - x-scheme-handler/supertasks
   desktop:
     entry:
       # Must equal LINUX_DESKTOP_NAME in electron/start-app.ts, which pins the
       # XDG app id that Electron 42+ uses for both the X11 WM_CLASS and the
       # Wayland app_id. Enforced by tools/verify-linux-wm-class.test.js.
-      # Reverts #9634: `superproductivity-bin` matched the Wayland app_id only on
+      # Reverts #9634: `supertasks-bin` matched the Wayland app_id only on
       # Electron <= 41, where it came from the renamed binary's basename (#9450).
       # The Electron 43 bump (#9571, v18.20.0) moved it to the XDG app id, so the
       # `-bin` value now matches nothing on either session type.
-      StartupWMClass: superproductivity
+      StartupWMClass: supertasks
   target:
     - AppImage
     - deb
@@ -123,7 +123,7 @@ rpm:
 #  desktop:
 #    Name: Super Productivity
 #    Comment: A todo list and time tracking app
-#    Exec: superProductivity
+#    Exec: supertasks
 #    Terminal: false
 #    Type: Application
 #    Icon: build/icon.png
@@ -203,7 +203,7 @@ flatpak:
     - --env=ELECTRON_TRASH=gio
 
 mac:
-  appId: com.super-productivity.app
+  appId: com.supertasks.app
   icon: build/icon.icns
   type: distribution
   category: public.app-category.productivity

@@ -26,16 +26,16 @@ describe('routeCapacitorAppUrl', () => {
   });
 
   const OAUTH_URLS = [
-    'com.super-productivity.app://oauth-callback?code=ABC123',
+    'com.supertasks.app://oauth-callback?code=ABC123',
     'superproductivity://oauth-callback?code=ABC123',
-    'com.super-productivity.app://plugin-oauth-callback?code=ABC123',
+    'com.supertasks.app://plugin-oauth-callback?code=ABC123',
   ];
 
   describe('task route family', () => {
     it('should still deliver a task action emitted before anyone subscribed', () => {
       expect(
         routeCapacitorAppUrl(
-          'com.super-productivity.app://create-task?title=hello',
+          'com.supertasks.app://create-task?title=hello',
           taskSink,
           oAuthSink,
         ),
@@ -56,7 +56,7 @@ describe('routeCapacitorAppUrl', () => {
       oAuthSink.subscribe(() => (oAuthReceived = true));
 
       routeCapacitorAppUrl(
-        'com.super-productivity.app://create-task?title=hello',
+        'com.supertasks.app://create-task?title=hello',
         taskSink,
         oAuthSink,
       );
@@ -93,7 +93,7 @@ describe('routeCapacitorAppUrl', () => {
     oAuthSink.subscribe((u) => (oAuthReceived = u));
 
     routeCapacitorAppUrl(
-      'com.super-productivity.app://create-task?title=hello',
+      'com.supertasks.app://create-task?title=hello',
       taskSink,
       oAuthSink,
     );

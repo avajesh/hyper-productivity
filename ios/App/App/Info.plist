@@ -60,7 +60,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.super-productivity.app</string>
+				<string>com.supertasks.app</string>
 			</array>
 			<key>CFBundleURLName</key>
 			<string>OAuth Callback</string>

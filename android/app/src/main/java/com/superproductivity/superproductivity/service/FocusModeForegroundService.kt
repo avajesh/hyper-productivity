@@ -14,14 +14,14 @@ class FocusModeForegroundService : Service() {
     companion object {
         const val TAG = "FocusModeService"
 
-        const val ACTION_START = "com.superproductivity.ACTION_START_FOCUS"
-        const val ACTION_STOP = "com.superproductivity.ACTION_STOP_FOCUS"
-        const val ACTION_UPDATE = "com.superproductivity.ACTION_UPDATE_FOCUS"
-        const val ACTION_PAUSE = "com.superproductivity.ACTION_PAUSE_FOCUS"
-        const val ACTION_RESUME = "com.superproductivity.ACTION_RESUME_FOCUS"
-        const val ACTION_SKIP = "com.superproductivity.ACTION_SKIP_FOCUS"
-        const val ACTION_COMPLETE = "com.superproductivity.ACTION_COMPLETE_FOCUS"
-        const val ACTION_TIMER_COMPLETE = "com.superproductivity.ACTION_TIMER_COMPLETE_FOCUS"
+        const val ACTION_START = "com.supertasks.ACTION_START_FOCUS"
+        const val ACTION_STOP = "com.supertasks.ACTION_STOP_FOCUS"
+        const val ACTION_UPDATE = "com.supertasks.ACTION_UPDATE_FOCUS"
+        const val ACTION_PAUSE = "com.supertasks.ACTION_PAUSE_FOCUS"
+        const val ACTION_RESUME = "com.supertasks.ACTION_RESUME_FOCUS"
+        const val ACTION_SKIP = "com.supertasks.ACTION_SKIP_FOCUS"
+        const val ACTION_COMPLETE = "com.supertasks.ACTION_COMPLETE_FOCUS"
+        const val ACTION_TIMER_COMPLETE = "com.supertasks.ACTION_TIMER_COMPLETE_FOCUS"
 
         const val EXTRA_TITLE = "title"
         const val EXTRA_TASK_TITLE = "task_title"

@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 object ForegroundServiceFailure {
-    const val ACTION = "com.superproductivity.ACTION_FOREGROUND_SERVICE_FAILED"
+    const val ACTION = "com.supertasks.ACTION_FOREGROUND_SERVICE_FAILED"
     const val EXTRA_SERVICE = "service"
     const val EXTRA_REASON = "reason"
 

@@ -78,9 +78,9 @@ class TaskListWidgetProvider : AppWidgetProvider() {
 
     companion object {
         private const val TAG = "TaskListWidget"
-        const val ACTION_CLICK = "com.superproductivity.superproductivity.WIDGET_CLICK"
+        const val ACTION_CLICK = "com.supertasks.superproductivity.WIDGET_CLICK"
         const val ACTION_WIDGET_DONE_DRAIN =
-            "com.superproductivity.superproductivity.WIDGET_DONE_DRAIN"
+            "com.supertasks.superproductivity.WIDGET_DONE_DRAIN"
         const val EXTRA_TASK_ID = "WIDGET_TASK_ID"
         const val EXTRA_SET_DONE = "WIDGET_SET_DONE"
         const val EXTRA_OPEN_APP = "WIDGET_OPEN_APP"

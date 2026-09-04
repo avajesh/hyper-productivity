@@ -97,7 +97,7 @@ describe('buildIdbOpenErrorMessage', () => {
     // match (e.g. just 'flatpak update') passes with a wrong id, and a wrong id
     // makes the single command we hand a locked-out user fail. Sources of truth
     // are the store links in README.md; they differ from the mac/Capacitor
-    // appId `com.super-productivity.app`, which is what a careless grep finds.
+    // appId `com.supertasks.app`, which is what a careless grep finds.
     //
     // The sudo asymmetry is deliberate and verified against polkit policy:
     // snapd's io.snapcraft.snapd.manage is `auth_admin_keep` (bare command dies
@@ -118,8 +118,8 @@ describe('buildIdbOpenErrorMessage', () => {
         ctx({ channel: 'linux-flatpak' }),
       );
 
-      expect(msg).toContain('flatpak update com.super_productivity.SuperProductivity');
-      expect(msg).not.toContain('com.super-productivity.app');
+      expect(msg).toContain('flatpak update com.supertasks.Supertasks');
+      expect(msg).not.toContain('com.supertasks.app');
       expect(msg).not.toContain('sudo flatpak');
     });
 

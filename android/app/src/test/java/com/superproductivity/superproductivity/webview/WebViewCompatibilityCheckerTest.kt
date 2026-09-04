@@ -473,7 +473,7 @@ class WebViewCompatibilityCheckerTest {
         val error = IllegalStateException("App WebView setup failed").apply {
             stackTrace = arrayOf(
                 StackTraceElement(
-                    "com.superproductivity.superproductivity.webview.WebHelper",
+                    "com.supertasks.superproductivity.webview.WebHelper",
                     "setupView",
                     "WebHelper.kt",
                     1,

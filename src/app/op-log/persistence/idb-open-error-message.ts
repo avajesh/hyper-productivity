@@ -53,8 +53,8 @@ const UNIVERSAL_RECOVERY_STEPS =
  * more here than a compile error would.
  *
  * Package identifiers per the store links in README.md — snapcraft.io/superproductivity
- * and flathub.org/apps/com.super_productivity.SuperProductivity. They differ from
- * both the top-level `appId` and the mac/Capacitor `com.super-productivity.app`;
+ * and flathub.org/apps/com.supertasks.Supertasks. They differ from
+ * both the top-level `appId` and the mac/Capacitor `com.supertasks.app`;
  * a wrong id here makes the one command we give the user fail outright.
  *
  * @see https://github.com/super-productivity/super-productivity/issues/9187
@@ -67,7 +67,7 @@ const versionErrorRecoverySteps = (channel: DistChannel): string => {
       return (
         '1. Close this window.\n' +
         '2. Update to the newest version:\n' +
-        '   flatpak update com.super_productivity.SuperProductivity\n\n'
+        '   flatpak update com.supertasks.Supertasks\n\n'
       );
     case 'linux-snap':
       // sudo IS required: snapd's io.snapcraft.snapd.manage is

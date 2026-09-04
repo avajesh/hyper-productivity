@@ -1,4 +1,4 @@
-appId: com.super-productivity.app
+appId: com.supertasks.app
 productName: Super Productivity
 artifactName: ${name}-${arch}.${ext}
 files:
@@ -38,7 +38,7 @@ beforePack: ./tools/beforePack.js
 afterPack: ./tools/afterPack.js
 
 mac:
-  appId: com.super-productivity.app
+  appId: com.supertasks.app
   icon: build/icon.icns
   type: development
   category: public.app-category.productivity

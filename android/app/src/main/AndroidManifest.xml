@@ -73,8 +73,8 @@
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
 
-        <action android:name="com.superproductivity.superproductivity.DONE" />
-        <action android:name="com.superproductivity.superproductivity.PAUSE" />
+        <action android:name="com.supertasks.app.DONE" />
+        <action android:name="com.supertasks.app.PAUSE" />
       </intent-filter>
     </activity>
 
@@ -101,7 +101,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data
-          android:scheme="com.super-productivity.app"
+          android:scheme="com.supertasks.app"
           android:host="oauth-callback" />
       </intent-filter>
 
@@ -111,7 +111,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data
-          android:scheme="com.super-productivity.app"
+          android:scheme="com.supertasks.app"
           android:host="plugin-oauth-callback" />
       </intent-filter>
 
@@ -121,7 +121,7 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data
-          android:scheme="com.superproductivity.superproductivity"
+          android:scheme="com.supertasks.app"
           android:pathPrefix="/plugin-oauth-callback" />
       </intent-filter>
 
@@ -134,10 +134,10 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data
-          android:scheme="com.super-productivity.app"
+          android:scheme="com.supertasks.app"
           android:host="create-task" />
         <data
-          android:scheme="com.super-productivity.app"
+          android:scheme="com.supertasks.app"
           android:host="complete-task" />
       </intent-filter>
     </activity>

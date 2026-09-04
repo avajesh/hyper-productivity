@@ -59,8 +59,8 @@ export class PluginOAuthService {
       // Android: applicationId from build.gradle
       // iOS: bundle ID (matches Capacitor appId)
       return IS_ANDROID_NATIVE
-        ? 'com.superproductivity.superproductivity:/plugin-oauth-callback'
-        : 'com.super-productivity.app:/plugin-oauth-callback';
+        ? 'com.supertasks.app:/plugin-oauth-callback'
+        : 'com.supertasks.app:/plugin-oauth-callback';
     }
     return `${window.location.origin}${WEB_OAUTH_CALLBACK_PATH}`;
   }
