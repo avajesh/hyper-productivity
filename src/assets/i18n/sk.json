@@ -1477,7 +1477,7 @@
         },
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "ID aplikácie (klienta) z registrácie vašej aplikácie Microsoft Entra",
-          "INFO_TEXT": "Overenie Microsoft 365 používa OAuth. Najprv vyplňte klienta a nájomníka a potom sa overte. <strong>Používate vlastnú registráciu aplikácie Entra?</strong> V počítačovej aplikácii zaregistrujte URI presmerovania <code>superproductivity://oauth-callback/onedrive</code> v časti „Mobile and desktop applications“, zapnite „Allow public client flows“ a udeľte delegované povolenie <code>Files.ReadWrite.AppFolder</code>. Pozrite si <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">sprievodcu nastavením OneDrive</a>.",
+          "INFO_TEXT": "Overenie Microsoft 365 používa OAuth. Najprv vyplňte klienta a nájomníka a potom sa overte. <strong>Používate vlastnú registráciu aplikácie Entra?</strong> V počítačovej aplikácii zaregistrujte URI presmerovania <code>superproductivity://oauth-callback/onedrive</code> v časti „Mobile and desktop applications“, zapnite „Allow public client flows“ a udeľte delegované povolenie <code>Files.ReadWrite.AppFolder</code>. Pozrite si <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">sprievodcu nastavením OneDrive</a>.",
           "L_CLIENT_ID": "ID aplikácie (klienta)",
           "L_SYNC_FOLDER_PATH": "Cesta k synchronizačnému priečinku",
           "L_TENANT_ID": "ID nájomníka",

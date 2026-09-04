@@ -393,7 +393,7 @@ recovery, and is answering again within seconds. `RestartCount` stays 0, the
 container never leaves `running`, and the compose healthcheck needs five
 consecutive failed probes — so checks 0–3 are all structurally blind to it. The
 hosted server crash-restarted 45 times over three months before the first one
-was noticed ([#9695](https://github.com/super-productivity/super-productivity/issues/9695));
+was noticed ([#9695](https://github.com/avajesh/hyper-productivity/issues/9695));
 users see each one only as a failed sync. The check reads the postgres container
 log directly (the app-container probe cannot: the crash kills its connection),
 so it is skipped when `POSTGRES_SERVICE=` selects an external database — an

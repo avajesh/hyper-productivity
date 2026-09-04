@@ -27,7 +27,7 @@
 # revision mount root and is more reliable than $0 resolution through
 # snapd's wrapper chain. Elsewhere, resolve $0 through symlinks — this
 # handles /usr/bin/superproductivity symlinks from .deb/.rpm installs.
-if [ -n "$SNAP" ] && [ "$SNAP_NAME" = "supertasks" ]; then
+if [ -n "$SNAP" ] && [ "$SNAP_NAME" = "hyperproductivity" ]; then
   IS_OUR_SNAP=1
   BIN_DIR="$SNAP"
 else
@@ -35,7 +35,7 @@ else
   SELF=$(readlink -f "$0" 2>/dev/null || echo "$0")
   BIN_DIR=$(dirname "$SELF")
 fi
-BIN="$BIN_DIR/supertasks-bin"
+BIN="$BIN_DIR/hyper-productivity-bin"
 
 # If the user already supplied --ozone-platform on argv, don't override. Stop
 # scanning at -- so positional args aren't misread as flags.

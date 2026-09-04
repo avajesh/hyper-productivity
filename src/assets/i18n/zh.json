@@ -437,7 +437,7 @@
         "FILTER_USER": "筛选用户名",
         "GITLAB_BASE_URL": "自定义 GitLab 基本 URL（可选）",
         "PROJECT": "用户名/项目",
-        "PROJECT_HINT": "例如 super-productivity/super-productivity",
+        "PROJECT_HINT": "例如 avajesh/hyper-productivity",
         "SCOPE": "范围",
         "SCOPE_ALL": "全部",
         "SCOPE_ASSIGNED": "分配给我",
@@ -1570,7 +1570,7 @@
         },
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "Microsoft Entra 应用注册中的应用程序（客户端）ID",
-          "INFO_TEXT": "Microsoft 365 使用 OAuth 进行认证。请先填写客户端和租户信息，然后进行认证。<strong>要使用自己的 Entra 应用注册？</strong>在桌面版中，请在“移动和桌面应用程序”下注册重定向 URI <code>superproductivity://oauth-callback/onedrive</code>，启用“允许公共客户端流”，并授予 <code>Files.ReadWrite.AppFolder</code> 委托权限。请参阅 <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive 设置指南</a>。",
+          "INFO_TEXT": "Microsoft 365 使用 OAuth 进行认证。请先填写客户端和租户信息，然后进行认证。<strong>要使用自己的 Entra 应用注册？</strong>在桌面版中，请在“移动和桌面应用程序”下注册重定向 URI <code>superproductivity://oauth-callback/onedrive</code>，启用“允许公共客户端流”，并授予 <code>Files.ReadWrite.AppFolder</code> 委托权限。请参阅 <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive 设置指南</a>。",
           "L_CLIENT_ID": "应用程序（客户端）ID",
           "L_SYNC_FOLDER_PATH": "同步文件夹路径",
           "L_TENANT_ID": "租户 ID",

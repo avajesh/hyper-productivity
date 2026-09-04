@@ -437,7 +437,7 @@
         "FILTER_USER": "Filtrează după numele de utilizator",
         "GITLAB_BASE_URL": "URL de bază personalizat GitLab (opțional)",
         "PROJECT": "nume utilizator/proiect",
-        "PROJECT_HINT": "d.e. super-productivity/super-productivity",
+        "PROJECT_HINT": "d.e. avajesh/hyper-productivity",
         "SCOPE": "Domeniu de aplicare",
         "SCOPE_ALL": "Toate",
         "SCOPE_ASSIGNED": "Atribuite mie",

@@ -1,7 +1,7 @@
 import { expect, test } from '../../fixtures/test.fixture';
 
 /**
- * Bug: https://github.com/super-productivity/super-productivity/issues/5358
+ * Bug: https://github.com/avajesh/hyper-productivity/issues/5358
  * (and the `#/schedule` variant in #4842)
  *
  * A malformed time in the *schedule config* (workStart / workEnd /

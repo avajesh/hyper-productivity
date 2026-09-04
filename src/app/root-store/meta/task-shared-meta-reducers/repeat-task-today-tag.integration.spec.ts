@@ -10,7 +10,7 @@
  * Uses the full combined meta-reducer chain to catch interactions between
  * the CRUD, scheduling, and tag meta-reducers.
  *
- * Related: https://github.com/avajesh/supertasks/issues/6269
+ * Related: https://github.com/avajesh/hyper-productivity/issues/6269
  */
 import { Action, ActionReducer } from '@ngrx/store';
 import { createCombinedTaskSharedMetaReducer, updateTaskEntity } from './test-helpers';

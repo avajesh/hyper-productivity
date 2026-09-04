@@ -1429,7 +1429,7 @@
         "L_USE_SPLIT_SYNC_FILES": "Surgical sync（実験的）– ops/snapshot ファイルを分割した構成により、同期を高速化します。有効にすると、このフォルダーを同期するすべてのデバイスでも有効にする必要があります。",
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "Microsoft Entra アプリ登録のアプリケーション（クライアント）ID",
-          "INFO_TEXT": "Microsoft 365 の認証には OAuth を使用します。まずクライアントとテナントを入力してから認証してください。<strong>独自の Entra アプリ登録を使用しますか？</strong> デスクトップでは、「モバイルとデスクトップ アプリケーション」にリダイレクト URI <code>superproductivity://oauth-callback/onedrive</code> を登録し、「パブリック クライアント フローを許可する」を有効にして、委任された <code>Files.ReadWrite.AppFolder</code> 権限を付与してください。<a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive セットアップガイド</a>を参照してください。",
+          "INFO_TEXT": "Microsoft 365 の認証には OAuth を使用します。まずクライアントとテナントを入力してから認証してください。<strong>独自の Entra アプリ登録を使用しますか？</strong> デスクトップでは、「モバイルとデスクトップ アプリケーション」にリダイレクト URI <code>superproductivity://oauth-callback/onedrive</code> を登録し、「パブリック クライアント フローを許可する」を有効にして、委任された <code>Files.ReadWrite.AppFolder</code> 権限を付与してください。<a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive セットアップガイド</a>を参照してください。",
           "L_CLIENT_ID": "アプリケーション（クライアント）ID",
           "L_SYNC_FOLDER_PATH": "同期フォルダーのパス",
           "L_TENANT_ID": "テナント ID",

@@ -53,11 +53,11 @@ const UNIVERSAL_RECOVERY_STEPS =
  * more here than a compile error would.
  *
  * Package identifiers per the store links in README.md — snapcraft.io/superproductivity
- * and flathub.org/apps/com.supertasks.Supertasks. They differ from
- * both the top-level `appId` and the mac/Capacitor `com.supertasks.app`;
+ * and flathub.org/apps/com.hyperproductivity.Hyper Productivity. They differ from
+ * both the top-level `appId` and the mac/Capacitor `com.hyperproductivity.app`;
  * a wrong id here makes the one command we give the user fail outright.
  *
- * @see https://github.com/super-productivity/super-productivity/issues/9187
+ * @see https://github.com/avajesh/hyper-productivity/issues/9187
  */
 const versionErrorRecoverySteps = (channel: DistChannel): string => {
   switch (channel) {
@@ -67,7 +67,7 @@ const versionErrorRecoverySteps = (channel: DistChannel): string => {
       return (
         '1. Close this window.\n' +
         '2. Update to the newest version:\n' +
-        '   flatpak update com.supertasks.Supertasks\n\n'
+        '   flatpak update com.hyperproductivity.Hyper Productivity\n\n'
       );
     case 'linux-snap':
       // sudo IS required: snapd's io.snapcraft.snapd.manage is
@@ -114,7 +114,7 @@ const buildVersionErrorMessage = (
  * Generic "cannot open the database" guidance, with extra recovery steps for
  * backing-store errors (stale LevelDB lock, sandbox not ready yet).
  *
- * @see https://github.com/avajesh/supertasks/issues/6255
+ * @see https://github.com/avajesh/hyper-productivity/issues/6255
  */
 const buildGenericErrorMessage = (
   error: IndexedDBOpenError,

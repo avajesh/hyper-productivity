@@ -33,7 +33,7 @@ const APP_DISPLAY_NAME = 'Super Productivity';
 // this value straight to `g_desktop_app_info_new()`, which wants a desktop-file
 // id, while the window identity strips the suffix itself. Coupled to the
 // desktop entry by `tools/verify-linux-wm-class.test.js`.
-const LINUX_DESKTOP_NAME = 'supertasks.desktop';
+const LINUX_DESKTOP_NAME = 'hyperproductivity.desktop';
 const IS_MAC = process.platform === 'darwin';
 // const DESKTOP_ENV = process.env.DESKTOP_SESSION;
 // const IS_GNOME = DESKTOP_ENV === 'gnome' || DESKTOP_ENV === 'gnome-xorg';
@@ -66,7 +66,7 @@ export const startApp = (): void => {
   app.commandLine.appendSwitch('enable-speech-dispatcher');
 
   // work around for #4375
-  // https://github.com/super-productivity/super-productivity/issues/4375#issuecomment-2883838113
+  // https://github.com/avajesh/hyper-productivity/issues/4375#issuecomment-2883838113
   // https://github.com/electron/electron/issues/46538#issuecomment-2808806722
   app.commandLine.appendSwitch('gtk-version', '3');
 
@@ -169,7 +169,7 @@ export const startApp = (): void => {
     // inference (`lib/browser/init.ts`) slugifies the app name, which happens to
     // produce the same value today but would become `super-productivity` the
     // moment a `productName` is added to package.json, detaching every window
-    // from `supertasks.desktop`. Must run before the first window is
+    // from `hyperproductivity.desktop`. Must run before the first window is
     // created. #9674, #9450.
     app.setDesktopName(LINUX_DESKTOP_NAME);
 

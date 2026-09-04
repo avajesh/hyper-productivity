@@ -1,6 +1,6 @@
 # @super-productivity/plugin-api
 
-Official TypeScript definitions for developing [Super Productivity](https://github.com/super-productivity/super-productivity) plugins.
+Official TypeScript definitions for developing [Super Productivity](https://github.com/avajesh/hyper-productivity) plugins.
 
 ## Installation
 
@@ -186,4 +186,4 @@ MIT - See the main Super Productivity repository for details.
 
 ## Contributing
 
-Please contribute to the main [Super Productivity repository](https://github.com/super-productivity/super-productivity).
+Please contribute to the main [Super Productivity repository](https://github.com/avajesh/hyper-productivity).

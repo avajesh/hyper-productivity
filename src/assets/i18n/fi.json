@@ -423,7 +423,7 @@
         "FILTER_USER": "Suodata käyttäjänimi",
         "GITLAB_BASE_URL": "Mukautettu GitLab-perus-URL (valinnainen)",
         "PROJECT": "käyttäjänimi/projekti",
-        "PROJECT_HINT": "esim. super-productivity/super-productivity",
+        "PROJECT_HINT": "esim. avajesh/hyper-productivity",
         "SCOPE": "Laajuus",
         "SCOPE_ALL": "Kaikki",
         "SCOPE_ASSIGNED": "Minulle osoitetut",
@@ -1449,7 +1449,7 @@
         },
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "Microsoft Entra -sovellusrekisteröinnin sovellustunnus (asiakastunnus)",
-          "INFO_TEXT": "Microsoft 365 -todennus käyttää OAuthia. Anna ensin asiakas- ja vuokraajatunnus ja todenna sitten. <strong>Käytätkö omaa Entra-sovellusrekisteröintiä?</strong> Rekisteröi työpöytäversiossa uudelleenohjauksen URI <code>superproductivity://oauth-callback/onedrive</code> kohtaan \"Mobile and desktop applications\", ota \"Allow public client flows\" käyttöön ja myönnä delegoitu <code>Files.ReadWrite.AppFolder</code>-käyttöoikeus. Katso <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive-määritysohje</a>.",
+          "INFO_TEXT": "Microsoft 365 -todennus käyttää OAuthia. Anna ensin asiakas- ja vuokraajatunnus ja todenna sitten. <strong>Käytätkö omaa Entra-sovellusrekisteröintiä?</strong> Rekisteröi työpöytäversiossa uudelleenohjauksen URI <code>superproductivity://oauth-callback/onedrive</code> kohtaan \"Mobile and desktop applications\", ota \"Allow public client flows\" käyttöön ja myönnä delegoitu <code>Files.ReadWrite.AppFolder</code>-käyttöoikeus. Katso <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive-määritysohje</a>.",
           "L_CLIENT_ID": "Sovellustunnus (asiakastunnus)",
           "L_SYNC_FOLDER_PATH": "Synkronointikansion polku",
           "L_TENANT_ID": "Vuokraajatunnus",

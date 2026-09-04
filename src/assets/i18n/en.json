@@ -438,7 +438,7 @@
         "FILTER_USER": "Filter username",
         "GITLAB_BASE_URL": "Custom GitLab base URL (optional)",
         "PROJECT": "user name/project",
-        "PROJECT_HINT": "Project path (namespace/project-slug) or numeric project ID, not the display name (e.g. super-productivity/super-productivity or 12345)",
+        "PROJECT_HINT": "Project path (namespace/project-slug) or numeric project ID, not the display name (e.g. avajesh/hyper-productivity or 12345)",
         "SCOPE": "Scope",
         "SCOPE_ALL": "All",
         "SCOPE_ASSIGNED": "Assigned to me",
@@ -1599,7 +1599,7 @@
         },
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "Application (client) ID from your Microsoft Entra app registration",
-          "INFO_TEXT": "Microsoft 365 authentication uses OAuth. Fill in client and tenant first, then authenticate. <strong>Using your own Entra app registration?</strong> On desktop, register the redirect URI <code>superproductivity://oauth-callback/onedrive</code> under \"Mobile and desktop applications\", enable \"Allow public client flows\", and grant the <code>Files.ReadWrite.AppFolder</code> delegated permission. See the <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive setup guide</a>.",
+          "INFO_TEXT": "Microsoft 365 authentication uses OAuth. Fill in client and tenant first, then authenticate. <strong>Using your own Entra app registration?</strong> On desktop, register the redirect URI <code>superproductivity://oauth-callback/onedrive</code> under \"Mobile and desktop applications\", enable \"Allow public client flows\", and grant the <code>Files.ReadWrite.AppFolder</code> delegated permission. See the <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive setup guide</a>.",
           "L_CLIENT_ID": "Application (Client) ID",
           "L_SYNC_FOLDER_PATH": "Sync Folder Path",
           "L_TENANT_ID": "Tenant ID",

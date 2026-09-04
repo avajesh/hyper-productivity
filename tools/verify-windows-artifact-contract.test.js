@@ -31,7 +31,7 @@ const sectionValue = (sectionName, key) => {
 };
 
 test('Windows release builds only the two universal executables', () => {
-  assert.equal(sectionValue('nsis', 'artifactName'), 'Supertasks-Setup.${ext}');
+  assert.equal(sectionValue('nsis', 'artifactName'), 'HyperProductivity-Setup.${ext}');
   assert.equal(sectionValue('portable', 'artifactName'), '${name}.${ext}');
 });
 
@@ -73,10 +73,10 @@ test('signed universal executables are published under compatibility aliases', (
   assert.ok(publishStep > signatureStep, 'publish only after signature verification');
 
   for (const alias of [
-    'Supertasks-Setup-x64.exe',
-    'Supertasks-Setup-arm64.exe',
-    'supertasks-x64.exe',
-    'supertasks-arm64.exe',
+    'HyperProductivity-Setup-x64.exe',
+    'HyperProductivity-Setup-arm64.exe',
+    'hyperproductivity-x64.exe',
+    'hyperproductivity-arm64.exe',
   ]) {
     assert.match(RELEASE_WORKFLOW, new RegExp(`Copy-Item.*${alias}`));
   }

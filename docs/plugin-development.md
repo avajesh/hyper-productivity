@@ -894,7 +894,7 @@ Happy plugin development! 🚀
 ```md
 Can you you write me a plugin for Super Productivity that plays a beep sound every time i click on a header button (You need to add a header button via PluginAPI.registerHeaderButton).
 
-Here are the docs: https://github.com/super-productivity/super-productivity/blob/master/docs/plugin-development.md
+Here are the docs: https://github.com/avajesh/hyper-productivity/blob/master/docs/plugin-development.md
 
 Don't use any PluginAPI methods that are not listed in the guide.
 

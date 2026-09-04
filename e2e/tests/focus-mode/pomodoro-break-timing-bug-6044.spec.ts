@@ -1,6 +1,6 @@
 /**
  * E2E tests for GitHub issue #6044
- * https://github.com/super-productivity/super-productivity/issues/6044
+ * https://github.com/avajesh/hyper-productivity/issues/6044
  *
  * Bug: Long break occurring after session 5 instead of 4
  *

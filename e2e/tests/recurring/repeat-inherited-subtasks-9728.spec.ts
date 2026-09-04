@@ -3,7 +3,7 @@ import { openRecurDialog, saveRecurDialog } from '../../utils/recurring-task-hel
 import type { Page } from '@playwright/test';
 
 /**
- * Bug: https://github.com/super-productivity/super-productivity/issues/9728
+ * Bug: https://github.com/avajesh/hyper-productivity/issues/9728
  *
  * Single-client half of the #9728 coverage: a daily repeat with inherited
  * subtasks must materialise each template EXACTLY once on the next day's

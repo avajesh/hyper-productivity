@@ -1,6 +1,6 @@
 /**
  * Integration tests for GitHub issue #6064
- * https://github.com/super-productivity/super-productivity/issues/6064
+ * https://github.com/avajesh/hyper-productivity/issues/6064
  *
  * Bug: Without break timer doesn't reset during Pomodoro breaks
  *

@@ -311,7 +311,7 @@ export const deleteTaskHelper = (
   // DEFENSIVE FIX: Also check state for subtasks not in subTaskIds.
   // This handles race conditions where subtasks were added but parent's
   // subTaskIds wasn't synced before a SYNC_IMPORT + moveToArchive.
-  // See: https://github.com/avajesh/supertasks/issues/XXXX
+  // See: https://github.com/avajesh/hyper-productivity/issues/XXXX
   const stateSubTaskIds = (state.ids as string[]).filter(
     (id) => state.entities[id]?.parentId === taskToDelete.id,
   );

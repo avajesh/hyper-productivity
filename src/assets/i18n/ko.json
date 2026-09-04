@@ -1408,7 +1408,7 @@
         "L_USE_SPLIT_SYNC_FILES": "정밀 동기화(실험적) – 분할된 ops/snapshot 파일 구조를 사용하여 더 빠르게 동기화합니다. 활성화하면 이 폴더를 동기화하는 모든 기기에서도 이 기능을 활성화해야 합니다.",
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "Microsoft Entra 앱 등록의 애플리케이션(클라이언트) ID",
-          "INFO_TEXT": "Microsoft 365 인증은 OAuth를 사용합니다. 먼저 클라이언트와 테넌트를 입력한 다음 인증하세요. <strong>자체 Entra 앱 등록을 사용하시나요?</strong> 데스크톱에서는 \"모바일 및 데스크톱 애플리케이션\" 아래에 리디렉션 URI <code>superproductivity://oauth-callback/onedrive</code>를 등록하고, \"퍼블릭 클라이언트 흐름 허용\"을 활성화한 후 <code>Files.ReadWrite.AppFolder</code> 위임 권한을 부여하세요. <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive 설정 가이드</a>를 참조하세요.",
+          "INFO_TEXT": "Microsoft 365 인증은 OAuth를 사용합니다. 먼저 클라이언트와 테넌트를 입력한 다음 인증하세요. <strong>자체 Entra 앱 등록을 사용하시나요?</strong> 데스크톱에서는 \"모바일 및 데스크톱 애플리케이션\" 아래에 리디렉션 URI <code>superproductivity://oauth-callback/onedrive</code>를 등록하고, \"퍼블릭 클라이언트 흐름 허용\"을 활성화한 후 <code>Files.ReadWrite.AppFolder</code> 위임 권한을 부여하세요. <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive 설정 가이드</a>를 참조하세요.",
           "L_CLIENT_ID": "애플리케이션(클라이언트) ID",
           "L_SYNC_FOLDER_PATH": "동기화 폴더 경로",
           "L_TENANT_ID": "테넌트 ID",

@@ -22,7 +22,7 @@
         "wellKnown": "https://super-productivity.com/.well-known/funding-manifest-urls"
       },
       "repositoryUrl": {
-        "url": "https://github.com/super-productivity/super-productivity"
+        "url": "https://github.com/avajesh/hyper-productivity"
       },
       "licenses": ["spdx:MIT"],
       "tags": [

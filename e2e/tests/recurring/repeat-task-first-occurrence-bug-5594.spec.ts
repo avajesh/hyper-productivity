@@ -2,7 +2,7 @@ import { expect, test } from '../../fixtures/test.fixture';
 import { openRecurDialog, saveRecurDialog } from '../../utils/recurring-task-helpers';
 
 /**
- * Bug: https://github.com/super-productivity/super-productivity/issues/5594
+ * Bug: https://github.com/avajesh/hyper-productivity/issues/5594
  *
  * When creating a repeat task (e.g., Mon/Wed/Fri) on a day that doesn't match
  * the pattern (e.g., Saturday), the first task instance should be scheduled

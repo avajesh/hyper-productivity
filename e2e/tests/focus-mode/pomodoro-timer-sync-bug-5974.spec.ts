@@ -1,6 +1,6 @@
 /**
  * E2E tests for GitHub issue #5974
- * https://github.com/super-productivity/super-productivity/issues/5974
+ * https://github.com/avajesh/hyper-productivity/issues/5974
  *
  * Bug: Multiple Pomodoro timer sync issues with breaks
  *

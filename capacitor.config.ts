@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.supertasks.app',
-  appName: 'Supertasks',
+  appId: 'com.hyperproductivity.app',
+  appName: 'Hyper Productivity',
   webDir: 'dist/browser',
   plugins: {
     CapacitorHttp: {

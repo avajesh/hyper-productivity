@@ -428,7 +428,7 @@
         "FILTER_USER": "篩選使用者名稱",
         "GITLAB_BASE_URL": "自訂 GitLab 基礎網址（選填）",
         "PROJECT": "使用者名稱/專案",
-        "PROJECT_HINT": "例如：super-productivity/super-productivity",
+        "PROJECT_HINT": "例如：avajesh/hyper-productivity",
         "SCOPE": "範圍",
         "SCOPE_ALL": "全部",
         "SCOPE_ASSIGNED": "指派給我",
@@ -1543,7 +1543,7 @@
         "L_USE_SPLIT_SYNC_FILES": "Surgical sync（實驗性）– 使用分割的 ops/snapshot 檔案配置加快同步速度。啟用後，所有同步此資料夾的裝置也都必須啟用此選項。",
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "Microsoft Entra 應用程式註冊中的應用程式（用戶端）ID",
-          "INFO_TEXT": "Microsoft 365 驗證使用 OAuth。請先填入用戶端與租用戶資訊，再進行驗證。<strong>使用自己的 Entra 應用程式註冊？</strong>在桌面版中，請在 \"Mobile and desktop applications\" 下註冊重新導向 URI <code>superproductivity://oauth-callback/onedrive</code>，啟用 \"Allow public client flows\"，並授予 <code>Files.ReadWrite.AppFolder</code> 委派權限。請參閱 <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive 設定指南</a>。",
+          "INFO_TEXT": "Microsoft 365 驗證使用 OAuth。請先填入用戶端與租用戶資訊，再進行驗證。<strong>使用自己的 Entra 應用程式註冊？</strong>在桌面版中，請在 \"Mobile and desktop applications\" 下註冊重新導向 URI <code>superproductivity://oauth-callback/onedrive</code>，啟用 \"Allow public client flows\"，並授予 <code>Files.ReadWrite.AppFolder</code> 委派權限。請參閱 <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">OneDrive 設定指南</a>。",
           "L_CLIENT_ID": "應用程式（用戶端）ID",
           "L_SYNC_FOLDER_PATH": "同步資料夾路徑",
           "L_TENANT_ID": "租用戶 ID",

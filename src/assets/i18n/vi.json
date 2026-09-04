@@ -441,7 +441,7 @@
         "FILTER_USER": "Tên người dùng lọc",
         "GITLAB_BASE_URL": "URL cơ sở GitLab tùy chỉnh (tùy chọn)",
         "PROJECT": "tên người dùng/dự án",
-        "PROJECT_HINT": "ví dụ: super-productivity/super-productivity",
+        "PROJECT_HINT": "ví dụ: avajesh/hyper-productivity",
         "SCOPE": "Phạm vi",
         "SCOPE_ALL": "Tất cả",
         "SCOPE_ASSIGNED": "Được giao cho tôi",
@@ -1593,7 +1593,7 @@
         },
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "ID ứng dụng (máy khách) từ đăng ký ứng dụng Microsoft Entra của bạn",
-          "INFO_TEXT": "Xác thực Microsoft 365 sử dụng OAuth. Trước tiên hãy điền ID máy khách và đối tượng thuê, sau đó xác thực. <strong>Bạn đang dùng đăng ký ứng dụng Entra của riêng mình?</strong> Trên máy tính, hãy đăng ký URI chuyển hướng <code>superproductivity://oauth-callback/onedrive</code> trong \"Mobile and desktop applications\", bật \"Allow public client flows\" và cấp quyền được ủy quyền <code>Files.ReadWrite.AppFolder</code>. Xem <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">hướng dẫn thiết lập OneDrive</a>.",
+          "INFO_TEXT": "Xác thực Microsoft 365 sử dụng OAuth. Trước tiên hãy điền ID máy khách và đối tượng thuê, sau đó xác thực. <strong>Bạn đang dùng đăng ký ứng dụng Entra của riêng mình?</strong> Trên máy tính, hãy đăng ký URI chuyển hướng <code>superproductivity://oauth-callback/onedrive</code> trong \"Mobile and desktop applications\", bật \"Allow public client flows\" và cấp quyền được ủy quyền <code>Files.ReadWrite.AppFolder</code>. Xem <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">hướng dẫn thiết lập OneDrive</a>.",
           "L_CLIENT_ID": "ID ứng dụng (máy khách)",
           "L_SYNC_FOLDER_PATH": "Đường dẫn thư mục đồng bộ",
           "L_TENANT_ID": "ID đối tượng thuê",

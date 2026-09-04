@@ -1482,7 +1482,7 @@
         "L_USE_SPLIT_SYNC_FILES": "Surgical sync (eksperimental) – Sinkronisasi lebih cepat dengan tata letak berkas ops/snapshot terpisah. Setelah diaktifkan, semua perangkat yang menyinkronkan folder ini juga harus mengaktifkannya.",
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "ID aplikasi (klien) dari pendaftaran aplikasi Microsoft Entra Anda",
-          "INFO_TEXT": "Autentikasi Microsoft 365 menggunakan OAuth. Isi klien dan tenant terlebih dahulu, lalu lakukan autentikasi. <strong>Menggunakan pendaftaran aplikasi Entra Anda sendiri?</strong> Di desktop, daftarkan URI pengalihan <code>superproductivity://oauth-callback/onedrive</code> di bagian \"Mobile and desktop applications\", aktifkan \"Allow public client flows\", dan berikan izin terdelegasi <code>Files.ReadWrite.AppFolder</code>. Lihat <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">panduan penyiapan OneDrive</a>.",
+          "INFO_TEXT": "Autentikasi Microsoft 365 menggunakan OAuth. Isi klien dan tenant terlebih dahulu, lalu lakukan autentikasi. <strong>Menggunakan pendaftaran aplikasi Entra Anda sendiri?</strong> Di desktop, daftarkan URI pengalihan <code>superproductivity://oauth-callback/onedrive</code> di bagian \"Mobile and desktop applications\", aktifkan \"Allow public client flows\", dan berikan izin terdelegasi <code>Files.ReadWrite.AppFolder</code>. Lihat <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">panduan penyiapan OneDrive</a>.",
           "L_CLIENT_ID": "ID Aplikasi (Klien)",
           "L_SYNC_FOLDER_PATH": "Jalur Folder Sinkronisasi",
           "L_TENANT_ID": "ID Tenant",

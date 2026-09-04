@@ -13,7 +13,7 @@ export interface ArchiveModel {
   task: TaskArchive;
   /**
    * Optional for backwards compatibility with older backups that don't have this field.
-   * @see https://github.com/avajesh/supertasks/issues/6200
+   * @see https://github.com/avajesh/hyper-productivity/issues/6200
    */
   lastTimeTrackingFlush?: number;
 }

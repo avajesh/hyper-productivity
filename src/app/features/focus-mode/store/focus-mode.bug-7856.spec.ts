@@ -1,6 +1,6 @@
 /**
  * Reducer test for GitHub issue #7856
- * https://github.com/super-productivity/super-productivity/issues/7856
+ * https://github.com/avajesh/hyper-productivity/issues/7856
  *
  * Bug (Android): after the app sits in the background for several minutes, the
  * in-app Pomodoro/Focus countdown differs from the Android notification timer.

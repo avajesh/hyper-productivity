@@ -4,4 +4,4 @@ I am a web developer with a frontend focus and no security expert. I tried to fo
 
 ## Reporting a Vulnerability
 
-Please report any vulnerabilities using the [form here on github](https://github.com/super-productivity/super-productivity/security/advisories/new).
+Please report any vulnerabilities using the [form here on github](https://github.com/avajesh/hyper-productivity/security/advisories/new).

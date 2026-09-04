@@ -434,7 +434,7 @@
         "FILTER_USER": "Filtrar usuario",
         "GITLAB_BASE_URL": "URL base de GitLab personalizada (opcional)",
         "PROJECT": "nombre de usuario/proyecto",
-        "PROJECT_HINT": "p. ej. super-productivity/super-productivity",
+        "PROJECT_HINT": "p. ej. avajesh/hyper-productivity",
         "SCOPE": "Ámbito",
         "SCOPE_ALL": "Todo",
         "SCOPE_ASSIGNED": "Asignado a mí",
@@ -1558,7 +1558,7 @@
         },
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "ID de aplicación (cliente) del registro de tu aplicación de Microsoft Entra",
-          "INFO_TEXT": "La autenticación de Microsoft 365 usa OAuth. Rellena primero el cliente y el inquilino y, después, autentícate. <strong>¿Usas tu propio registro de aplicación de Entra?</strong> En la aplicación de escritorio, registra el URI de redirección <code>superproductivity://oauth-callback/onedrive</code> en \"Mobile and desktop applications\", activa \"Allow public client flows\" y concede el permiso delegado <code>Files.ReadWrite.AppFolder</code>. Consulta la <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">guía de configuración de OneDrive</a>.",
+          "INFO_TEXT": "La autenticación de Microsoft 365 usa OAuth. Rellena primero el cliente y el inquilino y, después, autentícate. <strong>¿Usas tu propio registro de aplicación de Entra?</strong> En la aplicación de escritorio, registra el URI de redirección <code>superproductivity://oauth-callback/onedrive</code> en \"Mobile and desktop applications\", activa \"Allow public client flows\" y concede el permiso delegado <code>Files.ReadWrite.AppFolder</code>. Consulta la <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">guía de configuración de OneDrive</a>.",
           "L_CLIENT_ID": "ID de aplicación (cliente)",
           "L_SYNC_FOLDER_PATH": "Ruta de la carpeta de sincronización",
           "L_TENANT_ID": "ID de inquilino",

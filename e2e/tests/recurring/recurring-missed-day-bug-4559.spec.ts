@@ -2,7 +2,7 @@ import { expect, test } from '../../fixtures/test.fixture';
 import { openRecurDialog, saveRecurDialog } from '../../utils/recurring-task-helpers';
 
 /**
- * Bug: https://github.com/super-productivity/super-productivity/issues/4559
+ * Bug: https://github.com/avajesh/hyper-productivity/issues/4559
  *
  * Reported in v13.0.10: when the user did NOT open Super Productivity on the
  * scheduled day of a recurring task (e.g. the 1st of the month falls on a

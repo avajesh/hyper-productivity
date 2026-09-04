@@ -427,7 +427,7 @@
         "FILTER_USER": "Filtrar nome de usuário",
         "GITLAB_BASE_URL": "URL base personalizada do GitLab (opcional)",
         "PROJECT": "nome de usuário/projeto",
-        "PROJECT_HINT": "ex: super-productivity/super-productivity",
+        "PROJECT_HINT": "ex: avajesh/hyper-productivity",
         "SCOPE": "Escopo",
         "SCOPE_ALL": "Todos",
         "SCOPE_ASSIGNED": "Atribuído a mim",
@@ -1539,7 +1539,7 @@
         "L_USE_SPLIT_SYNC_FILES": "Surgical sync (experimental) – Sincronização mais rápida usando uma estrutura dividida de arquivos ops/snapshot. Depois de ativada, todos os dispositivos que sincronizam esta pasta também precisarão ativá-la.",
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "ID do aplicativo (cliente) do seu registro de app no Microsoft Entra",
-          "INFO_TEXT": "A autenticação do Microsoft 365 usa OAuth. Preencha primeiro o ID do cliente e o ID do locatário e depois autentique. <strong>Usa seu próprio registro de app no Entra?</strong> No desktop, registre o URI de redirecionamento <code>superproductivity://oauth-callback/onedrive</code> em \"Aplicativos móveis e de área de trabalho\", ative \"Permitir fluxos de cliente público\" e conceda a permissão delegada <code>Files.ReadWrite.AppFolder</code>. Consulte o <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">guia de configuração do OneDrive</a>.",
+          "INFO_TEXT": "A autenticação do Microsoft 365 usa OAuth. Preencha primeiro o ID do cliente e o ID do locatário e depois autentique. <strong>Usa seu próprio registro de app no Entra?</strong> No desktop, registre o URI de redirecionamento <code>superproductivity://oauth-callback/onedrive</code> em \"Aplicativos móveis e de área de trabalho\", ative \"Permitir fluxos de cliente público\" e conceda a permissão delegada <code>Files.ReadWrite.AppFolder</code>. Consulte o <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">guia de configuração do OneDrive</a>.",
           "L_CLIENT_ID": "ID do aplicativo (cliente)",
           "L_SYNC_FOLDER_PATH": "Caminho da pasta de sincronização",
           "L_TENANT_ID": "ID do locatário",

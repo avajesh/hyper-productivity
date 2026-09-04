@@ -1,4 +1,4 @@
-# How to Rate ***Super Productivity***
+# How to Rate **_Super Productivity_**
 
 ## How ratings affect app discoverability
 
@@ -81,6 +81,6 @@ If you've found Super Productivity useful, an honest rating or short review help
 
 ## Other places that help the project
 
-- ⭐ Star us on GitHub: https://github.com/super-productivity/super-productivity
+- ⭐ Star us on GitHub: https://github.com/avajesh/hyper-productivity
 - https://www.producthunt.com/products/super-productivity
 - https://www.pling.com/p/1352584/

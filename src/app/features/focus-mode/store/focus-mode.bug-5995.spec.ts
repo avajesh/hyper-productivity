@@ -1,6 +1,6 @@
 /**
  * Integration tests for GitHub issue #5995
- * https://github.com/super-productivity/super-productivity/issues/5995
+ * https://github.com/avajesh/hyper-productivity/issues/5995
  *
  * Bug #3: Resuming a paused break from banner starts next Pomodoro session
  *

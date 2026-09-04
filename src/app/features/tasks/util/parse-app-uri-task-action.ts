@@ -13,7 +13,7 @@ export interface AppUriCompleteTaskAction {
 export type AppUriTaskAction = AppUriAddTaskAction | AppUriCompleteTaskAction;
 
 /**
- * Parses the `com.supertasks.app://create-task?title=...` and
+ * Parses the `com.hyperproductivity.app://create-task?title=...` and
  * `.../complete-task?title=...` custom URL scheme actions (used by iOS
  * Shortcuts' "Open URLs" action and Android automation apps — both platforms
  * declare VIEW filters for these hosts and route through the same Capacitor

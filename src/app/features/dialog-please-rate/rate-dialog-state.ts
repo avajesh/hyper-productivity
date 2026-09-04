@@ -39,18 +39,19 @@ export const ERROR_SUPPRESSION_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 export const FEEDBACK_SUPPRESSION_STARTS = 90;
 
 export const MAINTAINER_EMAIL = 'contact@techeia.com';
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.supertasks.app';
+const PLAY_STORE_URL =
+  'https://play.google.com/store/apps/details?id=com.hyperproductivity.app';
 const APP_STORE_URL = 'https://apps.apple.com/app/id1482572463';
 const HOW_TO_RATE_URL =
-  'https://github.com/super-productivity/super-productivity/blob/master/docs/how-to-rate.md';
+  'https://github.com/avajesh/hyper-productivity/blob/master/docs/how-to-rate.md';
 // Web/Electron have no app store to rank in; a GitHub star is the equivalent
 // social-proof/discovery signal for the desktop distribution, so that's the CTA
 // there instead of the near-zero-conversion "how to rate" doc.
-const GITHUB_REPO_URL = 'https://github.com/super-productivity/super-productivity';
+const GITHUB_REPO_URL = 'https://github.com/avajesh/hyper-productivity';
 export const DISCUSSIONS_URL =
-  'https://github.com/super-productivity/super-productivity/discussions/new';
+  'https://github.com/avajesh/hyper-productivity/discussions/new';
 export const CONTRIBUTING_URL =
-  'https://github.com/super-productivity/super-productivity/blob/master/CONTRIBUTING.md';
+  'https://github.com/avajesh/hyper-productivity/blob/master/CONTRIBUTING.md';
 
 export interface RateDialogState {
   lastShownAppStartDay: number;

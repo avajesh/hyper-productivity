@@ -58,7 +58,7 @@ export class OAuthCallbackHandlerService implements OnDestroy {
       if (url.includes('plugin-oauth-callback')) {
         this._handlePluginOAuthCallback(url);
       } else if (
-        url.startsWith('com.supertasks.app://oauth-callback') ||
+        url.startsWith('com.hyperproductivity.app://oauth-callback') ||
         url.startsWith('superproductivity://oauth-callback')
       ) {
         const callbackData = this._parseOAuthCallback(url);

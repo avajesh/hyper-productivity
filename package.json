@@ -1,5 +1,5 @@
 {
-  "name": "supertasks",
+  "name": "hyper-productivity",
   "version": "18.21.2",
   "description": "ToDo list and Time Tracking",
   "keywords": [
@@ -12,7 +12,7 @@
   "homepage": "https://super-productivity.com",
   "repository": {
     "type": "git",
-    "url": "git://github.com/super-productivity/super-productivity.git"
+    "url": "git://github.com/avajesh/hyper-productivity.git"
   },
   "license": "MIT",
   "author": "Johannes Millan <contact@super-productivity.com> (http://super-productivity.com)",

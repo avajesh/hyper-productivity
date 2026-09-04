@@ -10,7 +10,7 @@ import {
 import { openRecurDialog, saveRecurDialog } from '../../utils/recurring-task-helpers';
 
 /**
- * Bug: https://github.com/super-productivity/super-productivity/issues/9728
+ * Bug: https://github.com/avajesh/hyper-productivity/issues/9728
  *
  * A daily recurring task with inherited subtasks shows every subtask twice
  * after the instance is created on more than one device.

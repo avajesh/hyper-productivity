@@ -299,7 +299,7 @@ If you suspect a security compromise:
 
 4. **Export audit logs**:
    ```bash
-   gh api /repos/super-productivity/super-productivity/actions/runs --paginate > audit-$(date +%Y%m%d).json
+   gh api /repos/avajesh/hyper-productivity/actions/runs --paginate > audit-$(date +%Y%m%d).json
    ```
 
 ### Investigation (4 hours)

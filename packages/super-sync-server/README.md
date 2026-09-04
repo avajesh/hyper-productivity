@@ -46,7 +46,7 @@ The image revision check requires Docker Compose support for
 
 ```bash
 # 1. Clone the repo (deploy.sh runs from this checkout) and enter this directory
-git clone https://github.com/super-productivity/super-productivity.git
+git clone https://github.com/avajesh/hyper-productivity.git
 cd super-productivity/packages/super-sync-server
 
 # 2. Copy environment example

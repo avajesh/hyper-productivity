@@ -434,7 +434,7 @@
         "FILTER_USER": "Filtriraj po korisničkom imenu",
         "GITLAB_BASE_URL": "Prilagođeni GitLab URL (opcionalno)",
         "PROJECT": "korisnik/projekt",
-        "PROJECT_HINT": "npr. super-productivity/super-productivity",
+        "PROJECT_HINT": "npr. avajesh/hyper-productivity",
         "SCOPE": "Opseg",
         "SCOPE_ALL": "Sve",
         "SCOPE_ASSIGNED": "Dodijeljeno meni",
@@ -1545,7 +1545,7 @@
         "L_USE_SPLIT_SYNC_FILES": "Surgical sync (eksperimentalno) – Brža sinkronizacija pomoću podijeljenog rasporeda datoteka ops/snapshot. Nakon uključivanja to moraju uključiti i svi uređaji koji sinkroniziraju ovu mapu.",
         "ONEDRIVE": {
           "CLIENT_ID_DESCRIPTION": "ID aplikacije (klijenta) iz tvoje registracije aplikacije Microsoft Entra",
-          "INFO_TEXT": "Microsoft 365 autentifikacija koristi OAuth. Najprije ispuni klijenta i tenanta, a zatim se autentificiraj. <strong>Koristiš vlastitu registraciju aplikacije Entra?</strong> U aplikaciji za računala registriraj URI za preusmjeravanje <code>superproductivity://oauth-callback/onedrive</code> pod „Mobile and desktop applications“, uključi „Allow public client flows“ i dodijeli delegirano dopuštenje <code>Files.ReadWrite.AppFolder</code>. Pogledaj <a href=\"https://github.com/super-productivity/super-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">upute za postavljanje OneDrivea</a>.",
+          "INFO_TEXT": "Microsoft 365 autentifikacija koristi OAuth. Najprije ispuni klijenta i tenanta, a zatim se autentificiraj. <strong>Koristiš vlastitu registraciju aplikacije Entra?</strong> U aplikaciji za računala registriraj URI za preusmjeravanje <code>superproductivity://oauth-callback/onedrive</code> pod „Mobile and desktop applications“, uključi „Allow public client flows“ i dodijeli delegirano dopuštenje <code>Files.ReadWrite.AppFolder</code>. Pogledaj <a href=\"https://github.com/avajesh/hyper-productivity/wiki/2.09-Configure-Sync-Backend\" target=\"_blank\" rel=\"noopener\">upute za postavljanje OneDrivea</a>.",
           "L_CLIENT_ID": "ID aplikacije (klijenta)",
           "L_SYNC_FOLDER_PATH": "Putanja mape za sinkronizaciju",
           "L_TENANT_ID": "ID tenanta",
