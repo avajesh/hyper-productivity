@@ -12,7 +12,6 @@ import { taskAdapter } from './task.adapter';
 import { filterOutId } from '../../../util/filter-out-id';
 import { Update } from '@ngrx/entity';
 import { TaskLog } from '../../../core/log';
-import { devError } from '../../../util/dev-error';
 import { sumSubTaskTimeLeft } from '../util/sum-sub-task-time-left';
 
 export const getTaskById = (taskId: string, state: TaskState): Task => {
@@ -66,7 +65,7 @@ export const reCalcTimeSpentForParentIfParent = (
         });
       }
     });
-    return taskAdapter.updateOne(
+    let stateAfterUpdate = taskAdapter.updateOne(
       {
         id: parentId,
         changes: {
@@ -76,6 +75,15 @@ export const reCalcTimeSpentForParentIfParent = (
       },
       state,
     );
+
+    if (parentTask.parentId) {
+      stateAfterUpdate = reCalcTimeSpentForParentIfParent(
+        parentTask.parentId,
+        stateAfterUpdate,
+      );
+    }
+
+    return stateAfterUpdate;
   } else {
     return state;
   }
@@ -114,7 +122,7 @@ export const reCalcTimeEstimateForParentIfParent = (
   //     1000,
   // );
 
-  return taskAdapter.updateOne(
+  let stateAfterUpdate = taskAdapter.updateOne(
     {
       id: parentId,
       changes: {
@@ -123,6 +131,16 @@ export const reCalcTimeEstimateForParentIfParent = (
     },
     state,
   );
+
+  if (parentTask.parentId) {
+    stateAfterUpdate = reCalcTimeEstimateForParentIfParent(
+      parentTask.parentId,
+      stateAfterUpdate,
+      upd,
+    );
+  }
+
+  return stateAfterUpdate;
 };
 
 export const updateDoneOnForTask = (upd: Update<Task>, state: TaskState): TaskState => {
@@ -216,16 +234,27 @@ const updateParentTimeSpentIncremental = (
     }
   }
 
-  return taskAdapter.updateOne(
+  let stateAfterUpdate = taskAdapter.updateOne(
     {
       id: parentId,
       changes: {
         timeSpentOnDay: parentTimeSpentOnDay,
-        timeSpent: parent.timeSpent + totalDelta,
+        timeSpent: Math.max(0, parent.timeSpent + totalDelta),
       },
     },
     state,
   );
+
+  if (parent.parentId) {
+    stateAfterUpdate = updateParentTimeSpentIncremental(
+      parent.parentId,
+      parent.timeSpentOnDay,
+      parentTimeSpentOnDay,
+      stateAfterUpdate,
+    );
+  }
+
+  return stateAfterUpdate;
 };
 
 export const updateTimeSpentForTask = (
@@ -305,39 +334,53 @@ export const deleteTaskHelper = (
   }
 
   // SUB TASK side effects
-  // also delete all sub tasks if any
-  const payloadSubTaskIds = taskToDelete.subTaskIds || [];
+  // recursively delete all descendants
+  const allSubTaskIds = new Set<string>();
+  const queue = [...(taskToDelete.subTaskIds || [])];
 
-  // DEFENSIVE FIX: Also check state for subtasks not in subTaskIds.
-  // This handles race conditions where subtasks were added but parent's
-  // subTaskIds wasn't synced before a SYNC_IMPORT + moveToArchive.
-  // See: https://github.com/avajesh/hyper-productivity/issues/XXXX
-  const stateSubTaskIds = (state.ids as string[]).filter(
-    (id) => state.entities[id]?.parentId === taskToDelete.id,
-  );
-
-  // Find orphans: subtasks in state but NOT in payload's subTaskIds
-  const orphanSubTaskIds = stateSubTaskIds.filter(
-    (id) => !payloadSubTaskIds.includes(id),
-  );
-
-  // Log devError if we found orphan subtasks - this indicates an upstream bug
-  if (orphanSubTaskIds.length > 0) {
-    devError(
-      `[deleteTaskHelper] Found ${orphanSubTaskIds.length} orphan subtask(s) not in parent's subTaskIds. ` +
-        `Parent: ${taskToDelete.id}, Orphans: ${orphanSubTaskIds.join(', ')}. ` +
-        `This indicates a sync race condition - subtasks added but parent.subTaskIds not updated before archive.`,
-    );
+  while (queue.length > 0) {
+    const id = queue.shift()!;
+    if (!allSubTaskIds.has(id)) {
+      allSubTaskIds.add(id);
+      const subTask = state.entities[id];
+      if (subTask?.subTaskIds) {
+        queue.push(...subTask.subTaskIds);
+      }
+    }
   }
 
-  // Combine both lists to ensure all subtasks are removed
-  const allSubTaskIds = [...new Set([...payloadSubTaskIds, ...stateSubTaskIds])];
+  // DEFENSIVE FIX: Also check state for orphaned subtasks not in subTaskIds.
+  for (const id of state.ids as string[]) {
+    const task = state.entities[id];
+    if (
+      task?.parentId &&
+      (task.parentId === taskToDelete.id || allSubTaskIds.has(task.parentId)) &&
+      !allSubTaskIds.has(id)
+    ) {
+      allSubTaskIds.add(id);
+      queue.push(id);
+      while (queue.length > 0) {
+        const qid = queue.shift()!;
+        const qTask = state.entities[qid];
+        if (qTask?.subTaskIds) {
+          for (const childId of qTask.subTaskIds) {
+            if (!allSubTaskIds.has(childId)) {
+              allSubTaskIds.add(childId);
+              queue.push(childId);
+            }
+          }
+        }
+      }
+    }
+  }
 
-  if (allSubTaskIds.length > 0) {
-    stateCopy = taskAdapter.removeMany(allSubTaskIds, stateCopy);
+  const allSubTaskIdsArr = Array.from(allSubTaskIds);
+
+  if (allSubTaskIdsArr.length > 0) {
+    stateCopy = taskAdapter.removeMany(allSubTaskIdsArr, stateCopy);
     // unset current if one of them is the current task
     currentTaskId =
-      !!currentTaskId && allSubTaskIds.includes(currentTaskId) ? null : currentTaskId;
+      !!currentTaskId && allSubTaskIdsArr.includes(currentTaskId) ? null : currentTaskId;
   }
 
   return {

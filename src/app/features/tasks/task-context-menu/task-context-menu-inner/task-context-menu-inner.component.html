@@ -187,7 +187,7 @@
       <span class="key-i">{{ kb.moveTaskToBottom }}</span>
     </button>
   }
-  @if (isAdvancedControls() && !task.parentId && !task.isDone) {
+  @if (isAdvancedControls() && !task.isDone) {
     <button
       (click)="addSubTask()"
       mat-menu-item

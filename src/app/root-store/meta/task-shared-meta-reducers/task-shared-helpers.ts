@@ -69,20 +69,27 @@ export const collectTaskAndSubTaskIds = (
   parentTaskIds: string[],
   payloadSubTaskIds: string[] | undefined = [],
 ): string[] => {
-  const parentIdSet = new Set(parentTaskIds);
   const taskIds = new Set([...parentTaskIds, ...(payloadSubTaskIds ?? [])]);
   const taskState = state[TASK_FEATURE_NAME];
 
-  for (const parentTaskId of parentTaskIds) {
+  // Using a queue for breadth-first traversal
+  const queue = [...parentTaskIds];
+  while (queue.length > 0) {
+    const parentTaskId = queue.shift()!;
     const parentTask = taskState.entities[parentTaskId];
+
     for (const subTaskId of parentTask?.subTaskIds ?? []) {
-      taskIds.add(subTaskId);
+      if (!taskIds.has(subTaskId)) {
+        taskIds.add(subTaskId);
+        queue.push(subTaskId);
+      }
     }
   }
 
+  // Also catch orphaned children that refer to the parents but aren't in subTaskIds
   for (const taskId of taskState.ids as string[]) {
     const task = taskState.entities[taskId];
-    if (task?.parentId && parentIdSet.has(task.parentId)) {
+    if (task?.parentId && taskIds.has(task.parentId) && !taskIds.has(taskId)) {
       taskIds.add(taskId);
     }
   }

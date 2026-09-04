@@ -573,7 +573,7 @@ jobs:
         run: |
           $exes = Get-ChildItem -Path .tmp/app-builds -Filter *.exe
           $actual = @($exes | ForEach-Object { $_.Name } | Sort-Object)
-          $expected = @('Hyper Productivity-Setup.exe', 'hyperproductivity.exe') | Sort-Object
+          $expected = @('HyperProductivity-Setup.exe', 'hyperproductivity.exe') | Sort-Object
           Write-Host "Built: $($actual -join ', ')"
           if (Compare-Object $actual $expected) {
             Write-Error "Unexpected Windows artifact set. Expected exactly: $($expected -join ', ')"
@@ -667,7 +667,7 @@ jobs:
         run: |
           $buildDir = ".tmp/app-builds"
           # Only regenerate blockmaps for NSIS setup files (portables don't use them)
-          $setupExes = Get-ChildItem -Path $buildDir -Filter "Hyper Productivity-Setup*.exe"
+          $setupExes = Get-ChildItem -Path $buildDir -Filter "HyperProductivity-Setup*.exe"
 
           # Resolve the platform-specific app-builder binary from the lockfile-pinned package
           $appBuilder = node -e "console.log(require('app-builder-bin').appBuilderPath)"
@@ -731,7 +731,7 @@ jobs:
               console.log('No existing latest.yml found, generating from scratch');
               const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
               const setupExes = fs.readdirSync(buildDir)
-                .filter(f => f.startsWith('Hyper Productivity-Setup') && f.endsWith('.exe'));
+                .filter(f => f.startsWith('HyperProductivity-Setup') && f.endsWith('.exe'));
               if (setupExes.length === 0) {
                 console.error('ERROR: No setup executables found in ' + buildDir);
                 process.exit(1);
@@ -742,7 +742,7 @@ jobs:
                 console.log('  ' + filename + ': sha512=' + info.sha512.substring(0, 20) + '... size=' + info.size);
                 return { url: filename, ...info };
               });
-              const primary = files.find(f => f.url === 'Hyper Productivity-Setup.exe')
+              const primary = files.find(f => f.url === 'HyperProductivity-Setup.exe')
                 || files[0];
               const latestYml = {
                 version: pkg.version,
@@ -763,8 +763,8 @@ jobs:
         shell: pwsh
         run: |
           $buildDir = '.tmp/app-builds'
-          Copy-Item -Force -ErrorAction Stop "$buildDir/Hyper Productivity-Setup.exe" "$buildDir/Hyper Productivity-Setup-x64.exe"
-          Copy-Item -Force -ErrorAction Stop "$buildDir/Hyper Productivity-Setup.exe" "$buildDir/Hyper Productivity-Setup-arm64.exe"
+          Copy-Item -Force -ErrorAction Stop "$buildDir/HyperProductivity-Setup.exe" "$buildDir/HyperProductivity-Setup-x64.exe"
+          Copy-Item -Force -ErrorAction Stop "$buildDir/HyperProductivity-Setup.exe" "$buildDir/HyperProductivity-Setup-arm64.exe"
           Copy-Item -Force -ErrorAction Stop "$buildDir/hyperproductivity.exe" "$buildDir/hyperproductivity-x64.exe"
           Copy-Item -Force -ErrorAction Stop "$buildDir/hyperproductivity.exe" "$buildDir/hyperproductivity-arm64.exe"
 
@@ -787,7 +787,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             .tmp/app-builds/*.exe
-            .tmp/app-builds/Hyper Productivity-Setup*.blockmap
+            .tmp/app-builds/HyperProductivity-Setup*.blockmap
             .tmp/app-builds/latest*.yml
           draft: true
           prerelease: ${{ contains(github.ref, 'RC') || contains(github.ref, 'beta') || contains(github.ref, 'alpha') }}
+

@@ -934,8 +934,8 @@ export class TaskComponent implements OnDestroy, AfterViewInit {
 
   addSubTask(): void {
     const task = this.task();
-    const parentId = task.parentId || task.id;
-    if (!task.parentId && task._hideSubTasksMode === HideSubTasksMode.HideAll) {
+    const parentId = task.id;
+    if (task._hideSubTasksMode === HideSubTasksMode.HideAll) {
       this._taskService.showSubTasks(task.id);
     }
     this._addSubtaskInputService.requestOpen(parentId);
