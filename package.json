@@ -9,13 +9,13 @@
     "GitHub",
     "Time Tracking"
   ],
-  "homepage": "https://super-productivity.com",
+  "homepage": "https://hyper-productivity.techeia.com",
   "repository": {
     "type": "git",
     "url": "git://github.com/avajesh/hyper-productivity.git"
   },
   "license": "MIT",
-  "author": "Johannes Millan <contact@super-productivity.com> (http://super-productivity.com)",
+  "author": "Johannes Millan <contact@super-productivity.com> (https://techeia.com)",
   "main": "./electron/main.js",
   "scripts": {
     "env": "node ./tools/load-env.js",
