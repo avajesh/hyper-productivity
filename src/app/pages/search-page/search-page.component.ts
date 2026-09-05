@@ -7,6 +7,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { fuzzySearch } from '../../util/fuzzy-search';
 import { T } from '../../t.const';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
@@ -310,7 +311,7 @@ export class SearchPageComponent implements OnInit {
     const result = searchableItems.filter(
       (task) =>
         (includeCompleted || (!task.isDone && !task.isArchiveTask)) &&
-        task.searchText.includes(lowerSearchTerm),
+        fuzzySearch(lowerSearchTerm, task.searchText),
     );
 
     return result.slice(0, MAX_RESULTS);

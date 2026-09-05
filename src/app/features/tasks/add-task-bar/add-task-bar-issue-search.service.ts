@@ -25,6 +25,7 @@ import { T } from '../../../t.const';
 import { IssueService } from '../../issue/issue.service';
 import { assertTruthy } from '../../../util/assert-truthy';
 import { TaskLog } from '../../../core/log';
+import { fuzzySearch } from '../../../util/fuzzy-search';
 
 @Injectable({
   providedIn: 'root',
@@ -270,12 +271,10 @@ export class AddTaskBarIssueSearchService {
   }
 
   private _filterBacklog(searchText: string, task: Task): boolean {
-    try {
-      return !!task.title?.toLowerCase().match(searchText.toLowerCase());
-    } catch (e) {
-      TaskLog.err('RegEx Error', e);
-      return false;
-    }
+    const s = searchText.toLowerCase();
+    if (fuzzySearch(s, task.title.toLowerCase())) return true;
+    if (task.notes && fuzzySearch(s, task.notes.toLowerCase())) return true;
+    return false;
   }
 
   private async _getCtxForTaskSuggestion({

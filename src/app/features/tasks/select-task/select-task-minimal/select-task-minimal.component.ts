@@ -29,6 +29,8 @@ import { WorkContextService } from '../../../work-context/work-context.service';
 import { map, startWith, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
+import { fuzzySearch } from '../../../../util/fuzzy-search';
+
 import { Store } from '@ngrx/store';
 import {
   selectStartableTasksActiveContextFirst,
@@ -110,7 +112,7 @@ export class SelectTaskMinimalComponent
         const filtered =
           search.length > 0
             ? tasks
-                .filter((task) => task.title?.toLowerCase().includes(search))
+                .filter((task) => fuzzySearch(search, task.title?.toLowerCase() || ''))
                 .slice(0, 10) // Limit to 10 suggestions
             : [];
         return filtered;

@@ -44,7 +44,7 @@ export interface BoardSrcCfg {
   backlogState?: BoardPanelCfgTaskTypeFilter;
 }
 
-export interface BoarFieldsToRemove {
+export interface BoardFieldsToRemove {
   tagIds?: string[];
 }
 

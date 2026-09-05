@@ -1,3 +1,4 @@
+import { fuzzySearch } from '../../../util/fuzzy-search';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -136,7 +137,7 @@ export class SelectTaskComponent {
         if (projectId && task.projectId !== projectId) {
           return false;
         }
-        return !searchTerm || task.title?.toLowerCase().includes(searchTerm);
+        return !searchTerm || fuzzySearch(searchTerm, task.title?.toLowerCase() || '');
       });
     }
     return [];
