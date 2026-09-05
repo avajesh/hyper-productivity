@@ -1034,13 +1034,17 @@ export class TaskComponent implements OnDestroy, AfterViewInit {
     if (task.issueWasUpdated) {
       this._taskService.markIssueUpdatesAsRead(task.id);
     }
-    this.toggleShowDetailPanel(ev);
+    this.toggleShowDetailPanel(ev, true);
   }
 
-  toggleShowDetailPanel(ev?: MouseEvent): void {
+  toggleShowDetailPanel(ev?: MouseEvent, isExplicitBtnClick = false): void {
     const isInTaskDetailPanel =
       this._elementRef.nativeElement.closest('task-detail-panel');
-    if (isInTaskDetailPanel && !this._wasClickedInDoubleClickRange) {
+    if (
+      !isExplicitBtnClick &&
+      isInTaskDetailPanel &&
+      !this._wasClickedInDoubleClickRange
+    ) {
       this._wasClickedInDoubleClickRange = true;
       window.clearTimeout(this._doubleClickTimeout);
       this._doubleClickTimeout = window.setTimeout(() => {
