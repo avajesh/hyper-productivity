@@ -348,7 +348,16 @@ export class TaskService {
     if (!task.parentId) {
       throw new Error('No task with parent task given');
     }
-    const parentTask = await this.getByIdOnce$(task.parentId).toPromise();
+
+    // Find the root parent task, since only root tasks are in activeContext.taskIds
+    // and only root tasks hold tagIds.
+    let currentTask = await this.getByIdOnce$(task.parentId).toPromise();
+    const immediateParentId = currentTask.id;
+    while (currentTask.parentId) {
+      currentTask = await this.getByIdOnce$(currentTask.parentId).toPromise();
+    }
+    const rootParentTask = currentTask;
+
     const activeContext = await this._workContextService.activeWorkContext$
       .pipe(first())
       .toPromise();
@@ -357,15 +366,17 @@ export class TaskService {
       throw new Error('No active work context');
     }
 
-    // Check if parent task is actually visible in the current context
-    const isParentVisibleInCurrentContext = activeContext.taskIds.includes(task.parentId);
+    // Check if the root parent task is actually visible in the current context
+    const isParentVisibleInCurrentContext = activeContext.taskIds.includes(
+      rootParentTask.id,
+    );
 
     if (!isParentVisibleInCurrentContext) {
-      // Navigate to the context where the parent task belongs
-      if (parentTask.projectId) {
-        await this._router.navigate([`project/${parentTask.projectId}/tasks`]);
-      } else if (parentTask.tagIds[0]) {
-        await this._router.navigate([`tag/${parentTask.tagIds[0]}/tasks`]);
+      // Navigate to the context where the root parent task belongs
+      if (rootParentTask.projectId) {
+        await this._router.navigate([`project/${rootParentTask.projectId}/tasks`]);
+      } else if (rootParentTask.tagIds && rootParentTask.tagIds[0]) {
+        await this._router.navigate([`tag/${rootParentTask.tagIds[0]}/tasks`]);
       } else {
         throw new Error('No valid context found for parent task');
       }
@@ -373,7 +384,7 @@ export class TaskService {
 
     this._store.dispatch(
       setSelectedTask({
-        id: task.parentId,
+        id: immediateParentId,
         taskDetailTargetPanel: TaskDetailTargetPanel.Default,
       }),
     );
