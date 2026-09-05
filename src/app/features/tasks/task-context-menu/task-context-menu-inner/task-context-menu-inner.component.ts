@@ -492,6 +492,12 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
     this._taskService.update(this.task.id, { timeEstimate: ms });
   }
 
+  zoomTask(): void {
+    if (this.task) {
+      this._taskService.zoomTask(this.task.id);
+    }
+  }
+
   addSubTask(): void {
     this._addSubtaskInputService.requestOpen(this.task.parentId || this.task.id);
   }

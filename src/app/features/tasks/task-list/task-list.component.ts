@@ -153,13 +153,25 @@ export class TaskListComponent implements OnDestroy, AfterViewInit {
   filteredTasks = computed<TaskWithSubTasks[]>(() => {
     const tasks = this.tasks();
     if (this.listId() === 'PARENT') {
+      const zoomedId = this._taskService.zoomedTaskId();
+      if (zoomedId) {
+        return tasks.filter((t) => t.id === zoomedId);
+      }
       return tasks;
     }
     const isHideDone = this.isHideDone();
     const isHideAll = this.isHideAll();
-    const currentId = this.currentTaskId() || null;
+    const currentId = this._taskService.currentTaskId() || null;
     return filterDoneTasks(tasks, currentId, isHideDone, isHideAll);
   });
+
+  isZoomed = computed<boolean>(() => {
+    return this.listId() === 'PARENT' && !!this._taskService.zoomedTaskId();
+  });
+
+  unzoom(): void {
+    this._taskService.zoomTask(null);
+  }
 
   doneTasksLength = computed(() => {
     return this.tasks()?.filter((task) => task.isDone).length ?? 0;

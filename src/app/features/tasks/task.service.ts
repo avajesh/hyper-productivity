@@ -3,7 +3,7 @@ import typia from 'typia';
 import { distinctUntilChanged, first, map, take, withLatestFrom } from 'rxjs/operators';
 import { computed, effect, inject, Injectable, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import {
   ArchiveTask,
   DEFAULT_TASK,
@@ -125,6 +125,13 @@ export class TaskService {
   private readonly _timeBlockDeleteSidecar = inject(TimeBlockDeleteSidecarService);
   private readonly _archiveTaskPromisesById = new Map<string, Promise<void>>();
   private readonly _taskTimeSync = inject(TaskTimeSyncService);
+
+  zoomedTaskId$ = new BehaviorSubject<string | null>(null);
+  zoomedTaskId = toSignal(this.zoomedTaskId$, { initialValue: null });
+
+  zoomTask(taskId: string | null): void {
+    this.zoomedTaskId$.next(taskId);
+  }
 
   currentTaskId$: Observable<string | null> = this._store.pipe(
     select(selectCurrentTaskId),

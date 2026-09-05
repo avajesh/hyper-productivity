@@ -38,6 +38,7 @@ import { appStateFeatureKey } from '../../app-state/app-state.reducer';
 import { getDbDateStr } from '../../../util/get-db-date-str';
 import { moveItemAfterAnchor } from '../../../features/work-context/store/work-context-meta.helper';
 import { canApplyConvertToSubTask } from '../../../features/tasks/util/can-convert-task-to-sub-task';
+import { TaskLog } from '../../../core/log';
 import {
   ActionHandlerMap,
   addTaskToList,
@@ -278,6 +279,23 @@ const handleConvertToMainTask = (
   return updateTags(updatedState, tagUpdates);
 };
 
+const wouldCreateCircularReference = (
+  state: RootState,
+  taskId: string,
+  newParentId: string,
+): boolean => {
+  let current = newParentId;
+  const visited = new Set<string>();
+  while (current) {
+    if (current === taskId) return true;
+    if (visited.has(current)) return false;
+    visited.add(current);
+    const t = state[TASK_FEATURE_NAME].entities[current] as Task | undefined;
+    current = t?.parentId || '';
+  }
+  return false;
+};
+
 const handleConvertToSubTask = (
   state: RootState,
   taskId: string,
@@ -293,6 +311,14 @@ const handleConvertToSubTask = (
   // eligibility rule (incl. self-target and not-a-subtask) lives in the shared
   // guard so the section meta-reducer stays in lock-step.
   if (!task || !targetParent || !canApplyConvertToSubTask(task, targetParent)) {
+    return state;
+  }
+
+  // Prevent circular references (task becoming subtask of its own descendant)
+  if (wouldCreateCircularReference(state, taskId, targetParentId)) {
+    TaskLog.err(
+      `Cannot convert task ${taskId} to subtask of ${targetParentId}: would create circular reference`,
+    );
     return state;
   }
 

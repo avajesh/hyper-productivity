@@ -22,6 +22,22 @@
   </div>
 }
 
+@if (isZoomed()) {
+  <div
+    class="zoom-out-box"
+    style="margin-bottom: 8px"
+  >
+    <button
+      mat-button
+      (click)="unzoom()"
+      color="primary"
+    >
+      <mat-icon>arrow_back</mat-icon>
+      Back to full list
+    </button>
+  </div>
+}
+
 <div
   cdkDropList
   [cdkDropListConnectedTo]="dropListService.dropLists | async"
