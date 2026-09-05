@@ -499,7 +499,9 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
   }
 
   addSubTask(): void {
-    this._addSubtaskInputService.requestOpen(this.task.parentId || this.task.id);
+    // Always nest under the clicked task — not its parent — so "Add Subtask"
+    // on a level-2 subtask creates level-3, not a sibling at level-2.
+    this._addSubtaskInputService.requestOpen(this.task.id);
   }
 
   async duplicate(): Promise<void> {

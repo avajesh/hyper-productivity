@@ -13,6 +13,7 @@ import { Log } from '../../../core/log';
 import { from, Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { GlobalConfigService } from '../../config/global-config.service';
 import { TaskService } from '../../tasks/task.service';
+import { Task } from '../../tasks/task.model';
 import { debounceTime, switchMap, take } from 'rxjs/operators';
 import { TaskAttachmentService } from '../../tasks/task-attachment/task-attachment.service';
 import { fadeAnimation, fadeSwapAnimation } from '../../../ui/animations/fade.ani';
@@ -216,6 +217,18 @@ export class FocusModeMainComponent {
     }
     return parent.title;
   });
+
+  // Sub-tasks of the currently displayed task, used to render the mini-checklist
+  // in focus-mode-task-row without leaving focus mode.
+  readonly displayedSubTasks = toSignal(
+    toObservable(this.displayedTask).pipe(
+      switchMap((t) => {
+        if (!t || !t.subTaskIds?.length) return of([]);
+        return this.taskService.getByIdsLive$(t.subTaskIds);
+      }),
+    ),
+    { initialValue: [] },
+  );
 
   private readonly _isPreparation = computed(
     () => this.mainState() === FocusMainUIState.Preparation,
@@ -455,6 +468,10 @@ export class FocusModeMainComponent {
 
   trackById(_i: number, item: SimpleCounter): string {
     return item.id;
+  }
+
+  toggleSubTaskDone(subTask: Task): void {
+    this.taskService.update(subTask.id, { isDone: !subTask.isDone });
   }
 
   updateTaskTitleIfChanged(isChanged: boolean, newTitle: string): void {

@@ -169,6 +169,13 @@ export class TaskListComponent implements OnDestroy, AfterViewInit {
     return this.listId() === 'PARENT' && !!this._taskService.zoomedTaskId();
   });
 
+  zoomedTaskTitle = computed<string>(() => {
+    const zoomedId = this._taskService.zoomedTaskId();
+    if (!zoomedId) return '';
+    const task = this.tasks().find((t) => t.id === zoomedId);
+    return task?.title ?? '';
+  });
+
   unzoom(): void {
     this._taskService.zoomTask(null);
   }

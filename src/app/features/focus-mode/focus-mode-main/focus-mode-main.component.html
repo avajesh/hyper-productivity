@@ -60,10 +60,12 @@
     <focus-mode-task-row
       [task]="displayed"
       [parentTitle]="parentTaskTitle()"
+      [subTasks]="displayedSubTasks() ?? []"
       (switchTask)="openTaskSelector()"
       (finishTask)="finishCurrentTask()"
       (selectTask)="openTaskSelector()"
       (titleEdited)="updateTaskTitleIfChanged($event.wasChanged, $event.newVal)"
+      (toggleSubTask)="toggleSubTaskDone($event)"
     ></focus-mode-task-row>
   </div>
 

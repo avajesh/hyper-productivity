@@ -73,6 +73,30 @@ import { T } from '../../../t.const';
           </button>
         </div>
       </div>
+
+      @if (subTasks().length > 0) {
+        <div class="subtask-checklist">
+          @for (sub of subTasks(); track sub.id) {
+            <div
+              class="subtask-checklist-item"
+              [style.opacity]="sub.isDone ? '0.5' : '1'"
+              [style.text-decoration]="sub.isDone ? 'line-through' : 'none'"
+            >
+              <button
+                mat-icon-button
+                class="subtask-check-btn"
+                (click)="toggleSubTask.emit(sub)"
+                style="width: 28px; height: 28px; line-height: 28px;"
+              >
+                <mat-icon style="font-size: 18px; height: 18px; width: 18px;">
+                  {{ sub.isDone ? 'check_box' : 'check_box_outline_blank' }}
+                </mat-icon>
+              </button>
+              <span class="subtask-title">{{ sub.title }}</span>
+            </div>
+          }
+        </div>
+      }
     } @else if (showRelaxMessage()) {
       <p class="task-title break-message">
         {{ T.F.FOCUS_MODE.BREAK_RELAX_MSG | translate }}
@@ -99,6 +123,7 @@ export class FocusModeTaskRowComponent {
 
   readonly task = input<Task | null>(null);
   readonly parentTitle = input<string | null>(null);
+  readonly subTasks = input<Task[]>([]);
   // When there is no task: true → the break's relax message, false → the
   // "select a task" CTA (focus session).
   readonly showRelaxMessage = input<boolean>(false);
@@ -107,4 +132,5 @@ export class FocusModeTaskRowComponent {
   readonly finishTask = output<void>();
   readonly selectTask = output<void>();
   readonly titleEdited = output<{ wasChanged: boolean; newVal: string }>();
+  readonly toggleSubTask = output<Task>();
 }

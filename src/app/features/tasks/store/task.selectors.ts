@@ -332,6 +332,35 @@ const createStableTaskIdMapper = <T extends Task = Task>(): ((
 // whose entity ref AND resolved subtask refs are unchanged (SPAP-19 per-id cache).
 // Missing subtask entities are skipped (parity with legacy mapSubTasksToTasks /
 // subtasksByParentId shaping).
+const buildSubTasksRecursively = (
+  taskId: string,
+  entities: Record<string, Task | undefined>,
+  cache: Map<string, { task: Task; subTasks: Task[]; result: TaskWithSubTasks }>,
+  seen: Set<string>,
+): TaskWithSubTasks | undefined => {
+  const task = entities[taskId];
+  if (!task) return undefined;
+  seen.add(taskId);
+
+  const subTasks: Task[] = [];
+  for (const sid of task.subTaskIds) {
+    const sub = buildSubTasksRecursively(sid, entities, cache, seen);
+    if (sub) {
+      subTasks.push(sub);
+    }
+  }
+
+  const cached = cache.get(taskId);
+  let built: TaskWithSubTasks;
+  if (cached && cached.task === task && fastArrayCompare(cached.subTasks, subTasks)) {
+    built = cached.result;
+  } else {
+    built = { ...task, subTasks };
+    cache.set(taskId, { task, subTasks, result: built });
+  }
+  return built;
+};
+
 const createStableWithSubTasksMapper = (): ((
   structure: readonly SnapshotStructureEntry[],
   entities: Record<string, Task | undefined>,
@@ -350,26 +379,10 @@ const createStableWithSubTasksMapper = (): ((
     let changed = structure.length !== prevResult.length;
     for (let i = 0; i < structure.length; i++) {
       const entry = structure[i];
-      const task = entities[entry.id];
-      if (!task) {
+      const built = buildSubTasksRecursively(entry.id, entities, cache, seen);
+      if (!built) {
         changed = true;
         continue;
-      }
-      seen.add(entry.id);
-      const subTasks: Task[] = [];
-      for (const sid of entry.subTaskIds) {
-        const sub = entities[sid];
-        if (sub) {
-          subTasks.push(sub);
-        }
-      }
-      const cached = cache.get(entry.id);
-      let built: TaskWithSubTasks;
-      if (cached && cached.task === task && fastArrayCompare(cached.subTasks, subTasks)) {
-        built = cached.result;
-      } else {
-        built = { ...task, subTasks };
-        cache.set(entry.id, { task, subTasks, result: built });
       }
       result.push(built);
       if (!changed && prevResult[i] !== built) {
@@ -783,41 +796,13 @@ export const selectTasksWithSubTasksByIdsFactory = (
       const result: TaskWithSubTasks[] = [];
       const seen = new Set<string>();
       for (const id of ids) {
-        const task = state.entities[id];
-        // Same filtering as the legacy selector: drop missing/deleted entities.
-        if (!task) {
-          continue;
-        }
-        seen.add(id);
-
-        // Resolve current subtask entities (same shaping as mapSubTasksToTask).
-        const subTasks: Task[] = [];
-        for (const subTaskId of task.subTaskIds) {
-          const subTask = state.entities[subTaskId];
-          if (subTask) {
-            subTasks.push(subTask);
-          } else {
-            devError('Task data not found for ' + subTaskId);
-          }
-        }
-
-        const cached = cache.get(id);
-        if (
-          cached &&
-          cached.task === task &&
-          cached.subTasks.length === subTasks.length &&
-          cached.subTasks.every((st, i) => st === subTasks[i])
-        ) {
-          // Nothing referentially changed → reuse the exact previous object.
-          result.push(cached.result);
-        } else {
-          const built: TaskWithSubTasks = { ...task, subTasks };
-          cache.set(id, { task, subTasks, result: built });
+        const built = buildSubTasksRecursively(id, state.entities, cache, seen);
+        if (built) {
           result.push(built);
         }
       }
       // Prune entries for ids no longer requested so the cache can't grow
-      // unbounded if the id-set is ever mutated in place.
+      // unbounded as tasks are deleted or move between lists.
       if (cache.size > seen.size) {
         for (const key of cache.keys()) {
           if (!seen.has(key)) {

@@ -24,17 +24,31 @@
 
 @if (isZoomed()) {
   <div
-    class="zoom-out-box"
-    style="margin-bottom: 8px"
+    class="zoom-breadcrumb"
+    style="
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+      padding: 4px 0;
+      flex-wrap: wrap;
+    "
   >
     <button
       mat-button
       (click)="unzoom()"
       color="primary"
+      style="padding: 0 8px; min-width: 0"
     >
-      <mat-icon>arrow_back</mat-icon>
-      Back to full list
+      <mat-icon>format_list_bulleted</mat-icon>
+      All tasks
     </button>
+    <mat-icon style="opacity: 0.5; font-size: 18px; height: 18px; width: 18px"
+      >chevron_right</mat-icon
+    >
+    <span style="font-weight: 500; opacity: 0.85; font-size: 0.9em">{{
+      zoomedTaskTitle()
+    }}</span>
   </div>
 }
 

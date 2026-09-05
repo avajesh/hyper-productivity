@@ -10,11 +10,13 @@
   margin: 0;
   position: relative;
 
+  // Recursive sub-task indentation: cap at ~4 levels (64px) so deep nesting
+  // doesn't squeeze task titles off-screen on mobile.
   ::ng-deep task-list & {
-    margin: var(--s-quarter) 5px 0 5px;
+    margin: var(--s-quarter) 5px 0 min(var(--subtask-indent, 5px), 5px);
 
     @include mq(xs, max) {
-      margin: 1px 0 0 10px;
+      margin: 1px 0 0 min(10px, 10px);
     }
   }
 }
