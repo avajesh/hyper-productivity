@@ -199,6 +199,18 @@
       <span class="key-i">{{ kb.taskAddSubTask }}</span>
     </button>
   }
+  @if (isAdvancedControls()) {
+    <button
+      (click)="openDetailPanel()"
+      mat-menu-item
+    >
+      <span class="menuItemLeft">
+        <mat-icon>info</mat-icon>
+        {{ T.F.TASK.CMP.TOGGLE_DETAIL_PANEL | translate }}
+      </span>
+      <span class="key-i">{{ kb.taskToggleDetailPanelOpen }}</span>
+    </button>
+  }
 
   <!-- Only show the duplicate command if it is a parent unfinished task -->
   @if (isAdvancedControls() && !task.parentId && !task.isDone) {

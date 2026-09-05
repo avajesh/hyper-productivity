@@ -504,6 +504,10 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
     this._addSubtaskInputService.requestOpen(this.task.id);
   }
 
+  openDetailPanel(): void {
+    this._taskService.setSelectedId(this.task.id);
+  }
+
   async duplicate(): Promise<void> {
     const taskWithSubtasks = this.task.subTaskIds.length
       ? await this._getTaskWithSubtasks()
