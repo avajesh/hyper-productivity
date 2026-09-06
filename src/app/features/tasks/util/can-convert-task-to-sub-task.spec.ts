@@ -22,12 +22,12 @@ describe('canConvertTaskToSubTask', () => {
     expect(canConvertTaskToSubTask(eligible())).toBe(true);
   });
 
-  it('rejects a task that is already a subtask', () => {
-    expect(canConvertTaskToSubTask({ ...eligible(), parentId: 'p1' })).toBe(false);
+  it('accepts a task that is already a subtask (allows infinite re-parenting via drag)', () => {
+    expect(canConvertTaskToSubTask({ ...eligible(), parentId: 'p1' })).toBe(true);
   });
 
-  it('rejects a task that already has subtasks', () => {
-    expect(canConvertTaskToSubTask({ ...eligible(), subTaskIds: ['s1'] })).toBe(false);
+  it('accepts a task that already has subtasks (allows subtree re-parenting)', () => {
+    expect(canConvertTaskToSubTask({ ...eligible(), subTaskIds: ['s1'] })).toBe(true);
   });
 
   it('rejects a repeating task', () => {
@@ -46,12 +46,6 @@ describe('canConvertTaskToSubTask', () => {
       }),
     ).toBe(false);
   });
-
-  it('rejects a scheduled / reminder task', () => {
-    expect(canConvertTaskToSubTask({ ...eligible(), dueWithTime: 1234 })).toBe(false);
-    expect(canConvertTaskToSubTask({ ...eligible(), reminderId: 'rem1' })).toBe(false);
-    expect(canConvertTaskToSubTask({ ...eligible(), remindAt: 1234 })).toBe(false);
-  });
 });
 
 describe('canApplyConvertToSubTask', () => {
@@ -60,6 +54,12 @@ describe('canApplyConvertToSubTask', () => {
 
   it('accepts an eligible task onto a valid top-level parent', () => {
     expect(canApplyConvertToSubTask(task, parent)).toBe(true);
+  });
+
+  it('accepts an existing subtask being re-parented to another subtask (deep nesting)', () => {
+    const subtask = { ...eligible(), id: 'child', parentId: 'p1' };
+    const newParent: Pick<Task, 'id' | 'parentId'> = { id: 'p2', parentId: 'root' };
+    expect(canApplyConvertToSubTask(subtask, newParent)).toBe(true);
   });
 
   it('rejects when the task is missing', () => {
@@ -79,13 +79,42 @@ describe('canApplyConvertToSubTask', () => {
     ).toBe(false);
   });
 
-  it('rejects nesting under a task that is itself a subtask', () => {
-    expect(canApplyConvertToSubTask(task, { id: 'p1', parentId: 'grandparent' })).toBe(
-      false,
-    );
+  it('rejects direct cycle: task A → target B where B is a child of A', () => {
+    // task 'a' has subtask 'b'; trying to put 'a' under 'b' would cycle
+    const taskA = { ...eligible(), id: 'a' };
+    const taskB: Pick<Task, 'id' | 'parentId'> = { id: 'b', parentId: 'a' };
+    const getState = () => ({
+      entities: { a: { id: 'a', parentId: undefined }, b: taskB } as Record<
+        string,
+        Pick<Task, 'id' | 'parentId'> | undefined
+      >,
+    });
+    expect(canApplyConvertToSubTask(taskA, taskB, getState)).toBe(false);
   });
 
-  it('rejects an ineligible task (already a subtask)', () => {
-    expect(canApplyConvertToSubTask({ ...task, parentId: 'x' }, parent)).toBe(false);
+  it('rejects deep cycle: A → C where C → B → A', () => {
+    const taskA = { ...eligible(), id: 'a' };
+    const getState = () => ({
+      entities: {
+        a: { id: 'a', parentId: undefined },
+        b: { id: 'b', parentId: 'a' },
+        c: { id: 'c', parentId: 'b' },
+      } as Record<string, Pick<Task, 'id' | 'parentId'> | undefined>,
+    });
+    const taskC: Pick<Task, 'id' | 'parentId'> = { id: 'c', parentId: 'b' };
+    expect(canApplyConvertToSubTask(taskA, taskC, getState)).toBe(false);
+  });
+
+  it('allows valid non-cyclic deep nesting with getState', () => {
+    const taskX = { ...eligible(), id: 'x' };
+    const taskY: Pick<Task, 'id' | 'parentId'> = { id: 'y', parentId: 'root' };
+    const getState = () => ({
+      entities: {
+        root: { id: 'root', parentId: undefined },
+        y: taskY,
+      } as Record<string, Pick<Task, 'id' | 'parentId'> | undefined>,
+    });
+    expect(canApplyConvertToSubTask(taskX, taskY, getState)).toBe(true);
   });
 });
+

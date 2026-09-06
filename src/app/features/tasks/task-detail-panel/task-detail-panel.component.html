@@ -76,25 +76,36 @@
       </ng-container>
     </task-detail-item>
   }
-  @if (task().parentId) {
+  @if (ancestors().length > 0) {
     <task-detail-item
       (collapseParent)="collapseParent()"
-      (editActionTriggered)="
-        taskService.setSelectedIdToParentAndSwitchContextIfNecessary(task())
-      "
-      (keyPress)="onItemKeyPress($event)"
-      [inputIcon]="'arrow_forward'"
+      [inputIcon]="'arrow_upward'"
       class="input-item --estimate"
     >
       <ng-container input-title>
-        <mat-icon>subdirectory_arrow_right</mat-icon>
+        <mat-icon>account_tree</mat-icon>
         <span>{{ T.F.TASK.ADDITIONAL_INFO.PARENT | translate }}</span>
       </ng-container>
       <ng-container input-value>
-        @if (parentTaskData()?.issueType; as issueType) {
-          <mat-icon [svgIcon]="issueType | issueIcon"></mat-icon>
-        }
-        <span>{{ parentTaskData()?.title }}</span>
+        <div class="breadcrumb-trail">
+          @for (ancestor of ancestors(); track ancestor.id; let last = $last) {
+            <span
+              class="breadcrumb-item"
+              (click)="taskService.setSelectedId(ancestor.id); $event.stopPropagation()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="taskService.setSelectedId(ancestor.id); $event.stopPropagation()"
+            >
+              @if (ancestor.issueType; as issueType) {
+                <mat-icon [svgIcon]="issueType | issueIcon"></mat-icon>
+              }
+              <span class="title">{{ ancestor.title }}</span>
+            </span>
+            @if (!last) {
+              <span class="separator">›</span>
+            }
+          }
+        </div>
       </ng-container>
     </task-detail-item>
   }

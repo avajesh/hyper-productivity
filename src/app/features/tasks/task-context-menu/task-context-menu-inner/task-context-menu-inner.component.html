@@ -21,77 +21,71 @@
     (focus)="focusFirstBtn($event)"
   ></div>
 
-  <div
-    class="quick-access"
-    (keydown)="quickAccessKeydown($event)"
-  >
-    <button
-      mat-icon-button
-      tabindex="0"
-      (click)="quickAccessBtnClick(1)"
-      [matTooltip]="T.F.TASK.D_SCHEDULE_TASK.QA_TODAY | translate"
-      [attr.aria-label]="T.F.TASK.D_SCHEDULE_TASK.QA_TODAY | translate"
+  @if (!task.parentId) {
+    <div
+      class="quick-access"
+      (keydown)="quickAccessKeydown($event)"
     >
-      <mat-icon>wb_sunny</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      tabindex="0"
-      (click)="quickAccessBtnClick(2)"
-      [matTooltip]="T.F.TASK.D_SCHEDULE_TASK.QA_TOMORROW | translate"
-      [attr.aria-label]="T.F.TASK.D_SCHEDULE_TASK.QA_TOMORROW | translate"
-    >
-      <mat-icon>wb_twilight</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      tabindex="0"
-      (click)="quickAccessBtnClick(3)"
-      [matTooltip]="T.F.TASK.D_SCHEDULE_TASK.QA_NEXT_WEEK | translate"
-      [attr.aria-label]="T.F.TASK.D_SCHEDULE_TASK.QA_NEXT_WEEK | translate"
-    >
-      <mat-icon>next_week</mat-icon>
-    </button>
-    <!--      <button-->
-    <!--        mat-icon-button-->
-    <!--        tabindex="0"-->
-    <!--        (click)="quickAccessBtnClick(3)"-->
-    <!--        [matTooltip]="(T.F.TASK.D_SCHEDULE_TASK.QA_NEXT_MONTH|translate)"-->
-    <!--      >-->
-    <!--        <mat-icon>bedtime</mat-icon>-->
-    <!--      </button>-->
-    <button
-      mat-icon-button
-      tabindex="0"
-      [matTooltip]="
-        (task.dueWithTime || task.dueDay
-          ? (T.F.TASK.CMP.EDIT_SCHEDULED | translate)
-          : (T.F.TASK.CMP.SCHEDULE | translate)) +
-        (kb.taskSchedule ? ' [' + kb.taskSchedule + ']' : '')
-      "
-      [attr.aria-label]="
-        task.dueWithTime || task.dueDay
-          ? (T.F.TASK.CMP.EDIT_SCHEDULED | translate)
-          : (T.F.TASK.CMP.SCHEDULE | translate)
-      "
-      (click)="scheduleTask()"
-    >
-      <mat-icon>today</mat-icon>
-    </button>
-
-    @if (task.dueWithTime || task.dueDay) {
       <button
         mat-icon-button
         tabindex="0"
-        (click)="unscheduleTask()"
-        [matTooltip]="T.F.TASK.CMP.UNSCHEDULE_TASK | translate"
-        [attr.aria-label]="T.F.TASK.CMP.UNSCHEDULE_TASK | translate"
+        (click)="quickAccessBtnClick(1)"
+        [matTooltip]="T.F.TASK.D_SCHEDULE_TASK.QA_TODAY | translate"
+        [attr.aria-label]="T.F.TASK.D_SCHEDULE_TASK.QA_TODAY | translate"
       >
-        <mat-icon>event_busy</mat-icon>
+        <mat-icon>wb_sunny</mat-icon>
       </button>
-    }
-  </div>
+
+      <button
+        mat-icon-button
+        tabindex="0"
+        (click)="quickAccessBtnClick(2)"
+        [matTooltip]="T.F.TASK.D_SCHEDULE_TASK.QA_TOMORROW | translate"
+        [attr.aria-label]="T.F.TASK.D_SCHEDULE_TASK.QA_TOMORROW | translate"
+      >
+        <mat-icon>wb_twilight</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        tabindex="0"
+        (click)="quickAccessBtnClick(3)"
+        [matTooltip]="T.F.TASK.D_SCHEDULE_TASK.QA_NEXT_WEEK | translate"
+        [attr.aria-label]="T.F.TASK.D_SCHEDULE_TASK.QA_NEXT_WEEK | translate"
+      >
+        <mat-icon>next_week</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        tabindex="0"
+        [matTooltip]="
+          (task.dueWithTime || task.dueDay
+            ? (T.F.TASK.CMP.EDIT_SCHEDULED | translate)
+            : (T.F.TASK.CMP.SCHEDULE | translate)) +
+          (kb.taskSchedule ? ' [' + kb.taskSchedule + ']' : '')
+        "
+        [attr.aria-label]="
+          task.dueWithTime || task.dueDay
+            ? (T.F.TASK.CMP.EDIT_SCHEDULED | translate)
+            : (T.F.TASK.CMP.SCHEDULE | translate)
+        "
+        (click)="scheduleTask()"
+      >
+        <mat-icon>today</mat-icon>
+      </button>
+
+      @if (task.dueWithTime || task.dueDay) {
+        <button
+          mat-icon-button
+          tabindex="0"
+          (click)="unscheduleTask()"
+          [matTooltip]="T.F.TASK.CMP.UNSCHEDULE_TASK | translate"
+          [attr.aria-label]="T.F.TASK.CMP.UNSCHEDULE_TASK | translate"
+        >
+          <mat-icon>event_busy</mat-icon>
+        </button>
+      }
+    </div>
+  }
 
   @if (
     isTimeTrackingEnabled() &&
@@ -211,9 +205,31 @@
       <span class="key-i">{{ kb.taskToggleDetailPanelOpen }}</span>
     </button>
   }
+  @if (isAdvancedControls()) {
+    <button
+      (click)="zoomTask()"
+      mat-menu-item
+    >
+      <span class="menuItemLeft">
+        <mat-icon>center_focus_strong</mat-icon>
+        {{ 'Zoom into task' }}
+      </span>
+    </button>
+  }
+  @if (isAdvancedControls() && task.parentId) {
+    <button
+      (click)="outdentTask()"
+      mat-menu-item
+    >
+      <span class="menuItemLeft">
+        <mat-icon>format_indent_decrease</mat-icon>
+        {{ 'Move up one level' }}
+      </span>
+    </button>
+  }
 
-  <!-- Only show the duplicate command if it is a parent unfinished task -->
-  @if (isAdvancedControls() && !task.parentId && !task.isDone) {
+  <!-- Only show the duplicate command if it is an unfinished task -->
+  @if (isAdvancedControls() && !task.isDone) {
     <button
       (click)="duplicate()"
       mat-menu-item

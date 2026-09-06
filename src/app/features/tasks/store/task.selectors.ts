@@ -55,19 +55,19 @@ export const mapSubTasksToTask = (
 };
 
 export const flattenTasks = (tasksIN: TaskWithSubTasks[]): TaskWithSubTasks[] => {
-  let flatTasks: TaskWithSubTasks[] = [];
-  tasksIN.forEach((task) => {
-    if (!task) {
-      return;
+  const result: TaskWithSubTasks[] = [];
+  const walk = (tasks: TaskWithSubTasks[]): void => {
+    for (const t of tasks) {
+      if (!t) continue;
+      // Strip subTasks on the flattened copy so the model shape is consistent
+      result.push({ ...t, subTasks: [] });
+      if (t.subTasks?.length) {
+        walk(t.subTasks as TaskWithSubTasks[]);
+      }
     }
-    flatTasks.push(task);
-    if (task.subTasks && task.subTasks.length > 0) {
-      // NOTE: in order for the model to be identical we add an empty subTasks array
-      const validSubTasks = task.subTasks.filter((t) => t !== null && t !== undefined);
-      flatTasks = flatTasks.concat(validSubTasks.map((t) => ({ ...t, subTasks: [] })));
-    }
-  });
-  return flatTasks;
+  };
+  walk(tasksIN);
+  return result;
 };
 
 // SELECTORS
@@ -586,6 +586,40 @@ export const selectSelectedTask = createSelector(
   },
 );
 
+export const selectSelectedTaskAncestors = createSelector(
+  selectTaskFeatureState,
+  (s): Task[] => {
+    if (!s.selectedTaskId || !s.entities[s.selectedTaskId]) {
+      return [];
+    }
+    const ancestors: Task[] = [];
+    let current = s.entities[s.selectedTaskId]?.parentId;
+    while (current) {
+      const parentTask = s.entities[current];
+      if (!parentTask) break;
+      ancestors.unshift(parentTask);
+      current = parentTask.parentId;
+    }
+    return ancestors;
+  },
+);
+
+export const selectTaskAncestors = (taskId: string): MemoizedSelector<object, Task[]> =>
+  createSelector(selectTaskFeatureState, (s): Task[] => {
+    if (!taskId || !s.entities[taskId]) {
+      return [];
+    }
+    const ancestors: Task[] = [];
+    let current = s.entities[taskId]?.parentId;
+    while (current) {
+      const parentTask = s.entities[current];
+      if (!parentTask) break;
+      ancestors.unshift(parentTask);
+      current = parentTask.parentId;
+    }
+    return ancestors;
+  });
+
 export const selectCurrentTaskParentOrCurrent = createSelector(
   selectTaskFeatureState,
   (s): Task | undefined => {
@@ -593,12 +627,18 @@ export const selectCurrentTaskParentOrCurrent = createSelector(
     const currentTask = s.entities[s.currentTaskId];
     if (!currentTask) return undefined;
 
-    // If current task has a parent, return the parent
-    if (currentTask.parentId) {
-      const parentTask = s.entities[currentTask.parentId];
-      if (parentTask) return parentTask;
+    // Walk all the way up to the root ancestor so the header always shows
+    // the top-level project context, not just the immediate parent.
+    // This prevents disorientation when tracking deeply nested subtasks.
+    let root: Task = currentTask;
+    const visited = new Set<string>();
+    while (root.parentId && !visited.has(root.id)) {
+      visited.add(root.id);
+      const parent = s.entities[root.parentId];
+      if (!parent) break;
+      root = parent;
     }
-    return currentTask;
+    return root;
   },
 );
 

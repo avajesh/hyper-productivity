@@ -30,7 +30,7 @@ export interface ProjectWithTimeSpent {
   styleUrls: ['./tasks-by-project.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [standardListAnimation],
-  imports: [AsyncPipe, MsToStringPipe, TranslatePipe, LazyChartComponent],
+  imports: [AsyncPipe, MsToStringPipe, LazyChartComponent],
 })
 export class TasksByProjectComponent {
   private readonly _store = inject(Store);

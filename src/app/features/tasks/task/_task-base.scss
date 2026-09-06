@@ -147,16 +147,35 @@
 }
 
 .sub-tasks {
-  // Cap left-indent: deep nesting adds margin per level via the recursive
-  // task-list wrapper (::ng-deep task-list &). Without a cap the title
-  // area is squeezed off-screen on narrow viewports at 4+ levels.
-  // Using max() so we never go below --s (1 rem) on desktop.
-  margin: var(--s) var(--s) var(--s) min(var(--s3), 3rem);
+  // Level 1 indent — main subtask offset under a root task
+  margin: var(--s) var(--s) var(--s) min(var(--s3), 2rem);
   position: relative;
 
   @include mq(xs) {
-    // Mobile: tighter indent cap (2rem ≈ 32px) so deep trees remain usable.
-    margin: var(--s) var(--s) var(--s) min(var(--s5), 2rem);
+    margin: var(--s) var(--s) var(--s) min(var(--s5), 1.25rem);
+  }
+
+  // Level 2+ — progressively shrink indent so margins don't compound off-screen.
+  // Each level adds a .sub-tasks container, so these selectors target deeper nesting.
+  .sub-tasks {
+    margin-left: min(var(--s2), 1.25rem);
+
+    @include mq(xs) {
+      margin-left: 0.75rem;
+    }
+
+    .sub-tasks {
+      margin-left: min(var(--s), 0.75rem);
+
+      @include mq(xs) {
+        margin-left: 0.5rem;
+      }
+
+      // Cap at level 4+: no further indent growth
+      .sub-tasks {
+        margin-left: 0;
+      }
+    }
   }
 
   ::ng-deep .box {

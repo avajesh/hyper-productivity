@@ -168,3 +168,46 @@ progress-bar {
 .local-attachments-heading {
   margin-bottom: 0;
 }
+
+.breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+
+  .breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 2px 4px;
+    transition: background-color 0.2s;
+    min-width: 0; // Allows truncation if needed
+
+    &:hover {
+      background-color: var(--c-primary-100);
+      color: var(--c-primary);
+    }
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+
+    .title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px; // Prevent long titles from breaking the breadcrumb
+    }
+  }
+
+  .separator {
+    color: var(--text-color-muted);
+    font-weight: bold;
+    user-select: none;
+  }
+}

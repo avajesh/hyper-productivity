@@ -13,15 +13,17 @@ type ConvertibleTaskFields = Pick<
   | 'remindAt'
 >;
 
+/**
+ * Whether the task's own fields allow it to be nested as a subtask.
+ * Does NOT check hierarchy — use canApplyConvertToSubTask for that.
+ * Allows tasks that are already subtasks (parentId set) so they can be
+ * drag-dropped to re-parent at any depth.
+ */
 export const canConvertTaskToSubTask = (task: ConvertibleTaskFields): boolean =>
-  !task.parentId &&
   !task.repeatCfgId &&
   !task.issueId &&
   !task.issueProviderId &&
-  !task.issueType &&
-  !task.dueWithTime &&
-  !task.reminderId &&
-  !task.remindAt;
+  !task.issueType;
 
 /**
  * Whether a `convertToSubTask` op may be applied to the given (already
@@ -32,10 +34,29 @@ export const canConvertTaskToSubTask = (task: ConvertibleTaskFields): boolean =>
 export const canApplyConvertToSubTask = (
   task: (ConvertibleTaskFields & Pick<Task, 'id'>) | undefined,
   targetParent: Pick<Task, 'id' | 'parentId'> | undefined,
-  getState?: () => any, // Optional state lookup for deep cycle prevention if needed
+  getState?: () => { entities: Record<string, Pick<Task, 'id' | 'parentId'> | undefined> },
 ): boolean => {
   if (!task || !targetParent || task.id === targetParent.id) {
     return false;
   }
-  return canConvertTaskToSubTask(task);
+  if (!canConvertTaskToSubTask(task)) {
+    return false;
+  }
+  // Cycle detection: walk the target parent's ancestor chain.
+  // If task.id appears anywhere in that chain, allowing the operation
+  // would create a cycle (A → B → ... → A) that would stack-overflow
+  // mapSubTasksToTask. We need getState to resolve ancestor IDs.
+  if (getState) {
+    const entities = getState().entities;
+    let current: Pick<Task, 'id' | 'parentId'> | undefined = targetParent;
+    const visited = new Set<string>();
+    while (current?.parentId) {
+      if (visited.has(current.parentId)) break; // safety — broken chain
+      if (current.parentId === task.id) return false; // cycle detected
+      visited.add(current.parentId);
+      current = entities[current.parentId];
+    }
+  }
+  return true;
 };
+

@@ -315,7 +315,6 @@ export const taskReducer = createReducer<TaskState>(
 
   //--------------------------------
 
-  // TODO check if working
   on(setCurrentTask, (state, { id }) => {
     if (id) {
       const taskToStartId = id;

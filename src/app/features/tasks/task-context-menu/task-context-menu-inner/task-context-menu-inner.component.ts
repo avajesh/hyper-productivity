@@ -498,6 +498,30 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  outdentTask(): void {
+    if (!this.task.parentId) return;
+    // Look up the grandparent synchronously from task service
+    this._taskService
+      .getByIdOnce$(this.task.parentId)
+      .pipe(first())
+      .subscribe((parent) => {
+        if (!parent) return;
+        if (parent.parentId) {
+          // Move to become a child of the grandparent (outdent one level)
+          this._store.dispatch(
+            TaskSharedActions.convertToSubTask({
+              taskId: this.task.id,
+              targetParentId: parent.parentId,
+              afterTaskId: parent.id,
+            }),
+          );
+        } else {
+          // Parent is already a root task — promote fully to main task
+          this._taskService.convertToMainTask(this.task);
+        }
+      });
+  }
+
   addSubTask(): void {
     // Always nest under the clicked task — not its parent — so "Add Subtask"
     // on a level-2 subtask creates level-3, not a sibling at level-2.

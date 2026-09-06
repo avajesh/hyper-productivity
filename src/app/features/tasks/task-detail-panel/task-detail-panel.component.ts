@@ -57,6 +57,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TaskSharedActions } from '../../../root-store/meta/task-shared.actions';
 import { Store } from '@ngrx/store';
+import { selectTaskAncestors } from '../store/task.selectors';
 import { selectIssueProviderById } from '../../issue/store/issue-provider.selectors';
 import { IssueLog } from '../../../core/log';
 import { TaskTitleComponent } from '../../../ui/task-title/task-title.component';
@@ -232,6 +233,15 @@ export class TaskDetailPanelComponent implements OnInit, AfterViewInit, OnDestro
       ),
     ),
     { initialValue: null },
+  );
+
+  ancestors = toSignal(
+    this._task$.pipe(
+      map((task) => task.id),
+      distinctUntilChanged(),
+      switchMap((id) => this._store.select(selectTaskAncestors(id))),
+    ),
+    { initialValue: [] },
   );
 
   // Repeat config label
