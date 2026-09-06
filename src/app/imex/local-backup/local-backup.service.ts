@@ -16,6 +16,7 @@ import { T } from '../../t.const';
 import { TranslateService } from '@ngx-translate/core';
 import { AppDataComplete } from '../../op-log/model/model-config';
 import { hasMeaningfulStateData } from '../../op-log/validation/has-meaningful-state-data.util';
+import { isValidBackupData } from './is-valid-backup-data.util';
 import {
   backupStrHasSyncEnabled,
   countAllTasks,
@@ -332,6 +333,13 @@ export class LocalBackupService {
     // "near-empty over substantial" inside each platform writer.
     if (!hasMeaningfulStateData(data)) {
       Log.warn('LocalBackupService: skipping backup — empty state');
+      return;
+    }
+
+    if (!isValidBackupData(data)) {
+      Log.error(
+        'LocalBackupService: skipping backup - data failed referential integrity check',
+      );
       return;
     }
 

@@ -83,6 +83,13 @@
                               {{
                                 T.F.WORKLOG.CMP.WEEK_NR | translate: { nr: week.weekNr }
                               }}
+                              <span class="week-date-range">
+                                ({{ week.start }}.
+                                @if (week.start !== week.end) {
+                                  - {{ week.end }}.
+                                }
+                                )
+                              </span>
                             </h3>
                             <div>{{ week.timeSpent | msToString }}</div>
                           </div>

@@ -1295,12 +1295,6 @@ export class TaskComponent implements OnDestroy, AfterViewInit {
               archiveInstances,
               targetProject,
             ]) => {
-              TaskLog.log({
-                reminderCfg,
-                nonArchiveInstancesWithSubTasks,
-                archiveInstances,
-              });
-
               // Repeat config was deleted (e.g. via cross-client sync) but the task
               // still references it — treat it as a plain task move instead of
               // crashing on the missing config. (#8715)

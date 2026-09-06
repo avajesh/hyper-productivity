@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom, Subject } from 'rxjs';
 import { OAuthFlowConfig, OAuthTokenResult } from '@hyper-productivity/plugin-api';
 import { generateCodeChallenge, generateCodeVerifier } from '@sp/sync-providers/pkce';
@@ -287,10 +287,26 @@ export class PluginOAuthService {
         expiresAt: refreshed.expiresAt,
       });
       return refreshed.accessToken;
-    } catch (err) {
+    } catch (err: unknown) {
       PluginLog.err(`Failed to refresh token for plugin ${pluginId}`, err);
-      this._tokenStore.delete(pluginId);
-      this.tokenInvalidated$.next(pluginId);
+      let shouldInvalidate = true;
+
+      if (err instanceof HttpErrorResponse) {
+        // Status 0: Network error / Offline / CORS / Timeout
+        // Status 429: Too Many Requests
+        // Status >= 500: Temporary server errors
+        if (err.status === 0 || err.status === 429 || err.status >= 500) {
+          PluginLog.log(
+            `Transient network error (${err.status}) during refresh. Keeping token for later retry.`,
+          );
+          shouldInvalidate = false;
+        }
+      }
+
+      if (shouldInvalidate) {
+        this._tokenStore.delete(pluginId);
+        this.tokenInvalidated$.next(pluginId);
+      }
       return null;
     }
   }
