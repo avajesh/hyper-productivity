@@ -636,7 +636,6 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
     }
     this._taskService.update(this.task.id, { priority });
   }
-  }
 
   addSubTask(): void {
     // Always nest under the clicked task — not its parent — so "Add Subtask"
@@ -743,7 +742,6 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
   async moveTaskToProject(projectId: string): Promise<void> {
     if (projectId === this.task.projectId) {
       return;
-
     }
     const taskWithSubTasks = await this._getTaskWithSubtasks();
     if (!taskWithSubTasks) {

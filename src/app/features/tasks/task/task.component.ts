@@ -1502,7 +1502,6 @@ export class TaskComponent implements OnDestroy, AfterViewInit {
     const t = this.task();
     if (projectId === t.projectId) {
       return;
-
     }
     this._taskMoveToProjectService.moveToProject(t, projectId).then((isMoved) => {
       if (isMoved) {

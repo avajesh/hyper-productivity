@@ -110,7 +110,6 @@ export class UpdateCheckService {
   }
 
   private _showUpdateBanner(versionTag: string): void {
-
     this._bannerService.open({
       id: BannerId.UpdateAvailable,
       msg: T.APP.B_UPDATE_AVAILABLE.MSG,
