@@ -13,6 +13,7 @@ import { filterOutId } from '../../../util/filter-out-id';
 import { Update } from '@ngrx/entity';
 import { TaskLog } from '../../../core/log';
 import { sumSubTaskTimeLeft } from '../util/sum-sub-task-time-left';
+import { devError } from '../../../util/dev-error';
 
 export const getTaskById = (taskId: string, state: TaskState): Task => {
   if (!state.entities[taskId]) {

@@ -1,7 +1,7 @@
 {
-  "name": "@hyper-productivity/super-sync-server",
+  "name": "@super-productivity/super-sync-server",
   "version": "1.0.0",
-  "description": "SuperSync server for Hyper Productivity",
+  "description": "SuperSync server for Super Productivity",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc",

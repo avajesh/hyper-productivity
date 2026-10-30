@@ -5,7 +5,7 @@
   "manifestVersion": 1,
   "minSupVersion": "13.0.0",
   "description": "GitHub issue provider plugin",
-  "author": "Hyper Productivity",
+  "author": "Super Productivity",
   "type": "issueProvider",
   "icon": "icon.svg",
   "iFrame": false,

@@ -2,7 +2,7 @@
  * Doc-Mode editor — runs inside the plugin iframe. Notion-style UX:
  * inline bubble menu on text selection, block hover gutter with insert
  * (`+`) and grip (`⋮⋮`) buttons, slash menu for inserts and turn-into,
- * and a custom taskRef atom node tied to Hyper Productivity tasks.
+ * and a custom taskRef atom node tied to Super Productivity tasks.
  */
 
 import { Editor } from '@tiptap/core';
@@ -18,7 +18,7 @@ import {
   type PluginAPI,
   type Task,
   type WorkContextChangePayload,
-} from '@hyper-productivity/plugin-api';
+} from '@super-productivity/plugin-api';
 import {
   buildSeedDoc,
   prepareStoredDoc,
@@ -2175,7 +2175,7 @@ void waitForPluginAPI()
       const msg = document.createElement('div');
       msg.className = 'doc-error-state';
       msg.textContent =
-        'Doc Mode could not connect to Hyper Productivity. ' +
+        'Doc Mode could not connect to Super Productivity. ' +
         'Try closing and reopening this panel.';
       root.appendChild(msg);
     }

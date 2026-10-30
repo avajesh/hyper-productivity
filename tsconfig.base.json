@@ -25,6 +25,7 @@
     "paths": {
       "src/*": ["./src/*"],
       "@super-productivity/plugin-api": ["./packages/plugin-api/src/index.ts"],
+      "@hyper-productivity/plugin-api": ["./packages/plugin-api/src/index.ts"],
       "@sp/shared-schema": ["./packages/shared-schema/src/index.ts"],
       "@sp/sync-core": ["./packages/sync-core/src/index.ts"],
       "@sp/sync-providers/dropbox": ["./packages/sync-providers/src/dropbox.ts"],

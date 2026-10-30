@@ -12,6 +12,6 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@hyper-productivity/plugin-api": "file:../../plugin-api"
+    "@super-productivity/plugin-api": "file:../../plugin-api"
   }
 }

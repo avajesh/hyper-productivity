@@ -1,7 +1,7 @@
 {
   "name": "ai-productivity-prompts-plugin",
   "version": "1.0.0",
-  "description": "AI Productivity Prompts plugin for Hyper Productivity",
+  "description": "AI Productivity Prompts plugin for Super Productivity",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,6 +24,6 @@
     "archiver": "^7.0.1"
   },
   "dependencies": {
-    "@hyper-productivity/plugin-api": "file:../../plugin-api"
+    "@super-productivity/plugin-api": "file:../../plugin-api"
   }
 }

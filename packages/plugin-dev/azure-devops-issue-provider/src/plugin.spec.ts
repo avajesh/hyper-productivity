@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, vi } from 'vitest';
 import type {
   IssueProviderPluginDefinition,
   PluginHttp,
-} from '@hyper-productivity/plugin-api';
+} from '@super-productivity/plugin-api';
 
 let definition: IssueProviderPluginDefinition;
 

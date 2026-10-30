@@ -1,12 +1,12 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
-import { hyperProductivityPlugin } from '@hyper-productivity/vite-plugin';
+import { superProductivityPlugin } from '@super-productivity/vite-plugin';
 
 export default defineConfig({
   plugins: [
     solidPlugin(),
-    hyperProductivityPlugin({
+    superProductivityPlugin({
       copyTo: '../../../src/assets/bundled-plugins/automations',
     }),
   ],

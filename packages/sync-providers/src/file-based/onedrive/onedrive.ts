@@ -47,7 +47,7 @@ const ONEDRIVE_PROTOCOL = {
 
 const ONEDRIVE_DEFAULTS = {
   tenantId: 'common',
-  syncFolderPath: 'Hyper Productivity',
+  syncFolderPath: 'Super Productivity',
 } as const;
 
 // Allowlist of Microsoft Graph sovereign hosts. `_request` accepts absolute

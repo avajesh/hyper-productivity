@@ -1,10 +1,10 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
-import { hyperProductivityPlugin } from '@hyper-productivity/vite-plugin';
+import { superProductivityPlugin } from '@super-productivity/vite-plugin';
 
 export default defineConfig({
-  plugins: [solidPlugin(), hyperProductivityPlugin()],
+  plugins: [solidPlugin(), superProductivityPlugin()],
   test: {
     environment: 'jsdom',
     globals: true,

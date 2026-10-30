@@ -15,6 +15,6 @@
     "vitest": "^4.1.12"
   },
   "dependencies": {
-    "@hyper-productivity/plugin-api": "file:../../plugin-api"
+    "@super-productivity/plugin-api": "file:../../plugin-api"
   }
 }

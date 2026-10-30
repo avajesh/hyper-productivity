@@ -2,7 +2,7 @@ import type {
   PluginHttp,
   PluginIssue,
   PluginSearchResult,
-} from '@hyper-productivity/plugin-api';
+} from '@super-productivity/plugin-api';
 import {
   asConfig,
   canConnect,

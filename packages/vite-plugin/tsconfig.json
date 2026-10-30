@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
+    "types": [],
     "target": "ES2020",
     "module": "CommonJS",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
-    "types": [],
     "skipLibCheck": true,
-    "types": [],
     "forceConsistentCasingInFileNames": true,
     "declaration": true
   },

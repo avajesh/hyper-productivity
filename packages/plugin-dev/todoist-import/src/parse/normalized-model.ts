@@ -1,6 +1,6 @@
 /**
  * Normalized intermediate shape between the Todoist sync payload and the
- * Hyper Productivity import plan. Everything lossy is flagged per task so the
+ * Super Productivity import plan. Everything lossy is flagged per task so the
  * preview/summary UI can honestly report what will be / was dropped.
  */
 

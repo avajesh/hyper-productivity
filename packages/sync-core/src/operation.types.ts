@@ -9,7 +9,7 @@ export enum OpType {
   Move = 'MOV', // For list reordering
   Batch = 'BATCH', // For bulk operations (import, mass update)
   /**
-   * @deprecated Hyper Productivity host-specific full-state op string baked
+   * @deprecated Super Productivity host-specific full-state op string baked
    * into sync-core for backward compatibility. New host integrations should
    * declare their full-state op strings as plain string literals and
    * register them via {@link createFullStateOpTypeHelpers}. This member
@@ -17,7 +17,7 @@ export enum OpType {
    */
   SyncImport = 'SYNC_IMPORT',
   /**
-   * @deprecated Hyper Productivity host-specific full-state op string baked
+   * @deprecated Super Productivity host-specific full-state op string baked
    * into sync-core for backward compatibility. New host integrations should
    * declare their full-state op strings as plain string literals and
    * register them via {@link createFullStateOpTypeHelpers}. This member
@@ -25,7 +25,7 @@ export enum OpType {
    */
   BackupImport = 'BACKUP_IMPORT',
   /**
-   * @deprecated Hyper Productivity host-specific full-state op string baked
+   * @deprecated Super Productivity host-specific full-state op string baked
    * into sync-core for backward compatibility. New host integrations should
    * declare their full-state op strings as plain string literals and
    * register them via {@link createFullStateOpTypeHelpers}. This member
