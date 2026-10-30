@@ -49,6 +49,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FocusButtonComponent } from './focus-button/focus-button.component';
 import { EmlDropDirective } from '../../core/drop-paste-input/eml-drop.directive';
 import { wheelDeltaPx } from '../../util/wheel-delta-px';
+import { RouterLink } from '@angular/router';
 
 /**
  * How long a reveal keeps re-asserting its edge while the row's own box is
@@ -64,6 +65,7 @@ const ACTION_ROW_REVEAL_PIN_MS = 400;
   styleUrls: ['./main-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    RouterLink,
     MatIconButton,
     MatIcon,
     MatTooltip,

@@ -160,6 +160,32 @@
   }
 }
 
+.app-titlebar-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: var(--s-half);
+  flex-shrink: 0;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+
+  .app-logo-svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+    border-radius: 6px;
+  }
+
+  &:hover {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.45));
+  }
+}
+
 // Below a row that cannot seat both, identity yields entirely.
 //
 // The title's floor plus its two never-shrinking buttons cost about 164px, so

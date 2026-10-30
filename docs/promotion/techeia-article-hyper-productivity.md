@@ -126,3 +126,4 @@ Hyper Productivity is ready today. Whether you want to run it directly in your b
 - 💻 **Source Code & Community:** [github.com/avajesh/hyper-productivity](https://github.com/avajesh/hyper-productivity)
 
 Experience a task manager that finally bends to how your brain works—not the other way around.
+

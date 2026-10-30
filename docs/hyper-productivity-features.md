@@ -80,3 +80,4 @@ Hyper Productivity provides four convenient ways to create nested subtasks:
 2. **Context Menu:** Right-click any subtask &rarr; select **`Add sub-task`**.
 3. **Keyboard Shortcut:** With any subtask highlighted, press **`A`** or **`Ctrl + Enter`** (`Cmd + Enter` on macOS).
 4. **Drag and Drop:** Drag a task into any open subtask's drop area.
+

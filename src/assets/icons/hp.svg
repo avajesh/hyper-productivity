@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="hp-main" x1="6" y1="24" x2="26" y2="6" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="hp-sub" x1="14" y1="20" x2="25" y2="5" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+  <!-- Secondary Nested Speed Wing -->
+  <path d="M 16 6.5 C 15.5 6 16 5.5 16.5 5.5 L 21.5 5.5 C 22.3 5.5 23 6 23.5 6.8 L 15.5 19 C 15 19.8 14 19.8 13.5 19.3 L 11.5 17.2 L 13.5 14.8 L 16 6.5 Z" 
+        fill="url(#hp-sub)" />
+  <!-- Primary Checkmark -->
+  <path d="M 7 14.5 C 6.5 13.8 7 13 7.8 13 L 9.2 13 C 10 13 10.5 13.5 11 14 L 13.5 17.5 L 21.5 6.8 C 22 6.1 22.8 5.8 23.5 5.8 L 25 5.8 C 26 5.8 26.5 6.8 25.8 7.8 L 15 23 C 14.5 23.8 13.5 23.8 12.8 23 L 7 14.5 Z" 
+        fill="url(#hp-main)" />
+</svg>

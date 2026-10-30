@@ -1,75 +1,38 @@
-<svg
-  width="1024"
-  height="1024"
-  viewBox="0 0 1024 1024"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g filter="url(#app-icon-shadow)">
-    <rect
-      x="101"
-      y="101"
-      width="822"
-      height="822"
-      rx="183"
-      fill="url(#emerald-gradient)"
-    />
-  </g>
-  <path
-    d="M263 528.788L514.234 760.08L761.85 263L496.615 632.602L263 528.788Z"
-    fill="white"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="none">
   <defs>
-    <linearGradient id="emerald-gradient" x1="101" y1="101" x2="923" y2="923" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#059669" />
-      <stop offset="100%" stop-color="#047857" />
+    <radialGradient id="app-bg" cx="512" cy="512" r="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="55%" stop-color="#042f2e" />
+      <stop offset="100%" stop-color="#021c17" />
+    </radialGradient>
+    <linearGradient id="icon-grad-main" x1="200" y1="750" x2="820" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="45%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#06b6d4" />
     </linearGradient>
-    <filter
-      id="app-icon-shadow"
-      x="79"
-      y="87"
-      width="866"
-      height="866"
-      filterUnits="userSpaceOnUse"
-      color-interpolation-filters="sRGB"
-    >
-      <feFlood
-        flood-opacity="0"
-        result="background"
-      />
-      <feColorMatrix
-        in="SourceAlpha"
-        type="matrix"
-        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        result="source-alpha"
-      />
-      <feMorphology
-        radius="2"
-        operator="dilate"
-        in="SourceAlpha"
-        result="shadow-spread"
-      />
-      <feOffset dy="8" />
-      <feGaussianBlur stdDeviation="10" />
-      <feComposite
-        in2="source-alpha"
-        operator="out"
-      />
-      <feColorMatrix
-        type="matrix"
-        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.24 0"
-      />
-      <feBlend
-        mode="normal"
-        in2="background"
-        result="shadow"
-      />
-      <feBlend
-        mode="normal"
-        in="SourceGraphic"
-        in2="shadow"
-        result="shape"
-      />
+    <linearGradient id="icon-grad-sub" x1="420" y1="620" x2="780" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <filter id="icon-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+    <filter id="icon-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="80" result="blur" />
     </filter>
   </defs>
+
+  <!-- Squircle Base with smooth curvature (iOS/macOS ratio: rx = 224 for 1024px) -->
+  <rect x="48" y="48" width="928" height="928" rx="224" fill="url(#app-bg)" stroke="#10b981" stroke-width="12" stroke-opacity="0.35" />
+  
+  <!-- Ambient Center Glow -->
+  <circle cx="550" cy="480" r="280" fill="#10b981" opacity="0.22" filter="url(#icon-glow)" />
+
+  <!-- Secondary Nested Wing (Subtasks & Velocity) -->
+  <path d="M 512 210 C 504 194 520 178 536 178 L 688 178 C 712 178 736 194 752 218 L 496 608 C 480 632 448 632 432 616 L 368 544 L 432 464 L 512 210 Z" 
+        fill="url(#icon-grad-sub)" filter="url(#icon-shadow)" />
+
+  <!-- Primary Bold Checkmark -->
+  <path d="M 224 480 C 208 456 224 424 256 424 L 296 424 C 320 424 336 440 352 456 L 432 568 L 688 224 C 704 200 728 192 752 192 L 800 192 C 832 192 848 224 824 256 L 480 736 C 464 760 424 760 400 736 L 224 480 Z" 
+        fill="url(#icon-grad-main)" filter="url(#icon-shadow)" />
 </svg>
