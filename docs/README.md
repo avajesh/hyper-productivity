@@ -8,6 +8,7 @@ research note does not override the current code, tests, or an accepted decision
 
 Update these alongside the behavior or workflow they describe:
 
+- [Hyper Productivity Features & Architecture](hyper-productivity-features.md) — infinite nested subtasks, recursive time rollups, cycle prevention, and breadcrumbs
 - [Repository content map](repository-map.md) — task keywords → code entry points,
   relevant constraints, and focused tests; start here to select what to read
 - [`src/app` layer map](../src/app/README.md) — where things live, which way
