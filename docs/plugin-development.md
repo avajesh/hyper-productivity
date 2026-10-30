@@ -97,6 +97,16 @@ are required arrays (use `[]` when unused), while `description` is optional.
 Do not rely on the installer's deliberately minimal runtime checks to infer the
 TypeScript contract.
 
+Installation and activation reject plugins whose `minSupVersion` is newer than
+the app, including uploaded plugins reloaded from cache. The error shows the
+required and current app versions. Comparison uses dotted numeric versions,
+ignoring a leading `v` and prerelease/build suffixes; missing or unparseable
+versions are not blocked by this check.
+
+Of the declared permissions, the app checks only `nodeExecution`, `http`
+together with `allowedHosts`, and `deleteProject`. The rest are shown in the
+plugin's details but not enforced; see [Security Considerations](#security-considerations).
+
 ### Complete Manifest Example
 
 ```json
@@ -306,6 +316,7 @@ Iframe plugins automatically receive:
 - `getAllProjects()` - Get all projects
 - `addProject(project)` - Create new project
 - `updateProject(projectId, updates)` - Update project
+- `deleteProject(projectId)` - Delete a project **and the tasks it contains** (backlog and subtasks included), the same cascade the UI's "Delete project" applies. Deleting the Inbox is rejected, and if the deleted project is the active one the app falls back to the Today context.
 
 #### Tags
 
@@ -382,8 +393,9 @@ PluginAPI.showSnack({
   msg: 'Operation completed!',
   type: 'SUCCESS', // SUCCESS, ERROR, INFO, WARNING
   ico: 'check', // Optional Material icon
-  actionStr: 'Undo', // Optional action button
-  actionFn: () => console.log('Undo clicked'),
+  // Optional action button; the snack then stays visible longer.
+  // plugin.js only: functions cannot cross the iframe message boundary.
+  action: { label: 'Undo', onClick: () => console.log('Undo clicked') },
 });
 
 // System notification
@@ -453,6 +465,29 @@ PluginAPI.registerMenuEntry({
 });
 ```
 
+#### Task Context Menu Entry
+
+Task context-menu entries can only be registered from host-side `plugin.js` code.
+The callback receives only the selected task ID; use the task API to read or
+update the task when needed.
+
+```javascript
+PluginAPI.registerTaskContextMenuEntry({
+  id: 'copy-external-link', // Unique within this plugin
+  label: 'Copy external link',
+  icon: 'link', // Optional Material icon ligature name (custom SVGs are not supported)
+  showFor: ['TASK'], // Optional: TASK, SUBTASK, or both when omitted; [] is invalid
+  onClick: ({ taskId }) => {
+    console.log('Selected task:', taskId);
+  },
+});
+```
+
+Entries appear under **Plugin actions** in the task's context menu. Labels contain at
+most 80 characters; add a short plugin-specific prefix yourself when disambiguation is
+needed. Re-registering the same `id` replaces the previous entry, and all entries are
+removed when the plugin unloads.
+
 #### Side Panel Button
 
 ```javascript
@@ -469,13 +504,20 @@ PluginAPI.registerSidePanelButton({
 
 ```javascript
 PluginAPI.registerShortcut({
-  keys: 'ctrl+shift+p',
+  id: 'my-shortcut', // optional, derived from the label when omitted
   label: 'My Plugin Shortcut',
-  action: () => {
+  onExec: () => {
     console.log('Shortcut triggered');
   },
 });
+
+// Removes it again.
+PluginAPI.unregisterShortcut('my-shortcut');
 ```
+
+Plugins do not pick the key combination: the shortcut shows up under **Plugin
+Shortcuts** in the keyboard settings, where the user assigns one. The binding is
+stored per shortcut id, so keep the id stable across app starts.
 
 #### Hooks
 
@@ -534,6 +576,38 @@ await PluginAPI.persistDataSynced(JSON.stringify({ count: 42 }));
 const data = await PluginAPI.loadSyncedData();
 console.log(data); // '{ count: 42 }'
 ```
+
+### Listing synced data keys
+
+`listSyncedDataKeys(prefix?)` returns a sorted snapshot of the calling plugin's
+non-empty keys. It excludes the legacy unkeyed entry. The optional prefix is a
+literal string, not a pattern or path. Colons and Unicode are preserved without
+normalization. Sorting uses JavaScript's default string order, not locale order.
+
+```javascript
+if (typeof PluginAPI.listSyncedDataKeys === 'function') {
+  const keys = await PluginAPI.listSyncedDataKeys('attachment:task-id:');
+  for (const key of keys) {
+    const data = await PluginAPI.loadSyncedData(key);
+    // A record can disappear between listing and loading it.
+    if (data !== null) renderAttachment(JSON.parse(data));
+  }
+}
+```
+
+This works in both `plugin.js` and plugin iframes. It only reads applied
+application state, including previously unknown keys received by normal sync.
+It does not flush queued writes, wait for compression, trigger sync, or confirm
+disk persistence or delivery to another client. `loadSyncedData` can return a
+pending local value before a new key appears in this list. An existing key stays
+listed while its replacement is pending. Re-read after `persistedDataChanged`.
+Feature-detect the method when supporting older hosts.
+
+For example, an attachment plugin can store each attachment's metadata under an
+independent key. After sync, a second client needs to discover keys containing
+UUIDs it has never seen. `loadSyncedData(key)` requires a known key, and
+`persistedDataChanged` does not enumerate keys. Listing the existing records
+avoids a shared index blob that concurrent additions could overwrite.
 
 ### Secret Storage
 
@@ -644,7 +718,8 @@ Consent handling differs by plugin type:
   (forcing a fresh prompt) when you **disable**, **uninstall**, or **re-upload** the
   plugin, so replacing a plugin's code under the same id always re-asks. To revoke access
   without removing the plugin, simply disable it.
-- **Built-in plugins** (e.g. `sync-md`) keep the per-session prompt and are not persisted.
+- **Built-in plugins** (e.g. `sync-md`) use the same ask-once consent, shown with the
+  verified on-disk name. Disabling the plugin clears it.
 
 > **Plugin id constraints (for `nodeExecution`):** the consent grant keys on your
 > manifest `id`, so it must be a single safe token — no whitespace, control/bidi
@@ -787,10 +862,10 @@ Iframe plugins receive a filtered `window.PluginAPI` object injected into `index
 The iframe can use the injected task/project/tag APIs, dialog and notification APIs,
 navigation helpers, persistence helpers, counters, action dispatch, `registerHook()`,
 and `registerWorkContextHeaderButton()`. Callback-heavy registration methods such as
-`registerHeaderButton()`, `registerMenuEntry()`, `registerSidePanelButton()`,
-`registerShortcut()`, and `registerConfigHandler()` must be registered from
-host-side `plugin.js` code. APIs not injected into the iframe are unavailable, even if
-they exist on the host-side plugin bridge.
+`registerHeaderButton()`, `registerMenuEntry()`, `registerTaskContextMenuEntry()`,
+`registerSidePanelButton()`, `registerShortcut()`/`unregisterShortcut()`, and
+`registerConfigHandler()` must be called from host-side `plugin.js` code. APIs not
+injected into the iframe are unavailable, even if they exist on the host-side plugin bridge.
 
 `executeNodeScript()` is proxied through the host bridge for iframe plugins when
 the desktop app grants the plugin `nodeExecution` permission.
@@ -866,16 +941,56 @@ async function testAPI() {
 - **Plugin API Types**: [@hyper-productivity/plugin-api](https://www.npmjs.com/package/@hyper-productivity/plugin-api)
 - **Plugin Boilerplate**: [boilerplate-solid-js](../packages/plugin-dev/boilerplate-solid-js)
 - **Example Plugins**: [plugin-dev](../packages/plugin-dev)
-- **Community Plugins**:
-  - [counter-tester-plugin](https://github.com/Mustache-Games/counter-tester-plugin) by [Mustache Dev](https://github.com/Mustache-Games)
-  - [sp-reporter](https://github.com/dougcooper/sp-reporter) by [dougcooper](https://github.com/dougcooper)
+- **Community Plugins**: [community-plugins.json](../src/assets/community-plugins.json), also listed in Settings → Plugins
 
 ## Contributing
 
 If you create a useful plugin, consider:
 
 1. Posting on reddit or GitHub discussions about it
-2. Submitting a PR to add it to the community plugins list (coming soon)
+2. [Getting it listed in the app](#get-listed-in-the-app)
+
+### Get Listed in the App
+
+Settings → Plugins shows a **Community Plugins** list read from
+[community-plugins.json](../src/assets/community-plugins.json), which ships with
+the app. To be listed, open a PR that adds an entry:
+
+```json
+{
+  "name": "My Plugin",
+  "shortDescription": "One or two sentences on what it does.",
+  "url": "https://github.com/you/my-plugin",
+  "author": "you",
+  "authorUrl": "https://github.com/you",
+  "id": "my-plugin",
+  "release": {
+    "version": "1.0.0",
+    "downloadUrl": "https://github.com/you/my-plugin/releases/download/v1.0.0/plugin.zip",
+    "sha256": "<output of: sha256sum plugin.zip>"
+  }
+}
+```
+
+- `id` and `release` are optional. Without them the entry links to your page and
+  users install the ZIP by hand (Settings → Plugins → Choose Plugin File).
+- `id` must equal the `id` in your `manifest.json`. With it, the list shows
+  **Installed** for users who have the plugin.
+- With `release`, the list shows an **Install** button. The app downloads
+  `downloadUrl`, refuses the file unless its SHA-256 matches `sha256`, then
+  installs it with the usual risk warning. `version` must equal the manifest
+  `version` and be numeric (`1.2.0`).
+- To ship an update, open a PR that bumps `version`, `downloadUrl` and
+  `sha256`. Users who have an older version see **Update** once the app release
+  that contains the new listing reaches them.
+- The `Community Plugins` CI check downloads each release and verifies its size
+  (10 MB max), hash, and manifest `id` and `version`; `npm run lint` checks the
+  file's shape.
+- The desktop and mobile apps install in-app. The web app shows a **Download**
+  link to `downloadUrl` instead, because release hosts such as GitHub and
+  Codeberg send no CORS headers; the user then installs the ZIP by hand.
+- A listing is not a review: the list says that community plugins are not
+  reviewed, and the hash only proves the file is the one listed.
 
 Happy plugin development! 🚀
 

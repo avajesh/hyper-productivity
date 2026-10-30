@@ -11,7 +11,7 @@
     "skipLibCheck": true,
     "types": [],
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "noEmitOnError": true
   },

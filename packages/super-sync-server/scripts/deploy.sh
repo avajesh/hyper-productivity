@@ -179,6 +179,11 @@ fi
 COMPOSE_FILES="-f docker-compose.yml"
 if [ -f "docker-compose.monitoring.yml" ]; then
     COMPOSE_FILES="$COMPOSE_FILES -f docker-compose.monitoring.yml"
+    # The monitoring file declares the shared network as external, which makes
+    # the merged config external too, so compose never creates it on a new host.
+    if ! docker network inspect super-sync-server_internal >/dev/null 2>&1; then
+        docker network create super-sync-server_internal >/dev/null
+    fi
 fi
 
 # Validate Caddyfile syntax before deploying
@@ -549,6 +554,12 @@ report_monitoring_status() {
             # Not the operator's to fix: no systemd, so no journal and no group to join.
             printf '    NOTE: no journalctl on this host, so the OOM check is unavailable (since %s).\n' "$oom_ts"
             echo "          Not a misconfiguration — every other check is unaffected."
+        elif [ "$oom_reason" = "journal-error" ]; then
+            printf '    WARNING: OOM detection is BLIND (journal read failed, since %s).\n' "$oom_ts"
+            echo "             Check journalctl -k and journal configuration."
+        elif [ "$oom_reason" = "no-kernel-log" ]; then
+            printf '    NOTE: no kernel log entries are available, so the OOM check is unavailable\n'
+            printf '          (since %s). Check journal configuration and host kernel-log access.\n' "$oom_ts"
         else
             printf '    WARNING: OOM detection is BLIND (kernel log unreadable, since %s).\n' "$oom_ts"
             echo "             Container OOM kills will not be alerted on. Add the cron user to"

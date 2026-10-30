@@ -1,9 +1,11 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Injector } from '@angular/core';
 import {
   planRegularOpsAfterFullStateUpload,
   planUploadLastServerSeqUpdate,
 } from '@sp/sync-core';
 import { OperationLogStoreService } from '../persistence/operation-log-store.service';
+import { SupersededOperationResolverService } from './superseded-operation-resolver.service';
+import { isReissuableReorder } from './reorder-conflict.util';
 import { LockService } from './lock.service';
 import {
   Operation,
@@ -13,10 +15,16 @@ import {
   extractFullStateFromPayload,
   assertValidFullStatePayload,
   ActionType,
+  isGenesisEntityType,
   isMultiEntityPayload,
 } from '../core/operation.types';
 import { OpLog } from '../../core/log';
-import { LOCK_NAMES, MAX_OPS_PER_UPLOAD_REQUEST } from '../core/operation-log.const';
+import {
+  LOCK_NAMES,
+  MAX_OPS_PER_UPLOAD_REQUEST,
+  DOWNLOAD_PAGE_SIZE,
+  MAX_DOWNLOAD_ITERATIONS,
+} from '../core/operation-log.const';
 import { chunkArray } from '../../util/chunk-array';
 import {
   OperationSyncCapable,
@@ -34,6 +42,7 @@ import {
 import { isRetryableUploadError } from '@sp/sync-providers/http';
 import { getSyncErrorCode, handleStorageQuotaError } from './sync-error-utils';
 import {
+  ClientUpdateRequiredSPError,
   DecryptNoPasswordError,
   EncryptNoPasswordError,
 } from '../core/errors/sync-errors';
@@ -45,6 +54,8 @@ import {
 } from '../../features/config/local-only-sync-settings.util';
 import { isLwwUpdateActionType } from '../core/lww-update-action-types';
 import { StateSnapshotService } from '../backup/state-snapshot.service';
+import { isRebasedTimeDeltaReceipt } from '../persistence/acknowledge-operations.util';
+import { isSyncTimeSpentOp } from './fold-sync-time-spent.util';
 
 // Re-export for consumers that import from this service
 export type {
@@ -70,6 +81,7 @@ export class OperationLogUploadService {
   private encryptionService = inject(OperationEncryptionService);
   private stateSnapshotService = inject(StateSnapshotService);
   private providerManager = inject(SyncProviderManager);
+  private injector = inject(Injector);
 
   async uploadPendingOps(
     syncProvider: OperationSyncCapable,
@@ -96,6 +108,7 @@ export class OperationLogUploadService {
     let hasMorePiggyback = false;
     let selectedPendingOps: OperationLogEntry[] = [];
     const pendingAcknowledgementSeqs: number[] = [];
+    const pendingAcknowledgementOriginals = new Map<string, Operation>();
     const pendingAcknowledgementSeqSet = new Set<number>();
     const acknowledge = async (seqs: number[]): Promise<void> => {
       if (seqs.length === 0) {
@@ -158,7 +171,19 @@ export class OperationLogUploadService {
       const { pendingOps, localStateSnapshot } = await this.lockService.request(
         LOCK_NAMES.OPERATION_LOG,
         async () => {
-          const capturedPendingOps = await this.opLogStore.getUnsynced();
+          // #10377: a pending note or habit order that crossed an applied
+          // remote op is reissued first; one whose reissue had to wait never
+          // uploads stale, which a file-based provider would accept.
+          let capturedPendingOps = await this.opLogStore.getUnsynced();
+          if (capturedPendingOps.some(({ op }) => isReissuableReorder(op))) {
+            const { created, deferredOpIds } = await this.injector
+              .get(SupersededOperationResolverService)
+              .reissueCrossedPendingReorders();
+            if (created > 0) capturedPendingOps = await this.opLogStore.getUnsynced();
+            capturedPendingOps = capturedPendingOps.filter(
+              ({ op }) => !deferredOpIds.includes(op.id),
+            );
+          }
           return {
             pendingOps: capturedPendingOps,
             localStateSnapshot:
@@ -250,12 +275,22 @@ export class OperationLogUploadService {
         );
       }
 
+      // Genesis ops (MIGRATION / RECOVERY) replay as a no-op on every other
+      // client, so API-based providers never upload them (acknowledged below once
+      // this round's full-state ops are settled). File-based providers keep
+      // uploading them: there the ops upload is what writes the state snapshot,
+      // which a genesis-only client must still do. (#9921)
+      const isGenesisToSkip = (entry: OperationLogEntry): boolean =>
+        syncProvider.providerMode !== 'fileSnapshotOps' &&
+        isGenesisEntityType(entry.op.entityType);
+      const uploadableOps = pendingOps.filter((entry) => !isGenesisToSkip(entry));
+
       // Separate full-state operations (backup imports, repairs) from regular ops
       // Full-state ops are uploaded via snapshot endpoint for better efficiency
-      const fullStateOps = pendingOps.filter((entry) =>
+      const fullStateOps = uploadableOps.filter((entry) =>
         FULL_STATE_OP_TYPES.has(entry.op.opType as OpType),
       );
-      let regularOps = pendingOps.filter(
+      let regularOps = uploadableOps.filter(
         (entry) => !FULL_STATE_OP_TYPES.has(entry.op.opType as OpType),
       );
 
@@ -278,6 +313,7 @@ export class OperationLogUploadService {
       // can order a post-snapshot op BEFORE the full-state op after a clock
       // rollback, which would mark it synced without ever uploading it.
       let lastUploadedFullStateOpSeq: number | undefined;
+      let droppedFullStateOnExists = false;
       for (const entry of fullStateOps) {
         // BACKUP_IMPORT is an explicit restore and intentionally wipes remote
         // history. SYNC_IMPORT only does so when explicitly requested. REPAIR
@@ -327,6 +363,7 @@ export class OperationLogUploadService {
             await this.opLogStore.deleteOpsWhere(
               (logEntry) => logEntry.op.id === entry.op.id,
             );
+            droppedFullStateOnExists = true;
             // Don't count as rejected - this is expected behavior when joining existing group
             continue;
           }
@@ -364,6 +401,25 @@ export class OperationLogUploadService {
 
       if (fullStateUploadBlocked) {
         return;
+      }
+
+      // Settle the skipped genesis ops (see isGenesisToSkip) only now: while the
+      // upload was still blocked above, or when this client's own SYNC_IMPORT was
+      // just dropped in favour of a remote one, the pending genesis op is what
+      // makes the incoming-import gate prompt on the next cycle instead of
+      // silently replacing this client's state. (#9921)
+      const genesisSeqs = pendingOps.filter(isGenesisToSkip).map((entry) => entry.seq);
+      if (genesisSeqs.length > 0 && droppedFullStateOnExists) {
+        OpLog.normal(
+          'OperationLogUploadService: Keeping genesis op(s) pending — the local SYNC_IMPORT ' +
+            'was superseded by a remote one.',
+        );
+      } else if (genesisSeqs.length > 0) {
+        OpLog.normal(
+          `OperationLogUploadService: Marking ${genesisSeqs.length} genesis op(s) synced ` +
+            'without uploading them (no receiver on any other client).',
+        );
+        await acknowledge(genesisSeqs);
       }
 
       // Skip regular ops processing if none exist
@@ -465,6 +521,69 @@ export class OperationLogUploadService {
           OpLog.error(`OperationLogUploadService: Upload failed: ${message}`);
           handleStorageQuotaError(err);
           throw err; // Re-throw to propagate the error
+        }
+
+        const ambiguousDeltas = entries.filter(
+          ({ op }) =>
+            syncProvider.providerMode === 'superSyncOps' &&
+            isSyncTimeSpentOp(op) &&
+            response.results.some(
+              (result) => result.opId === op.id && result.errorCode === 'INVALID_OP_ID',
+            ),
+        );
+        if (ambiguousDeltas.length > 0) {
+          // Conflict resolution can rebase a pending delta after a lost upload
+          // response. Recover only a matching authenticated server receipt;
+          // an id collision or different content must keep the normal error.
+          const originals = new Map<string, Operation>();
+          let sinceSeq = 0;
+          for (let page = 0; page < MAX_DOWNLOAD_ITERATIONS; page++) {
+            const receipt = await syncProvider.downloadOps(
+              sinceSeq,
+              undefined,
+              DOWNLOAD_PAGE_SIZE,
+            );
+            const matches = receipt.ops
+              .map(({ op }) => op)
+              .filter((op) => ambiguousDeltas.some((entry) => entry.op.id === op.id));
+            assertOpsEncryptedWhenExpected(matches, isEncryptionEnabled);
+            const decoded = encryptKey
+              ? await this.encryptionService.decryptOperations(matches, encryptKey)
+              : matches;
+            decoded.forEach((op) => originals.set(op.id, syncOpToOperation(op)));
+            if (!receipt.hasMore || originals.size === ambiguousDeltas.length) break;
+            const nextSeq = receipt.ops.at(-1)?.serverSeq;
+            if (nextSeq === undefined || nextSeq <= sinceSeq)
+              throw new Error('Non-progressing time delta receipt lookup');
+            sinceSeq = nextSeq;
+            if (page === MAX_DOWNLOAD_ITERATIONS - 1)
+              throw new Error('Time delta receipt lookup exceeded the download limit');
+          }
+          const recovered = ambiguousDeltas.filter(({ op }) => {
+            const original = originals.get(op.id);
+            return original && isRebasedTimeDeltaReceipt(op, original);
+          });
+          if (recovered.length > 0) {
+            if (options?.deferAcknowledgement) {
+              for (const { op } of recovered)
+                pendingAcknowledgementOriginals.set(op.id, originals.get(op.id)!);
+            } else {
+              await this.lockService.request(LOCK_NAMES.OPERATION_LOG, async () => {
+                this.providerManager.assertSyncEpochUnchanged(
+                  options?.fenceEpoch,
+                  'time delta receipt',
+                );
+                await this.opLogStore.markSynced(
+                  recovered.map(({ seq }) => seq),
+                  originals,
+                );
+              });
+            }
+            const recoveredIds = new Set(recovered.map(({ op }) => op.id));
+            response.results = response.results.map((result) =>
+              recoveredIds.has(result.opId) ? { ...result, accepted: true } : result,
+            );
+          }
         }
 
         // Mark successfully accepted ops as synced
@@ -621,7 +740,13 @@ export class OperationLogUploadService {
       ...(blockedByRejectedFullState ? { blockedByRejectedFullState: true } : {}),
       ...(fullStateUploadDeferred ? { fullStateUploadDeferred: true } : {}),
       ...(options?.deferAcknowledgement
-        ? { selectedPendingOps, pendingAcknowledgementSeqs }
+        ? {
+            selectedPendingOps,
+            pendingAcknowledgementSeqs,
+            ...(pendingAcknowledgementOriginals.size > 0
+              ? { pendingAcknowledgementOriginals }
+              : {}),
+          }
         : {}),
     };
   }
@@ -812,6 +937,12 @@ export class OperationLogUploadService {
       );
       return response;
     } catch (err) {
+      // The server refused this app version, not this op: turning the error into
+      // a result would classify the full-state op as rejected. Re-throw, as for
+      // a missing encryption key, so it stays pending until the app is updated.
+      if (err instanceof ClientUpdateRequiredSPError) {
+        throw err;
+      }
       const message = err instanceof Error ? err.message : 'Unknown error';
       OpLog.error(`OperationLogUploadService: Snapshot upload failed: ${message}`);
       handleStorageQuotaError(err);

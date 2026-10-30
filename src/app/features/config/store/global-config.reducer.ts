@@ -7,6 +7,7 @@ import {
   on,
 } from '@ngrx/store';
 import {
+  AppFeaturesConfig,
   ClipboardImagesConfig,
   FocusModeConfig,
   GlobalConfigState,
@@ -15,11 +16,18 @@ import {
 } from '../global-config.model';
 import type { KeyboardConfig } from '@sp/keyboard-config';
 import { DEFAULT_GLOBAL_CONFIG } from '../default-global-config.const';
+import { getInitialAppFeatures } from '../new-install-app-features.const';
 import { loadAllData } from '../../../root-store/meta/load-all-data.action';
 import { getHoursFromClockString } from '../../../util/get-hours-from-clock-string';
 import { isValidSplitTime } from '../../../util/is-valid-split-time';
 import { normalizeStartOfNextDayConfig } from '../normalize-start-of-next-day-config';
 import { withLocalOnlySyncSettings } from '../local-only-sync-settings.util';
+
+const stripRemovedUserProfilesSetting = <T extends object>(config: T): T => {
+  const result = { ...config };
+  delete (result as Record<string, unknown>)['isEnableUserProfiles'];
+  return result;
+};
 
 /**
  * Migrate the legacy `isSyncSessionWithTracking` flag (removed in the focus-mode
@@ -106,6 +114,8 @@ export const selectIsFocusModeEnabled = createSelector(
 
 export const initialGlobalConfigState: GlobalConfigState = {
   ...DEFAULT_GLOBAL_CONFIG,
+  // New installs start calm; existing data keeps its own values (see loadAllData).
+  appFeatures: getInitialAppFeatures(),
 };
 
 const migrateKeyboardConfig = (cfg: KeyboardConfig | undefined): KeyboardConfig => {
@@ -167,13 +177,17 @@ export const globalConfigReducer = createReducer<GlobalConfigState>(
       ? withLocalOnlySyncSettings(incomingSyncConfig, oldState.sync)
       : incomingSyncConfig;
 
+    const incomingMiscConfig = stripRemovedUserProfilesSetting(
+      appDataComplete.globalConfig.misc ?? {},
+    );
+
     const incomingGlobalConfig = {
       ...DEFAULT_GLOBAL_CONFIG,
       ...appDataComplete.globalConfig,
       misc: {
         ...DEFAULT_GLOBAL_CONFIG.misc,
-        ...appDataComplete.globalConfig.misc,
-        ...normalizeStartOfNextDayConfig(appDataComplete.globalConfig.misc ?? {}),
+        ...incomingMiscConfig,
+        ...normalizeStartOfNextDayConfig(incomingMiscConfig),
       },
     };
 
@@ -184,7 +198,9 @@ export const globalConfigReducer = createReducer<GlobalConfigState>(
       // predate newly added fields (e.g., isAutoMarkParentAsDone, notesTemplate).
       appFeatures: {
         ...DEFAULT_GLOBAL_CONFIG.appFeatures,
-        ...appDataComplete.globalConfig.appFeatures,
+        ...stripRemovedUserProfilesSetting(
+          appDataComplete.globalConfig.appFeatures ?? {},
+        ),
       },
       tasks: {
         ...DEFAULT_GLOBAL_CONFIG.tasks,
@@ -222,8 +238,12 @@ export const globalConfigReducer = createReducer<GlobalConfigState>(
     const { sectionKey, sectionCfg } = action;
     const normalizedSectionCfg =
       sectionKey === 'misc'
-        ? normalizeStartOfNextDayConfig(sectionCfg as Partial<MiscConfig>)
-        : sectionCfg;
+        ? stripRemovedUserProfilesSetting(
+            normalizeStartOfNextDayConfig(sectionCfg as Partial<MiscConfig>),
+          )
+        : sectionKey === 'appFeatures'
+          ? stripRemovedUserProfilesSetting(sectionCfg as Partial<AppFeaturesConfig>)
+          : sectionCfg;
     const updatedSection = {
       ...state[sectionKey],
       ...normalizedSectionCfg,

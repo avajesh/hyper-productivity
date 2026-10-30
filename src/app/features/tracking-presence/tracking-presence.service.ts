@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 import { Subscription, combineLatest } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { nanoid } from 'nanoid';
-import { selectCurrentTaskId } from '../tasks/store/task.selectors';
+import { selectCurrentTaskId, selectTaskEntities } from '../tasks/store/task.selectors';
 import { setCurrentTask } from '../tasks/store/task.actions';
 import { selectIsIdle } from '../idle/store/idle.selectors';
 import {
@@ -27,9 +27,15 @@ import { SyncProviderManager } from '../../op-log/sync-providers/provider-manage
 import { SyncProviderId } from '../../op-log/sync-providers/provider.const';
 import { OperationEncryptionService } from '../../op-log/sync/operation-encryption.service';
 import { SnackService } from '../../core/snack/snack.service';
+import { BannerService } from '../../core/banner/banner.service';
+import { BannerId } from '../../core/banner/banner.model';
 import { T } from '../../t.const';
 import { SyncLog } from '../../core/log';
-import { getDeviceLabel } from './get-device-label.util';
+import {
+  getDeviceLabel,
+  resolveDeviceLabel,
+  sanitizeDeviceLabel,
+} from './get-device-label.util';
 import {
   PRESENCE_HEARTBEAT_MS,
   PRESENCE_HIDE_STALE_AFTER_MS,
@@ -47,14 +53,6 @@ import { isOperationSyncCapable } from '../../op-log/sync/operation-sync.util';
 /** Staleness re-check cadence for viewers; display is minute-granular. */
 const VIEW_TICK_MS = 30_000;
 
-/**
- * Relayed payload fields are untrusted (with E2EE off a hostile server can
- * inject them). The label ends up as a translate param inside an [innerHtml]
- * snack, so strip markup-capable chars and cap length instead of trusting it.
- */
-const sanitizeDeviceLabel = (v: unknown): string =>
-  typeof v === 'string' ? v.replace(/[<>&"'`]/g, '').slice(0, 32) : '';
-
 interface LocalDerivedState {
   taskId: string | null;
   isIdle: boolean;
@@ -67,6 +65,10 @@ interface LocalSession {
   taskId: string | null;
   reason?: 'idle';
 }
+
+/** Producer-built frames; `deviceLabel` is resolved once per send in `_doSend`. */
+type OutboundPayload = Omit<TrackingPresencePayload, 'deviceLabel'>;
+type OutboundCmd = Omit<TrackingPresenceCmd, 'deviceLabel'>;
 
 /**
  * Cross-device tracking presence over the SuperSync WebSocket.
@@ -97,6 +99,7 @@ export class TrackingPresenceService implements OnDestroy {
   private _providerManager = inject(SyncProviderManager);
   private _encryption = inject(OperationEncryptionService);
   private _snackService = inject(SnackService);
+  private _bannerService = inject(BannerService);
 
   /** Last known remote tracking session, or null when there is none to show. */
   readonly remoteSession = signal<RemoteTrackingSession | null>(null);
@@ -149,6 +152,29 @@ export class TrackingPresenceService implements OnDestroy {
    * actually changes — so the header isn't re-dirtied twice a minute.
    */
   readonly isRemoteSessionShown = computed(() => this.remoteSessionView() !== null);
+
+  private _taskEntities = this._store.selectSignal(selectTaskEntities);
+
+  /**
+   * The takeover banner stays only while it is true: gone once this device
+   * tracks again (view null), the winner stopped, or its session expired.
+   * Staleness alone does not hide it — a backgrounded phone goes stale within
+   * minutes, which would clear the notice before the user is back here.
+   * An effect rather than `hideWhen$`: `toObservable` replays its last value,
+   * and a pre-takeover `true` would dismiss the banner the moment it opens.
+   */
+  private _isMovedBannerObsolete = computed(() => {
+    const v = this.remoteSessionView();
+    return !v || v.session.payload.state !== 'tracking';
+  });
+  private _movedBannerHideEffect = effect(
+    () => {
+      if (this._isMovedBannerObsolete()) {
+        this._bannerService.dismiss(BannerId.TrackingMovedToOtherDevice);
+      }
+    },
+    { injector: this._injector },
+  );
 
   private _subs: Subscription | null = null;
   private _heartbeatTimer: ReturnType<typeof setInterval> | null = null;
@@ -293,11 +319,10 @@ export class TrackingPresenceService implements OnDestroy {
     if (!rs || rs.payload.state !== 'tracking') {
       return;
     }
-    const cmd: TrackingPresenceCmd = {
+    const cmd: OutboundCmd = {
       v: 1,
       cmd: 'stop',
       sessionId: rs.payload.sessionId,
-      deviceLabel: getDeviceLabel(),
     };
     this._send('presence_cmd', cmd).catch((err) =>
       SyncLog.warn('TrackingPresenceService: Failed to send stop cmd', err),
@@ -366,7 +391,7 @@ export class TrackingPresenceService implements OnDestroy {
       // Never tracked on this device in this app run — nothing to announce.
       return;
     }
-    const payload: TrackingPresencePayload = {
+    const payload: OutboundPayload = {
       v: 1,
       sessionId: this._sessionId,
       seq: ++this._seq,
@@ -374,7 +399,6 @@ export class TrackingPresenceService implements OnDestroy {
       ...(this._current.reason ? { reason: this._current.reason } : {}),
       taskId: this._current.taskId,
       sinceTs: this._sinceTs,
-      deviceLabel: getDeviceLabel(),
       ...(this._focusCycle !== undefined ? { focusCycle: this._focusCycle } : {}),
     };
     this._send('presence_state', payload).catch((err) =>
@@ -482,8 +506,10 @@ export class TrackingPresenceService implements OnDestroy {
    * Both this device and a remote one claim to be tracking. Exactly one may
    * win (one active session account-wide). The later-started session wins;
    * sessionId compare breaks exact ties deterministically on both ends.
-   * Losing is loud and reversible: an attributed snack with a one-tap
-   * take-back — silent stops read as data-loss bugs.
+   * Losing is loud and reversible: an attributed banner with a one-tap
+   * take-back — silent stops read as data-loss bugs. A banner, not a snack:
+   * the user is usually looking at the winning device, so the notice must
+   * still be here when they come back.
    */
   private _resolveTakeover(p: TrackingPresencePayload, producerConnected: boolean): void {
     const remoteWins =
@@ -498,20 +524,29 @@ export class TrackingPresenceService implements OnDestroy {
     const prevTaskId = this._current.taskId;
     this._suppressNextStopBroadcast = true;
     this._store.dispatch(setCurrentTask({ id: null }));
-    this._snackService.open({
-      msg: T.F.TRACKING_PRESENCE.S.MOVED_TO,
-      translateParams: { device: p.deviceLabel },
-      actionStr: T.F.TRACKING_PRESENCE.S.TRACK_HERE_AGAIN,
-      actionFn: () => {
-        if (prevTaskId) {
-          this._store.dispatch(setCurrentTask({ id: prevTaskId }));
-        }
-      },
-    });
     this._setRemoteSession({
       payload: p,
       producerConnected,
       receivedAt: Date.now(),
+    });
+    this._openMovedBanner(p.deviceLabel, prevTaskId);
+  }
+
+  private _openMovedBanner(deviceLabel: string, prevTaskId: string | null): void {
+    const title = prevTaskId && this._taskEntities()[prevTaskId]?.title;
+    this._bannerService.open({
+      id: BannerId.TrackingMovedToOtherDevice,
+      ico: 'devices',
+      msg: title ? T.F.TRACKING_PRESENCE.B.MOVED_TO : T.F.TRACKING_PRESENCE.S.MOVED_TO,
+      translateParams: title ? { device: deviceLabel, title } : { device: deviceLabel },
+      action: {
+        label: T.F.TRACKING_PRESENCE.S.TRACK_HERE_AGAIN,
+        fn: () => {
+          if (prevTaskId) {
+            this._store.dispatch(setCurrentTask({ id: prevTaskId }));
+          }
+        },
+      },
     });
   }
 
@@ -533,6 +568,7 @@ export class TrackingPresenceService implements OnDestroy {
     this._snackService.open({
       msg: T.F.TRACKING_PRESENCE.S.STOPPED_FROM,
       translateParams: { device: cmd.deviceLabel },
+      ico: 'devices',
     });
   }
 
@@ -574,7 +610,7 @@ export class TrackingPresenceService implements OnDestroy {
 
   private _send(
     type: 'presence_state' | 'presence_cmd',
-    obj: TrackingPresencePayload | TrackingPresenceCmd,
+    obj: OutboundPayload | OutboundCmd,
   ): Promise<void> {
     // Serialized: encrypt latency varies (cold key derivation), and an older
     // `tracking` finishing after a newer `stopped` would leave a phantom
@@ -586,7 +622,7 @@ export class TrackingPresenceService implements OnDestroy {
 
   private async _doSend(
     type: 'presence_state' | 'presence_cmd',
-    obj: TrackingPresencePayload | TrackingPresenceCmd,
+    obj: OutboundPayload | OutboundCmd,
   ): Promise<void> {
     if (!this._ws.isConnected()) {
       // `_subs` is the running latch (see start()): a send enqueued before
@@ -611,10 +647,35 @@ export class TrackingPresenceService implements OnDestroy {
       );
       return;
     }
+    // Resolved per frame, not cached: a device renamed in settings announces
+    // its new name on the next transition/heartbeat without a restart.
+    const frame: TrackingPresencePayload | TrackingPresenceCmd = {
+      ...obj,
+      deviceLabel: await this._getDeviceLabel(),
+    };
     const envelope: TrackingPresenceEnvelope = key
-      ? { enc: true, data: await this._encryption.encryptPayload(obj, key) }
-      : { enc: false, data: JSON.stringify(obj) };
+      ? { enc: true, data: await this._encryption.encryptPayload(frame, key) }
+      : { enc: false, data: JSON.stringify(frame) };
     this._ws.sendPresence(type, JSON.stringify(envelope));
+  }
+
+  /**
+   * The user's per-device name from the SuperSync private config, else the
+   * platform default. Must not drop the frame on its own account (the key
+   * step above already fails closed): the label is decoration, the state
+   * transition is the point, so a read failure degrades to the default.
+   */
+  private async _getDeviceLabel(): Promise<string> {
+    try {
+      const cfg = await this._providerManager.getProviderConfig(SyncProviderId.SuperSync);
+      return resolveDeviceLabel(cfg?.deviceName);
+    } catch (err) {
+      SyncLog.warn(
+        'TrackingPresenceService: Device name unresolved — using platform label',
+        err,
+      );
+      return getDeviceLabel();
+    }
   }
 
   private async _decode(payloadStr: string): Promise<unknown | null> {

@@ -46,6 +46,8 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { IS_ANDROID_WEB_VIEW_TOKEN } from '../../../util/is-android-web-view';
+import { IosKeyboardService } from '../../../core/theme/ios-keyboard.service';
+import { DateTimeFormatService } from '../../../core/date-time-format/date-time-format.service';
 import { BehaviorSubject, combineLatest, from, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../../../ui/dialog-confirm/dialog-confirm.component';
@@ -89,6 +91,7 @@ import { PlannerActions } from '../../planner/store/planner.actions';
 import { DateService } from '../../../core/date/date.service';
 import { MenuTreeService } from '../../menu-tree/menu-tree.service';
 import { SelectOptionRowComponent } from '../../../ui/select-option-row/select-option-row.component';
+import { toPersistableRemindOption } from '../../planner/dialog-schedule-task/task-reminder-options.const';
 
 export interface TaskAddEvent {
   taskId: string;
@@ -103,6 +106,15 @@ export interface TaskAddEvent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [blendInOutAnimation, expandFadeAnimation],
   standalone: true,
+  /* eslint-disable @typescript-eslint/naming-convention*/
+  host: {
+    // The global bar is fixed and outside the CDK overlay layer, so it gets its
+    // iOS keyboard offset here rather than from <html> (see IosKeyboardService
+    // for why nothing is written there). Null leaves the `:root` default.
+    '[style.--keyboard-overlay-offset]':
+      'isGlobalBarVariant() ? iosKeyboardService.keyboardOverlayOffset() : null',
+  },
+  /* eslint-enable @typescript-eslint/naming-convention*/
   imports: [
     FormsModule,
     CdkTextareaAutosize,
@@ -140,8 +152,10 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
   private readonly _taskRepeatCfgService = inject(TaskRepeatCfgService);
   private readonly _markdownPasteService = inject(MarkdownPasteService);
   private readonly _dateService = inject(DateService);
+  private readonly _dateTimeFormatService = inject(DateTimeFormatService);
   private readonly _menuTreeService = inject(MenuTreeService);
   readonly stateService = inject(AddTaskBarStateService);
+  readonly iosKeyboardService = inject(IosKeyboardService);
 
   T = T;
 
@@ -173,7 +187,7 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
   isScheduleDialogOpen = signal(false);
 
   // Computed signals for projects and tags
-  projects = this._projectService.listInTreeOrderForUI;
+  projects = this._projectService.listInTreeOrder;
   // Observable version for compatibility with existing code
   projects$ = toObservable(this.projects);
   tags$ = this._tagService.tags$;
@@ -267,13 +281,14 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
           projects,
           defaultColor: activeWorkContext?.theme?.primary || DEFAULT_PROJECT_COLOR,
           shortSyntaxConfig,
+          dateLocale: this._dateTimeFormatService.dateInputLocale(),
         }),
       ),
     ),
     startWith([]),
   );
 
-  mentionCfg$ = inject(MentionConfigService).mentionConfig$;
+  mentionCfg$ = inject(MentionConfigService).addTaskBarMentionConfig$;
 
   // View children
   inputEl = viewChild<ElementRef<HTMLTextAreaElement>>('inputEl');
@@ -427,6 +442,7 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
                 defaultProject!,
                 date,
                 time,
+                this._dateTimeFormatService.dateInputLocale(),
               ),
             );
           },
@@ -519,6 +535,10 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
 
       if (state.spent) {
         taskData.timeSpentOnDay = state.spent;
+      }
+
+      if (state.priority) {
+        taskData.priority = state.priority;
       }
 
       if (state.deadlineDate) {
@@ -623,7 +643,10 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
       if (state.repeat) {
         const repeat = state.repeat;
         if (repeat.type === 'DIALOG') {
-          this._openRepeatDialogForTask(taskId, resolvedRemindOption);
+          this._openRepeatDialogForTask(
+            taskId,
+            toPersistableRemindOption(resolvedRemindOption),
+          );
         } else {
           const referenceDate = dateStrToUtcDate(startDay);
           // An interval ("@every 2 days") has no preset to expand — it maps to a
@@ -645,10 +668,16 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
             ...repeatUpdates,
             title,
             notes: taskData.notes,
+            // Later occurrences take their priority from the config, so a
+            // "p1 @daily" must land here too, not only on the first instance
+            priority: taskData.priority,
             tagIds: taskData.tagIds ?? [],
             defaultEstimate: state.estimate || 0,
             startTime: state.time || undefined,
-            remindAt: state.time ? resolvedRemindOption : undefined,
+            // the schedule pick offers day/week lead times, a repeat cfg must not persist them
+            remindAt: state.time
+              ? toPersistableRemindOption(resolvedRemindOption)
+              : undefined,
           };
           // Seed the skipOverdue default from the chosen schedule, same as the
           // repeat dialog (there is no advanced toggle in the inline add-bar).
@@ -732,10 +761,10 @@ export class AddTaskBarComponent implements AfterViewInit, OnInit, OnDestroy {
       if (planForDay) {
         await this._planTaskForCurrentDay(suggestion.taskId);
         didPlanForDay = true;
-      } else {
-        this._taskService.getByIdOnce$(suggestion.taskId).subscribe((task) => {
-          this._taskService.moveToCurrentWorkContext(task);
-        });
+      } else if (suggestion.projectId) {
+        // Project contexts only suggest the project's own backlog tasks, so
+        // this is a move from the backlog, like the issue search's one.
+        this._projectService.moveTaskToTodayList(suggestion.taskId, suggestion.projectId);
       }
 
       if (suggestion.isArchivedTask) {

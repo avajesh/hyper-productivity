@@ -4,6 +4,7 @@ import { EMPTY, firstValueFrom, timer } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, timeout } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { T } from '../../t.const';
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports -- grandfathered layer-boundary debt
 import { GlobalConfigService } from '../../features/config/global-config.service';
 import { isNewerVersion } from '../../util/is-newer-version';
 import { BannerService } from '../banner/banner.service';
@@ -15,6 +16,7 @@ import { isUpdateCheckPossible } from './is-update-check-possible.util';
 
 const RELEASES_API_URL =
   'https://api.github.com/repos/avajesh/hyper-productivity/releases/latest';
+const DOWNLOAD_PAGE_URL = 'https://hyper-productivity.techeia.com';
 const INITIAL_CHECK_DELAY = 30 * 1000;
 const CHECK_INTERVAL = 24 * 60 * 60 * 1000;
 const REQUEST_TIMEOUT = 15 * 1000;
@@ -108,10 +110,7 @@ export class UpdateCheckService {
   }
 
   private _showUpdateBanner(versionTag: string): void {
-    // Built locally from the validated tag instead of trusting the response's
-    // html_url: openExternalUrl only checks the scheme, so a forged response
-    // could otherwise point "Download" at an arbitrary https host.
-    const downloadUrl = `https://github.com/avajesh/hyper-productivity/releases/tag/${versionTag}`;
+
     this._bannerService.open({
       id: BannerId.UpdateAvailable,
       msg: T.APP.B_UPDATE_AVAILABLE.MSG,
@@ -124,7 +123,7 @@ export class UpdateCheckService {
         label: T.APP.B_UPDATE_AVAILABLE.DOWNLOAD,
         fn: () => {
           this._rememberVersion(versionTag);
-          window.ea.openExternalUrl(downloadUrl);
+          window.ea.openExternalUrl(DOWNLOAD_PAGE_URL);
         },
       },
       action2: {

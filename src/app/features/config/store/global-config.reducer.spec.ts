@@ -19,7 +19,7 @@ import {
 } from './global-config.reducer';
 import { updateGlobalConfigSection } from './global-config.actions';
 import { loadAllData } from '../../../root-store/meta/load-all-data.action';
-import { GlobalConfigState } from '../global-config.model';
+import { GlobalConfigState, GlobalSectionConfig } from '../global-config.model';
 import { MemoizedSelector } from '@ngrx/store';
 import { SyncProviderId } from '../../../op-log/sync-providers/provider.const';
 import { AppDataComplete } from '../../../op-log/model/model-config';
@@ -55,6 +55,27 @@ describe('GlobalConfigReducer', () => {
       );
 
       expect(result.misc.isDisableAnimations).toBe(true);
+    });
+
+    it('should strip the removed user-profiles setting from stored data', () => {
+      const incomingConfig = {
+        ...initialGlobalConfigState,
+        appFeatures: {
+          ...initialGlobalConfigState.appFeatures,
+          isEnableUserProfiles: true,
+        },
+      };
+
+      const result = globalConfigReducer(
+        initialGlobalConfigState,
+        loadAllData({
+          appDataComplete: {
+            globalConfig: incomingConfig,
+          } as unknown as AppDataComplete,
+        }),
+      );
+
+      expect('isEnableUserProfiles' in result.appFeatures).toBe(false);
     });
 
     it('should fill missing tasks config fields with defaults', () => {
@@ -120,10 +141,32 @@ describe('GlobalConfigReducer', () => {
       // Existing values preserved
       expect(result.idle.isEnableIdleTimeTracking).toBe(true);
       expect(result.idle.minIdleTime).toBe(5 * 60 * 1000);
-      // Missing value filled from default (must be false = opt-in)
+      // Missing value filled from default
       expect(result.idle.isSuppressIdleDuringFocusMode).toBe(
         DEFAULT_GLOBAL_CONFIG.idle.isSuppressIdleDuringFocusMode,
       );
+    });
+
+    it('should turn priority short syntax on for a config that predates it', () => {
+      const { isEnablePriority, ...legacyShortSyntax } =
+        DEFAULT_GLOBAL_CONFIG.shortSyntax;
+      expect(isEnablePriority).toBe(true);
+
+      const load = (shortSyntax: object): GlobalConfigState =>
+        globalConfigReducer(
+          initialGlobalConfigState,
+          loadAllData({
+            appDataComplete: {
+              globalConfig: { ...initialGlobalConfigState, shortSyntax },
+            } as AppDataComplete,
+          }),
+        );
+
+      expect(load(legacyShortSyntax).shortSyntax.isEnablePriority).toBe(true);
+      expect(
+        load({ ...legacyShortSyntax, isEnablePriority: false }).shortSyntax
+          .isEnablePriority,
+      ).toBe(false);
     });
 
     it('should coerce a legacy null defaultProjectId to the Inbox default (#7891)', () => {
@@ -904,6 +947,20 @@ describe('GlobalConfigReducer', () => {
   });
 
   describe('updateGlobalConfigSection action', () => {
+    it('should ignore the removed user-profiles setting from an old client', () => {
+      const result = globalConfigReducer(
+        initialGlobalConfigState,
+        updateGlobalConfigSection({
+          sectionKey: 'appFeatures',
+          sectionCfg: {
+            isEnableUserProfiles: true,
+          } as unknown as Partial<GlobalSectionConfig>,
+        }),
+      );
+
+      expect('isEnableUserProfiles' in result.appFeatures).toBe(false);
+    });
+
     it('should update sync schedule settings for local actions', () => {
       const result = globalConfigReducer(
         initialGlobalConfigState,

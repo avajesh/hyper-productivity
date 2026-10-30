@@ -22,6 +22,7 @@ import {
 import { dateStrToUtcDate } from '../../../util/date-str-to-utc-date';
 import { isTodayWithOffset } from '../../../util/is-today.util';
 import { getTimeConflictTaskIds } from '../util/get-time-conflict-task-ids';
+import { getEndOfTodayTime, isInLaterTodayWindow } from '../util/later-today-window';
 import {
   getLogicalTodayStartMs,
   isTaskOverdueByThreshold,
@@ -271,7 +272,7 @@ const createSchedulingSnapshotProjector = (): ((
 
 // Snapshot over active-project tasks — matches selectAllTasksInActiveProjects'
 // archived-project filtering AND ordering exactly (it IS its source). Drives the
-// overdue / due-time / deadline / due-day / later-today / today decisions.
+// overdue / due-time / deadline / due-day / later-today / today / done-ids decisions.
 export const selectTaskSchedulingSnapshot = createSelector(
   selectAllTasksInActiveProjects,
   createSchedulingSnapshotProjector(),
@@ -649,22 +650,39 @@ export const selectCurrentTaskParentOrCurrent = createSelector(
 // DECISION runs on the snapshot only (skipped on a timeSpent tick) and emits an
 // ordered {id, subTaskIds} structure; the public selector re-maps it to live
 // TaskWithSubTasks. NOTE: like the original this reads Date.now() for the
-// "later today" cutoff; the snapshot boundary means `now` only advances when a
-// scheduling field (or todayStr/offset) changes rather than on every store tick.
+// "later today" cutoff; the snapshot boundary means `now` only advances when an
+// input changes (a scheduling field, the tracked task, todayStr/offset) rather
+// than on every store tick. A growing `now` can only ever REMOVE entries, so
+// the result stays a SUPERSET of the truth and consumers re-apply the cutoff
+// against the current clock (see work-view's laterTodayTasks).
 export const selectLaterTodayStructure = createSelector(
   selectTaskSchedulingSnapshot,
   selectTodayStr,
   selectStartOfNextDayDiffMs,
-  (snapshot, todayStr, startOfNextDayDiffMs): SnapshotStructureEntry[] => {
+  selectCurrentTaskId,
+  (snapshot, todayStr, startOfNextDayDiffMs, currentTaskId): SnapshotStructureEntry[] => {
     if (!todayStr) {
       return [];
     }
 
     const now = Date.now();
-    // End of "today" with offset: last ms of todayStr + offset
-    const todayDate = dateStrToUtcDate(todayStr);
-    todayDate.setHours(23, 59, 59, 999);
-    const todayEndTime = todayDate.getTime() + startOfNextDayDiffMs;
+    const todayEndTime = getEndOfTodayTime(todayStr, startOfNextDayDiffMs);
+
+    // The tracked task is current, not upcoming: once you work on an
+    // appointment it belongs in the main list, even if it starts later. The
+    // whole subtree goes with it — a tracked SUBTASK takes its parent out,
+    // since the parent is the entry this panel would render, and a tracked
+    // PARENT takes its subtasks out, or a scheduled one would be left behind
+    // as a top-level entry with no parent context.
+    const trackedParentId =
+      currentTaskId && snapshot.find((s) => s.id === currentTaskId)?.parentId;
+    const isTracked = (snap: SchedulingSnapshot): boolean =>
+      // guard: with nothing tracked both ids are null, which would match every
+      // top-level task on the parentId comparison
+      !!currentTaskId &&
+      (snap.id === currentTaskId ||
+        snap.id === trackedParentId ||
+        snap.parentId === currentTaskId);
 
     // Helper to check if task is "in TODAY" via virtual tag pattern
     // Priority: dueWithTime takes precedence over dueDay (mutual exclusivity)
@@ -677,7 +695,7 @@ export const selectLaterTodayStructure = createSelector(
 
     // Helper to check if task is scheduled for later today
     const isScheduledLaterToday = (snap: SchedulingSnapshot): boolean =>
-      !!snap.dueWithTime && snap.dueWithTime >= now && snap.dueWithTime <= todayEndTime;
+      isInLaterTodayWindow(snap.dueWithTime, now, todayEndTime);
 
     // PERF: Single pass to categorize all tasks (was 2 passes before)
     const scheduledParentTasks: SchedulingSnapshot[] = [];
@@ -688,7 +706,7 @@ export const selectLaterTodayStructure = createSelector(
     for (const snap of snapshot) {
       dueWithTimeById.set(snap.id, snap.dueWithTime);
 
-      if (snap.isDone || !isInToday(snap)) continue;
+      if (snap.isDone || isTracked(snap) || !isInToday(snap)) continue;
 
       if (snap.parentId) {
         // Subtask - only care about scheduled ones
@@ -757,8 +775,8 @@ export const selectLaterTodayTasksWithSubTasks = createSelector(
 );
 
 export const selectAllDoneIds = createSelector(
-  selectAllTasksInActiveProjects,
-  (tasks: Task[]): string[] => tasks.filter((t) => t?.isDone).map((t) => t.id),
+  selectTaskSchedulingSnapshot,
+  (snapshot): string[] => snapshot.filter((s) => s.isDone).map((s) => s.id),
 );
 
 // DYNAMIC SELECTORS
@@ -819,17 +837,22 @@ export const selectTasksByIdFactory = (ids: string[]): MemoizedSelector<object, 
     ids ? ids.map((id) => state.entities[id]).filter((task): task is Task => !!task) : [],
   );
 
+export type TaskWithSubTasksCache = Map<
+  string,
+  { task: Task; subTasks: Task[]; result: TaskWithSubTasks }
+>;
+
 export const selectTasksWithSubTasksByIdsFactory = (
   ids: string[],
+  // Defaults to a per-selector-instance (per-subscription) cache keyed by task
+  // id, GC'd with the selector. On a tick where only one task's entity ref
+  // changed, every other task returns its identical previous
+  // `TaskWithSubTasks` object. A list stream that re-mints the selector per
+  // id-set passes one long-lived cache, so adding or reordering a task keeps
+  // the other rows' objects too. Entries are only reused when the task and
+  // subtask refs are identical, so a shared cache can't serve stale data.
+  cache: TaskWithSubTasksCache = new Map(),
 ): MemoizedSelector<object, TaskWithSubTasks[]> => {
-  // Per-selector-instance (per-subscription) cache keyed by task id. Because it
-  // lives in this closure it is naturally isolated from other subscribers and
-  // GC'd with the selector. On a tick where only one task's entity ref changed,
-  // every other task returns its identical previous `TaskWithSubTasks` object.
-  const cache = new Map<
-    string,
-    { task: Task; subTasks: Task[]; result: TaskWithSubTasks }
-  >();
   return createSelector(
     selectTaskFeatureState,
     (state: TaskState): TaskWithSubTasks[] => {
@@ -842,7 +865,7 @@ export const selectTasksWithSubTasksByIdsFactory = (
         }
       }
       // Prune entries for ids no longer requested so the cache can't grow
-      // unbounded as tasks are deleted or move between lists.
+      // unbounded, including a long-lived cache across id-sets.
       if (cache.size > seen.size) {
         for (const key of cache.keys()) {
           if (!seen.has(key)) {
@@ -855,13 +878,24 @@ export const selectTasksWithSubTasksByIdsFactory = (
   );
 };
 
+/**
+ * The task plus its subtasks, or `undefined` when the id is unknown.
+ *
+ * #9946: this used to return a truthy `{ subTasks: [] }` stub for a missing id,
+ * so callers guarding with `if (!task)` were not guarded at all — and an id-less
+ * task reaching a delete wiped every top-level task. Callers must handle
+ * `undefined`; a stale id is normal (a task can be deleted or synced away
+ * between lookup and use), so this is not by itself an error worth reporting.
+ */
 export const selectTaskByIdWithSubTaskData = createSelector(
   selectTaskFeatureState,
-  (state: TaskState, props: { id: string }): TaskWithSubTasks => {
+  (state: TaskState, props: { id: string }): TaskWithSubTasks | undefined => {
     const task = state.entities[props.id];
-    if (!task) {
-      devError('Task data not found for ' + props.id);
-      return { subTasks: [] } as unknown as TaskWithSubTasks;
+    // The id check rejects prototype-property names ('constructor', 'toString',
+    // …) that a plain-object entity map resolves to truthy non-tasks — same
+    // guard the Local REST API handler already applies (#9001).
+    if (!task || task.id !== props.id) {
+      return undefined;
     }
     return mapSubTasksToTask(task, state) as TaskWithSubTasks;
   },

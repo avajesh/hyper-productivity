@@ -203,6 +203,82 @@ describe('ArchiveOperationHandler', () => {
     service = TestBed.inject(ArchiveOperationHandler);
   });
 
+  describe('local operation queue', () => {
+    const createLocalRestoreAction = (taskId: string): PersistentAction =>
+      ({
+        type: TaskSharedActions.restoreTask.type,
+        task: createMockTask(taskId),
+        subTasks: [],
+        meta: { isPersistent: true },
+      }) as unknown as PersistentAction;
+
+    const createDeferred = (): { promise: Promise<void>; resolve: () => void } => {
+      let resolve!: () => void;
+      const promise = new Promise<void>((r) => (resolve = r));
+      return { promise, resolve };
+    };
+
+    it('should run enqueued operations one at a time, in order', async () => {
+      const first = createDeferred();
+      mockTaskArchiveService.deleteTasks.and.callFake((taskIds: string[]) =>
+        taskIds[0] === 'task-1' ? first.promise : Promise.resolve(),
+      );
+
+      const firstRun = service.enqueueLocalOperation(createLocalRestoreAction('task-1'));
+      const secondRun = service.enqueueLocalOperation(createLocalRestoreAction('task-2'));
+      await new Promise((resolve) => setTimeout(resolve));
+
+      expect(mockTaskArchiveService.deleteTasks.calls.allArgs()).toEqual([
+        [['task-1'], {}],
+      ]);
+
+      first.resolve();
+      await Promise.all([firstRun, secondRun]);
+
+      expect(mockTaskArchiveService.deleteTasks.calls.allArgs()).toEqual([
+        [['task-1'], {}],
+        [['task-2'], {}],
+      ]);
+    });
+
+    it('should settle only after every operation enqueued so far has finished', async () => {
+      const removal = createDeferred();
+      mockTaskArchiveService.deleteTasks.and.returnValue(removal.promise);
+      let isSettled = false;
+
+      void service.enqueueLocalOperation(createLocalRestoreAction('task-1'));
+      const settled = service.whenLocalOperationsSettled().then(() => {
+        isSettled = true;
+      });
+      await new Promise((resolve) => setTimeout(resolve));
+
+      expect(isSettled).toBe(false);
+
+      removal.resolve();
+      await settled;
+
+      expect(isSettled).toBe(true);
+    });
+
+    it('should reject only the failing operation and keep the queue running', async () => {
+      mockTaskArchiveService.deleteTasks.and.callFake((taskIds: string[]) =>
+        taskIds[0] === 'task-1'
+          ? Promise.reject(new Error('Archive write failed'))
+          : Promise.resolve(),
+      );
+
+      const failingRun = service.enqueueLocalOperation(
+        createLocalRestoreAction('task-1'),
+      );
+      const nextRun = service.enqueueLocalOperation(createLocalRestoreAction('task-2'));
+
+      await expectAsync(failingRun).toBeRejectedWithError('Archive write failed');
+      await expectAsync(nextRun).toBeResolved();
+      await expectAsync(service.whenLocalOperationsSettled()).toBeResolved();
+      expect(mockTaskArchiveService.deleteTasks).toHaveBeenCalledWith(['task-2'], {});
+    });
+  });
+
   describe('handleOperation', () => {
     it('should expose archive side effects through ArchiveSideEffectPort without mutating action meta', async () => {
       const port: ArchiveSideEffectPort<PersistentAction> = service;
@@ -228,6 +304,19 @@ describe('ArchiveOperationHandler', () => {
     });
 
     describe('moveToArchive action', () => {
+      it('should treat a missing meta as local rather than throwing', async () => {
+        const action = {
+          type: TaskSharedActions.moveToArchive.type,
+          tasks: [createMockTaskWithSubTasks('task-1')],
+        } as unknown as PersistentAction;
+
+        await expectAsync(service.handleOperation(action)).toBeResolved();
+
+        expect(
+          mockArchiveService.writeTasksToArchiveForRemoteSync,
+        ).not.toHaveBeenCalled();
+      });
+
       it('should write tasks to archive for remote sync', async () => {
         const tasks = [
           createMockTaskWithSubTasks('task-1'),
@@ -379,6 +468,21 @@ describe('ArchiveOperationHandler', () => {
         expect(mockTaskArchiveService.updateTask).not.toHaveBeenCalled();
       });
 
+      // A hand-rolled dispatch (e2e fixtures, a plugin) carries no `meta` at
+      // all. That used to throw out of the handler and surface as a devError
+      // plus an "archive operation failed" snack; a missing `meta` reads as
+      // local, the same as an absent isRemote.
+      it('should treat a missing meta as local rather than throwing', async () => {
+        const action = {
+          type: TaskSharedActions.updateTask.type,
+          task: { id: 'task-1', changes: { title: 'Updated Title' } },
+        } as unknown as PersistentAction;
+
+        await expectAsync(service.handleOperation(action)).toBeResolved();
+
+        expect(mockTaskArchiveService.updateTask).not.toHaveBeenCalled();
+      });
+
       it('should skip update for task not in archive (task is non-archived)', async () => {
         // Task is not in archive
         mockTaskArchiveService.hasTask.and.returnValue(Promise.resolve(false));
@@ -416,6 +520,17 @@ describe('ArchiveOperationHandler', () => {
     });
 
     describe('updateTasks action (batch)', () => {
+      it('should treat a missing meta as local rather than throwing', async () => {
+        const action = {
+          type: TaskSharedActions.updateTasks.type,
+          tasks: [{ id: 'task-1', changes: { title: 'Updated 1' } }],
+        } as unknown as PersistentAction;
+
+        await expectAsync(service.handleOperation(action)).toBeResolved();
+
+        expect(mockTaskArchiveService.updateTasks).not.toHaveBeenCalled();
+      });
+
       it('should update multiple archived tasks for remote operations', async () => {
         // Both tasks exist in archive
         mockTaskArchiveService.hasTasksBatch.and.returnValue(

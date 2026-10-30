@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { TaskService } from './task.service';
 import { TaskWithSubTasks } from './task.model';
 import { addSubTask } from './store/task.actions';
+import { PlannerActions } from '../planner/store/planner.actions';
+import { isWontDoTask } from './util/is-wont-do-task';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +23,7 @@ export class TaskDuplicateService {
       projectId: task.projectId || undefined,
       tagIds: task.tagIds || [],
       ...(task.notes && { notes: task.notes }),
+      ...(task.priority !== undefined && { priority: task.priority }),
     };
     const timeData = {
       ...(task.dueDay && { dueDay: task.dueDay }),
@@ -34,7 +37,11 @@ export class TaskDuplicateService {
     if (actualParentId) {
       const subTaskObj = this._taskService.createNewTaskWithDefaults({
         title: `${task.title} (copy)`,
-        additional: { ...taskData, ...timeData },
+        additional: {
+          ...taskData,
+          ...timeData,
+          parentId: actualParentId,
+        },
       });
       taskId = subTaskObj.id;
       this._store.dispatch(
@@ -43,6 +50,14 @@ export class TaskDuplicateService {
           parentId: actualParentId,
         }),
       );
+      if (task.dueDay) {
+        this._store.dispatch(
+          PlannerActions.planTaskForDay({
+            task: subTaskObj,
+            day: task.dueDay,
+          }),
+        );
+      }
     } else {
       taskId = this._taskService.add(
         `${task.title} (copy)`,
@@ -53,7 +68,6 @@ export class TaskDuplicateService {
     }
 
     for (const subTask of task.subTasks) {
-      // Recursively duplicate subtasks without adding the "(copy)" suffix to them
       this._duplicateRecursive(subTask as TaskWithSubTasks, taskId);
     }
 
@@ -64,12 +78,18 @@ export class TaskDuplicateService {
     const subTaskObj = this._taskService.createNewTaskWithDefaults({
       title: task.title,
       additional: {
+        parentId,
         isDone: task.isDone,
+        ...(isWontDoTask(task) && {
+          doneOn: task.doneOn,
+          wontDoOn: task.wontDoOn,
+        }),
         projectId: task.projectId || undefined,
         timeEstimate: task.timeEstimate,
         ...(task.dueDay && { dueDay: task.dueDay }),
         ...(task.dueWithTime && { dueWithTime: task.dueWithTime }),
         ...(task.notes && { notes: task.notes }),
+        ...(task.priority !== undefined && { priority: task.priority }),
       },
     });
     this._store.dispatch(
@@ -78,6 +98,14 @@ export class TaskDuplicateService {
         parentId,
       }),
     );
+    if (task.dueDay) {
+      this._store.dispatch(
+        PlannerActions.planTaskForDay({
+          task: subTaskObj,
+          day: task.dueDay,
+        }),
+      );
+    }
     for (const subSubTask of task.subTasks) {
       this._duplicateRecursive(subSubTask as TaskWithSubTasks, subTaskObj.id);
     }

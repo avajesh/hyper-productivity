@@ -3,7 +3,7 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -14,6 +14,7 @@ import { SnackService } from '../../core/snack/snack.service';
 import { BackupService } from '../../op-log/backup/backup.service';
 import { LocalDraftService } from '../../core/draft/local-draft.service';
 import { T } from '../../t.const';
+import { BackupRepairFailedError } from '../../op-log/core/errors/sync-errors';
 import { TODAY_TAG } from '../../features/tag/tag.const';
 import { ConfirmUrlImportDialogComponent } from '../dialog-confirm-url-import/dialog-confirm-url-import.component';
 import { DialogImportFromUrlComponent } from '../dialog-import-from-url/dialog-import-from-url.component';
@@ -48,7 +49,7 @@ describe('FileImexComponent', () => {
     ]);
     backupServiceSpy.loadCompleteBackup.and.returnValue(Promise.resolve(mockAppData));
     const localDraftServiceSpy = jasmine.createSpyObj('LocalDraftService', [
-      'deleteDraftsForActiveProfile',
+      'deleteAllDrafts',
     ]);
     const matDialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     const importEncryptionHandlerSpy = jasmine.createSpyObj(
@@ -82,7 +83,7 @@ describe('FileImexComponent', () => {
     await TestBed.configureTestingModule({
       imports: [FileImexComponent, TranslateModule.forRoot()],
       providers: [
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideHttpClientTesting(),
         { provide: SnackService, useValue: snackServiceSpy },
         { provide: Router, useValue: routerSpy },
@@ -350,15 +351,15 @@ describe('FileImexComponent', () => {
         true,
         true,
       );
-      // The import replaced this profile's notes wholesale, so every draft's
+      // The import replaced the notes wholesale, so every draft's
       // baseContent now refers to content that no longer exists.
-      expect(mockLocalDraftService.deleteDraftsForActiveProfile).toHaveBeenCalledTimes(1);
+      expect(mockLocalDraftService.deleteAllDrafts).toHaveBeenCalledTimes(1);
     });
 
     it('should not clear drafts when the data is invalid and no import happens', async () => {
       await component['_processAndImportData']('{ invalid json');
 
-      expect(mockLocalDraftService.deleteDraftsForActiveProfile).not.toHaveBeenCalled();
+      expect(mockLocalDraftService.deleteAllDrafts).not.toHaveBeenCalled();
     });
 
     it('should handle invalid JSON data', async () => {
@@ -395,6 +396,19 @@ describe('FileImexComponent', () => {
       expect(mockSnackService.open).toHaveBeenCalledWith({
         type: 'ERROR',
         msg: T.FILE_IMEX.S_ERR_IMPORT_FAILED,
+      });
+    });
+
+    it('should explain an unrepairable backup instead of the generic error (#8279)', async () => {
+      mockBackupService.importCompleteBackup.and.rejectWith(
+        new BackupRepairFailedError(),
+      );
+
+      await component['_processAndImportData'](JSON.stringify(mockAppData));
+
+      expect(mockSnackService.open).toHaveBeenCalledWith({
+        type: 'ERROR',
+        msg: T.FILE_IMEX.S_ERR_IMPORT_UNREPAIRABLE,
       });
     });
 

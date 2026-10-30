@@ -31,20 +31,20 @@ jobs:
           # per-push dev versionCode from the last stable tag.
           fetch-depth: 0
           filter: blob:none
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v6
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v6
         with:
-          node-version: 22
+          node-version-file: .nvmrc
       - name: Setup Java
-        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
           distribution: 'temurin'
           java-version: 21
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
       #      - name: Build with Gradle
       #        run: ./gradlew build
       - name: Setup android-sdk
-        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699 # v4.0.1
+        uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
         with:
           accept-android-sdk-licenses: true
           log-accepted-android-sdk-licenses: true #make accepting the android sdk license verbose
@@ -179,10 +179,39 @@ jobs:
             "${zipalign}" -c -P 16 4 "${apk}"
           done
 
+      # `sync:android` deletes the service-worker files (nothing on Android
+      # registers a service worker, and ngsw.json carries a build timestamp that
+      # breaks F-Droid's reproducible-build verification, #4155). That strip
+      # never fails the build, so assert the outcome on the packaged artifact
+      # instead. No PR triggers this workflow, and no PR workflow could host the
+      # check: android-tests.yml assembles an APK but substitutes a stand-in
+      # smoke page for the Angular bundle, so the assertion would be vacuous.
+      - name: 'Verify no service worker shipped in the APK'
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          apks=(android/app/build/outputs/apk/*/release/*.apk)
+          if [ ${#apks[@]} -eq 0 ]; then
+            echo "::error::no release APK found to verify"
+            exit 1
+          fi
+          for apk in "${apks[@]}"; do
+            # Listing captured first: piping straight into `grep -q` makes grep
+            # exit on the first match, unzip die of SIGPIPE, and pipefail report
+            # that 141 as the pipeline status — so the `if` reads false and the
+            # check passes on exactly the APKs it should catch.
+            listing="$(unzip -l "${apk}")"
+            if printf '%s\n' "${listing}" \
+              | grep -E 'assets/public/(ngsw|safety-worker|worker-basic|sw\.js)'; then
+              echo "::error::${apk} ships service-worker assets; the strip in sync:android did not run (#4155)"
+              exit 1
+            fi
+          done
+
       # APK is now signed automatically by Gradle using signingConfig
 
       - name: 'Upload APK files'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: sup-android-release
           path: android/app/build/outputs/apk/**/*.apk

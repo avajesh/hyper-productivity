@@ -18,7 +18,12 @@ import { download } from '../../util/download';
 import { isDataRepairPossible } from '../validation/is-data-repair-possible.util';
 import { recordCriticalErrorTime } from '../../util/critical-error-signal';
 import { uuidv7 } from '../../util/uuid-v7';
-import { ActionType, Operation, OpType } from '../core/operation.types';
+import {
+  ActionType,
+  isGenesisEntityType,
+  Operation,
+  OpType,
+} from '../core/operation.types';
 import { SINGLETON_ENTITY_ID } from '../core/entity-registry';
 import { CURRENT_SCHEMA_VERSION } from './schema-migration.service';
 import { AppDataComplete, withDefaultModelSlices } from '../model/model-config';
@@ -49,6 +54,9 @@ export class OperationLogMigrationService {
   private languageService = inject(LanguageService);
   private translateService = inject(TranslateService);
   private lockService = inject(LockService);
+
+  /** How long the completed migration dialog stays visible; specs set it to 0. */
+  completionDisplayMs = 1000;
 
   /**
    * Checks if the operation log is in a valid state and migrates legacy data if found.
@@ -109,10 +117,11 @@ export class OperationLogMigrationService {
             return false;
           }
 
-          const allOps = await this.opLogStore.getOpsAfterSeq(0);
-          if (allOps.length > 0) {
-            const firstOp = allOps[0].op;
-            if (firstOp.entityType === 'MIGRATION' || firstOp.entityType === 'RECOVERY') {
+          // Only the first row decides; a full-log read here would decode
+          // every op on every boot (#9921).
+          const firstEntry = await this.opLogStore.getFirstOpEntry();
+          if (firstEntry) {
+            if (isGenesisEntityType(firstEntry.op.entityType)) {
               OpLog.normal(
                 'OperationLogMigrationService: Genesis operation found. Skipping migration.',
               );
@@ -120,15 +129,16 @@ export class OperationLogMigrationService {
             }
 
             if (hasLegacyData) {
+              const orphanCount = await this.opLogStore.countOps();
               OpLog.warn(
-                `OperationLogMigrationService: Found ${allOps.length} orphan operations. ` +
+                `OperationLogMigrationService: Found ${orphanCount} orphan operations. ` +
                   `Clearing them before legacy migration.`,
               );
               await this.opLogStore.clearAllOperations();
             } else {
               OpLog.normal(
-                `OperationLogMigrationService: Found ${allOps.length} operations (fresh install). ` +
-                  `Skipping migration - hydrator will replay them.`,
+                'OperationLogMigrationService: Found existing operations (fresh install). ' +
+                  'Skipping migration - hydrator will replay them.',
               );
               return false;
             }
@@ -162,7 +172,7 @@ export class OperationLogMigrationService {
 
         // Brief delay to show completion status. Keep this cosmetic wait outside
         // the operation-log barrier so queued capture writes can proceed.
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, this.completionDisplayMs));
       }
     } catch (error) {
       OpLog.err('OperationLogMigrationService: Migration failed:', error);

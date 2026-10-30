@@ -27,7 +27,6 @@ import { GlobalConfigService } from '../../features/config/global-config.service
 import { KeyboardConfig, keyboardConfigOrEmpty } from '@sp/keyboard-config';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatBadge } from '@angular/material/badge';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SimpleCounterButtonComponent } from '../../features/simple-counter/simple-counter-button/simple-counter-button.component';
@@ -47,14 +46,9 @@ import { RemoteTrackingPillComponent } from '../../features/tracking-presence/re
 import { TrackingPresenceService } from '../../features/tracking-presence/tracking-presence.service';
 import { DesktopPanelButtonsComponent } from './desktop-panel-buttons/desktop-panel-buttons.component';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { UserProfileButtonComponent } from '../../features/user-profile/user-profile-button/user-profile-button.component';
 import { FocusButtonComponent } from './focus-button/focus-button.component';
 import { EmlDropDirective } from '../../core/drop-paste-input/eml-drop.directive';
-import { ConflictJournalService } from '../../op-log/sync/conflict-journal.service';
-import { UserProfileService } from '../../features/user-profile/user-profile.service';
-
-/** One `DOM_DELTA_LINE` notch, in CSS pixels. Matches the row's icon metrics. */
-const WHEEL_LINE_HEIGHT_PX = 16;
+import { wheelDeltaPx } from '../../util/wheel-delta-px';
 
 /**
  * How long a reveal keeps re-asserting its edge while the row's own box is
@@ -72,7 +66,6 @@ const ACTION_ROW_REVEAL_PIN_MS = 400;
   imports: [
     MatIconButton,
     MatIcon,
-    MatBadge,
     MatTooltip,
     TranslatePipe,
     SimpleCounterButtonComponent,
@@ -87,7 +80,6 @@ const ACTION_ROW_REVEAL_PIN_MS = 400;
     TrackedTaskPillComponent,
     RemoteTrackingPillComponent,
     DesktopPanelButtonsComponent,
-    UserProfileButtonComponent,
     FocusButtonComponent,
   ],
 })
@@ -107,16 +99,10 @@ export class MainHeaderComponent implements OnDestroy {
   private readonly _snackService = inject(SnackService);
   private readonly _configService = inject(GlobalConfigService);
   private readonly _dataInitStateService = inject(DataInitStateService);
-  private readonly _conflictJournal = inject(ConflictJournalService);
-  private readonly _userProfileService = inject(UserProfileService);
 
   readonly isDataLoaded = toSignal(this._dataInitStateService.isAllDataLoadedInitially$, {
     initialValue: false,
   });
-
-  // SPAP-15: persistent badge on the sync icon — count of unreviewed
-  // auto-resolved sync conflicts awaiting review.
-  readonly unreviewedConflictCount = this._conflictJournal.unreviewedCount;
 
   T: typeof T = T;
 
@@ -198,13 +184,13 @@ export class MainHeaderComponent implements OnDestroy {
     { initialValue: false },
   );
   isOnline = toSignal(isOnline$);
-  // State-aware tooltip for the sync button: the icon alone (sync_problem /
+  // State-aware tooltip for the sync button: the icon alone (sync_error /
   // wifi_off) signals a problem but never explains it. Surfacing the state in
   // the tooltip is the ambient counterpart to suppressing the transient
   // network snack on automatic syncs — a persistent problem stays discoverable
   // by glancing at / hovering the always-present header button.
-  // Precedence mirrors the icon @if cascade in the template (disabled →
-  // offline → error → syncing → in-sync); keep the two in sync.
+  // Precedence mirrors `syncIcon` (disabled → offline → error → syncing →
+  // in-sync); keep the two in sync.
   syncTooltip = computed(() => {
     if (!this.syncIsEnabledAndReady()) {
       return T.MH.TRIGGER_SYNC;
@@ -219,9 +205,44 @@ export class MainHeaderComponent implements OnDestroy {
       return T.MH.SYNC_STATE.SYNCING;
     }
     if (this.hasNoPendingOps()) {
-      return T.MH.SYNC_STATE.IN_SYNC;
+      return this.superSyncIsConfirmedInSync()
+        ? T.MH.SYNC_STATE.IN_SYNC_CONFIRMED
+        : T.MH.SYNC_STATE.IN_SYNC;
     }
     return T.MH.TRIGGER_SYNC;
+  });
+  // One icon per state, nothing drawn over it (#10427). All but `wifi_off` are
+  // the SVG icons in `BUILT_IN_SVG_ICONS`: one sync ring at the header's icon
+  // size, with a check, "!" or slash inside, so the arrows stay identical
+  // across states and in-sync differs from pending only by the check.
+  // Same precedence as `syncTooltip`.
+  syncIcon = computed(() => {
+    if (!this.syncIsEnabledAndReady()) {
+      return 'sync_off';
+    }
+    if (!this.isOnline()) {
+      return 'wifi_off';
+    }
+    if (this.syncState() === 'ERROR') {
+      return 'sync_error';
+    }
+    if (this.isSyncInProgress()) {
+      return 'sync_ring';
+    }
+    return this.hasNoPendingOps() ? 'sync_done' : 'sync_ring';
+  });
+  isSyncIconSpinning = computed(
+    () => this.syncIcon() === 'sync_ring' && !!this.isSyncInProgress(),
+  );
+  // Test hook for the E2E sync helpers, which wait on these states. 'local':
+  // every local change is uploaded. 'remote': the remote was also checked
+  // within the last minute. Deliberately independent of the spinner and
+  // the error state, as the checkmark badges it replaces were.
+  syncConfirmation = computed(() => {
+    if (!this.syncIsEnabledAndReady() || !this.isOnline() || !this.hasNoPendingOps()) {
+      return null;
+    }
+    return this.superSyncIsConfirmedInSync() ? 'remote' : 'local';
   });
   readonly isTimeTrackingEnabled = computed(() => {
     return this.globalConfigService.appFeatures().isTimeTrackingEnabled;
@@ -234,12 +255,6 @@ export class MainHeaderComponent implements OnDestroy {
   readonly isSyncIconEnabled = computed(
     () => this.globalConfigService.appFeatures().isSyncIconEnabled,
   );
-  readonly isUserProfilesEnabled = computed(
-    () =>
-      this.globalConfigService.appFeatures().isEnableUserProfiles &&
-      this._userProfileService.isInitialized(),
-  );
-
   /**
    * Add-task, the desktop panel buttons and the plugin side-panel buttons are
    * absent below 600px rather than squeezed: the bottom nav owns all three
@@ -445,7 +460,7 @@ export class MainHeaderComponent implements OnDestroy {
     // fires at trackpad rates. Same source of truth: `app.component` sets `dir`
     // on the document element, which is what the computed value reflected.
     const towardsEnd = document.documentElement.dir === 'rtl' ? -1 : 1;
-    const step = towardsEnd * this._wheelDeltaPx(ev, el.clientWidth);
+    const step = towardsEnd * wheelDeltaPx(ev.deltaY, ev.deltaMode, el.clientWidth);
     const before = el.scrollLeft;
     el.scrollLeft = before + step;
     // Only swallow the gesture if it actually moved the row, so a wheel at
@@ -453,25 +468,6 @@ export class MainHeaderComponent implements OnDestroy {
     if (el.scrollLeft !== before) {
       ev.preventDefault();
     }
-  }
-
-  /**
-   * `deltaY` in CSS pixels, whatever unit the browser reported it in.
-   *
-   * Only `DOM_DELTA_PIXEL` is already pixels. Firefox reports `DOM_DELTA_LINE`
-   * for a classic mouse wheel -- about ±3 per notch -- so taking `deltaY` raw
-   * moves the row 3px and then `preventDefault()`s, which reads as broken
-   * rather than absent. `DOM_DELTA_PAGE` is reachable from the Windows
-   * "one screen at a time" setting.
-   */
-  private _wheelDeltaPx(ev: WheelEvent, clientWidth: number): number {
-    if (ev.deltaMode === WheelEvent.DOM_DELTA_LINE) {
-      return ev.deltaY * WHEEL_LINE_HEIGHT_PX;
-    }
-    if (ev.deltaMode === WheelEvent.DOM_DELTA_PAGE) {
-      return ev.deltaY * clientWidth;
-    }
-    return ev.deltaY;
   }
 
   constructor() {

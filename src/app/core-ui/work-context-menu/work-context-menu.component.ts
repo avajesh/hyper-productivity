@@ -82,6 +82,7 @@ export class WorkContextMenuComponent implements OnInit {
   isArchived$: Observable<boolean> = of(false);
   isDone$: Observable<boolean> = of(false);
   isSharedOnPlainspace$: Observable<boolean> = of(false);
+  inviteUrl$: Observable<string | null> = of(null);
   base: string = 'project';
   shareSupport: ShareSupport = 'none';
 
@@ -103,6 +104,7 @@ export class WorkContextMenuComponent implements OnInit {
       this.isSharedOnPlainspace$ = this._store.select(
         selectIsProjectSharedOnPlainspace(this.contextId),
       );
+      this.inviteUrl$ = this._plainspaceShareService.inviteUrl$(this.contextId);
     }
     const support = await this._shareService.getShareSupport();
     this._setShareSupport(support);
@@ -156,6 +158,57 @@ export class WorkContextMenuComponent implements OnInit {
       }
       this._projectService.remove(project);
     }
+  }
+
+  async rename(): Promise<void> {
+    if (this.isForProject) {
+      const project = await firstValueFrom(
+        this._projectService.getByIdOnce$(this.contextId),
+      );
+      if (!project) {
+        return;
+      }
+      const result = await firstValueFrom(
+        this._matDialog
+          .open(DialogPromptComponent, {
+            restoreFocus: true,
+            data: {
+              txtValue: project.title,
+              placeholder: T.F.PROJECT.D_RENAME.PLACEHOLDER,
+            },
+          })
+          .afterClosed(),
+      );
+
+      const trimmed = (result as string | undefined)?.trim();
+      if (!trimmed || trimmed === project.title) {
+        return;
+      }
+      this._projectService.update(this.contextId, { title: trimmed });
+      return;
+    }
+
+    const tag = await firstValueFrom(this._tagService.getTagById$(this.contextId));
+    if (!tag) {
+      return;
+    }
+    const result = await firstValueFrom(
+      this._matDialog
+        .open(DialogPromptComponent, {
+          restoreFocus: true,
+          data: {
+            txtValue: tag.title,
+            placeholder: T.F.TAG.D_RENAME.PLACEHOLDER,
+          },
+        })
+        .afterClosed(),
+    );
+
+    const trimmed = (result as string | undefined)?.trim();
+    if (!trimmed || trimmed === tag.title) {
+      return;
+    }
+    this._tagService.updateTag(this.contextId, { title: trimmed });
   }
 
   async completeProject(): Promise<void> {
@@ -313,6 +366,12 @@ export class WorkContextMenuComponent implements OnInit {
       project.id,
       project.title,
     );
+  }
+
+  copyPlainspaceInviteUrl(url: string): void {
+    // Synchronous from the click (the URL was resolved when the menu opened);
+    // surfaces its own copied/failed snack.
+    void this._plainspaceShareService.copyInviteUrl(url);
   }
 
   async duplicateProject(): Promise<void> {

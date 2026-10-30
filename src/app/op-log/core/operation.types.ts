@@ -1,5 +1,5 @@
 // Generic, framework-agnostic primitives come from @sp/sync-core.
-// Hyper Productivity-specific types (entity-type union, app action-type enum,
+// Super Productivity-specific types (entity-type union, app action-type enum,
 // sync-import reasons, repair payloads, full-state wrapper) live alongside this
 // file in the app.
 
@@ -38,7 +38,21 @@ export const FULL_STATE_OP_TYPES = fullStateOpTypeHelpers.FULL_STATE_OP_TYPES;
 export const isFullStateOpType = fullStateOpTypeHelpers.isFullStateOpType;
 
 /**
- * Entity type — Hyper Productivity's domain set, sourced from `@sp/shared-schema`
+ * Genesis entity types: the MIGRATION (legacy `pf` → op-log) and RECOVERY
+ * (disaster recovery) Batch op that opens a client's log carrying its whole
+ * state. A genesis op is local bookkeeping, not sync history — it replays as a
+ * no-op on every other client, is never counted by `hasSyncedOps()`, and on
+ * API-based providers is never uploaded (#9921). Single source of truth.
+ */
+const GENESIS_ENTITY_TYPES: ReadonlySet<EntityType> = new Set<EntityType>([
+  'MIGRATION',
+  'RECOVERY',
+]);
+export const isGenesisEntityType = (entityType: string): boolean =>
+  GENESIS_ENTITY_TYPES.has(entityType as EntityType);
+
+/**
+ * Entity type — Super Productivity's domain set, sourced from `@sp/shared-schema`
  * so client and server agree on the union.
  */
 export type EntityType = SharedEntityType;
@@ -56,7 +70,7 @@ export type SyncImportReason =
   | 'REPAIR';
 
 /**
- * Hyper Productivity's narrowed Operation type: tightens `actionType` and
+ * Super Productivity's narrowed Operation type: tightens `actionType` and
  * `entityType` to the app's enums and adds the optional `syncImportReason`
  * field carried on full-state ops.
  */

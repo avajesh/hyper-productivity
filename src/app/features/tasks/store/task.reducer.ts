@@ -43,6 +43,7 @@ import { Update } from '@ngrx/entity';
 import { unique } from '../../../util/unique';
 import { roundDurationVanilla } from '../../../util/round-duration';
 import { loadAllData } from '../../../root-store/meta/load-all-data.action';
+import { allDataWasLoaded } from '../../../root-store/meta/all-data-was-loaded.actions';
 import { createReducer, on } from '@ngrx/store';
 import { PlannerActions } from '../../planner/store/planner.actions';
 import { TaskSharedActions } from '../../../root-store/meta/task-shared.actions';
@@ -177,6 +178,9 @@ export const initialTaskState: TaskState = taskAdapter.getInitialState({
 
 export const taskReducer = createReducer<TaskState>(
   initialTaskState,
+
+  // Operation-log-only startup replays entities without dispatching loadAllData.
+  on(allDataWasLoaded, (state) => ({ ...state, isDataLoaded: true })),
 
   // META ACTIONS
   // ------------
@@ -317,15 +321,17 @@ export const taskReducer = createReducer<TaskState>(
 
   on(setCurrentTask, (state, { id }) => {
     if (id) {
+      const task = state.entities[id];
+      if (!task) {
+        TaskLog.warn('setCurrentTask: task not found, unsetting current task', { id });
+        return {
+          ...state,
+          currentTaskId: null,
+        };
+      }
       const taskToStartId = id;
       return {
-        ...taskAdapter.updateOne(
-          {
-            id: taskToStartId,
-            changes: { isDone: false, doneOn: undefined },
-          },
-          state,
-        ),
+        ...state,
         currentTaskId: taskToStartId,
         selectedTaskId: state.selectedTaskId && taskToStartId,
       };
@@ -498,7 +504,11 @@ export const taskReducer = createReducer<TaskState>(
   ),
 
   on(removeTimeSpent, (state, { id, date, duration }) => {
-    const task = getTaskById(id, state);
+    const task = state.entities[id];
+    if (!task) {
+      TaskLog.warn('removeTimeSpent: task not found, skipping', { id });
+      return state;
+    }
 
     let stateAfterUpdate = state;
     if (task.subTaskIds && task.subTaskIds.length > 0) {
@@ -517,7 +527,6 @@ export const taskReducer = createReducer<TaskState>(
         state,
       );
     }
-
     const currentTimeSpentForTickDay =
       (task.timeSpentOnDay && +task.timeSpentOnDay[date]) || 0;
 

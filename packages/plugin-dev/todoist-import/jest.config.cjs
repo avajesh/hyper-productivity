@@ -19,7 +19,6 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   roots: ['<rootDir>/src'],
   moduleNameMapper: {
-    '^@hyper-productivity/plugin-api$':
-      '<rootDir>/node_modules/@hyper-productivity/plugin-api/src/index.ts',
+    '^@super-productivity/plugin-api$': '<rootDir>/../../plugin-api/src/index.ts',
   },
 };

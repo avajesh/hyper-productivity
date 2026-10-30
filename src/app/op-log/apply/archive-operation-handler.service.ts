@@ -79,7 +79,8 @@ export const isArchiveAffectingAction = (action: Action): action is PersistentAc
  *
  * ## Entry Points
  *
- * 1. **Local operations**: Called by ArchiveOperationHandlerEffects after action dispatch
+ * 1. **Local operations**: Called by ArchiveOperationHandlerEffects after action dispatch,
+ *    through the local queue (enqueueLocalOperation)
  * 2. **Remote operations**: Called by OperationApplierService after applying remote operations
  *
  * ## Why This Architecture
@@ -141,6 +142,32 @@ export class ArchiveOperationHandler implements ArchiveSideEffectPort<Persistent
     this._injector,
     ArchiveCompressionService,
   );
+
+  // Tail of the local operation queue. Never rejects, so one failed operation
+  // does not block the ones after it.
+  private _localQueue: Promise<void> = Promise.resolve();
+
+  /**
+   * Queue a local action's archive side effects behind every local action
+   * queued before it. ArchiveOperationHandlerEffects calls this synchronously
+   * on dispatch, so a caller that dispatches and then awaits
+   * whenLocalOperationsSettled() knows the archive reflects its action (#9952).
+   *
+   * @returns Promise that settles with this action's own outcome
+   */
+  enqueueLocalOperation(action: PersistentAction): Promise<void> {
+    const run = this._localQueue.then(() => this.handleOperation(action));
+    this._localQueue = run.catch(() => undefined);
+    return run;
+  }
+
+  /**
+   * Resolves once every local operation queued so far has finished,
+   * whether it succeeded or failed.
+   */
+  whenLocalOperationsSettled(): Promise<void> {
+    return this._localQueue;
+  }
 
   /**
    * Process an action and handle any archive-related side effects.
@@ -215,7 +242,7 @@ export class ArchiveOperationHandler implements ArchiveSideEffectPort<Persistent
    * @remoteBehavior Executes - Writes tasks to archiveYoung
    */
   private async _handleMoveToArchive(action: PersistentAction): Promise<void> {
-    if (!action.meta.isRemote) {
+    if (!action.meta?.isRemote) {
       return; // Local: already written by ArchiveService before dispatch
     }
     const tasks = (action as ReturnType<typeof TaskSharedActions.moveToArchive>).tasks;
@@ -245,7 +272,7 @@ export class ArchiveOperationHandler implements ArchiveSideEffectPort<Persistent
    * @remoteBehavior Executes - Updates task in archive if it exists there
    */
   private async _handleUpdateTask(action: PersistentAction): Promise<void> {
-    if (!action.meta.isRemote) {
+    if (!action.meta?.isRemote) {
       return; // Local: already written by TaskArchiveService before dispatch
     }
 
@@ -276,7 +303,7 @@ export class ArchiveOperationHandler implements ArchiveSideEffectPort<Persistent
    * @remoteBehavior Executes - Updates tasks in archive if they exist there
    */
   private async _handleUpdateTasks(action: PersistentAction): Promise<void> {
-    if (!action.meta.isRemote) {
+    if (!action.meta?.isRemote) {
       return; // Local: already written by TaskArchiveService before dispatch
     }
 

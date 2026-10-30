@@ -1,19 +1,21 @@
 For all current downloads, package links, and platform-specific notes: [check the wiki](https://github.com/super-productivity/super-productivity/wiki/2.01-Downloads-and-Install).
 
-### Features
+### Improvements
 
-- Show the currently tracked task in the browser tab title (#9306)
-- Add URL-scheme task actions on Android (#9792)
-- Update the Turkish translation (#9797)
+- Collapse project task tables in the daily summary.
+- Open the download page directly from the update banner.
+- Subtler due badges, mobile play button, and planner calendar colors.
 
 ### Fixes
 
-- Migrate legacy data missing newer model sections (#9808)
-- Prevent touch swipes from moving or resizing schedule events (#9807)
-- Stop the iOS add-task bar from jumping when the keyboard layout changes (#9779, #9809)
-- Ensure reminders no longer block overdue repeating-task cleanup (#9802)
-- Improve sync repair reliability and privacy hardening (#9795)
+- Ask for confirmation before loading remote sync data when it is missing your previous uploads.
+- Show an exact-alarm hint in reminder settings.
+- Use locale-correct leading zeros in short dates.
+- Allow touch scrolling over recurring task rows.
+- Pause issue and calendar polling while offline and catch up on reconnect.
+- Keep planner calendar colors up to date.
 
-### Performance
+### Desktop fixes
 
-- Improve SuperSync processing and maintenance of older operations (#9791, #9801)
+- Run pending shutdown work when quitting from the tray.
+- Prevent two Snap revisions from opening the same local database.
