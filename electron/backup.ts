@@ -47,7 +47,7 @@ const getBackupDir = (): string => path.join(app.getPath('userData'), `backups`)
 const getBackupDirWinStore = (): string =>
   getBackupDir().replace(
     'Roaming',
-    `Local\Packages\53707johannesjo.HyperProductivity_ch45amy23cdv6\LocalCache\Roaming`,
+    `Local\\Packages\\53707johannesjo.HyperProductivity_ch45amy23cdv6\\LocalCache\\Roaming`,
   );
 
 /**
