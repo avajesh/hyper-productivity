@@ -744,5 +744,18 @@ describe('PlannerService', () => {
         }, 10);
       });
     });
+
+    it('should toggle hideWeekends and update includedWeekDays$', (done) => {
+      service.setHideWeekends(false);
+      service.includedWeekDays$.pipe(first()).subscribe((weekdays) => {
+        expect(weekdays).toEqual([0, 1, 2, 3, 4, 5, 6]);
+
+        service.toggleHideWeekends();
+        service.includedWeekDays$.pipe(first()).subscribe((updatedWeekdays) => {
+          expect(updatedWeekdays).toEqual([1, 2, 3, 4, 5]);
+          done();
+        });
+      });
+    });
   });
 });

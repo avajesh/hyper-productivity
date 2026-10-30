@@ -1,0 +1,20 @@
+:host {
+  display: block;
+}
+
+.dialog-header-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: var(--c-primary, #059669);
+}
+
+.dialog-description {
+  font-size: 14px;
+  margin-bottom: 16px;
+  opacity: 0.85;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 12px;
+}

@@ -18,6 +18,7 @@ import { selectActiveTaskRepeatCfgs } from '../task-repeat-cfg/store/task-repeat
 import { Log } from '../../core/log';
 import { LayoutService } from '../../core-ui/layout/layout.service';
 import { buildDayWindow } from './util/build-day-window';
+import { LS } from '../../core/persistence/storage-keys.const';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +44,23 @@ export class PlannerService {
   public isLoadingMore$ = new BehaviorSubject<boolean>(false);
   private _loadMoreTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  includedWeekDays$ = of([0, 1, 2, 3, 4, 5, 6]);
+  private _hideWeekends$ = new BehaviorSubject<boolean>(
+    localStorage.getItem(LS.PLANNER_HIDE_WEEKENDS) === 'true',
+  );
+  readonly hideWeekends$: Observable<boolean> = this._hideWeekends$.asObservable();
+
+  setHideWeekends(hide: boolean): void {
+    this._hideWeekends$.next(hide);
+    localStorage.setItem(LS.PLANNER_HIDE_WEEKENDS, String(hide));
+  }
+
+  toggleHideWeekends(): void {
+    this.setHideWeekends(!this._hideWeekends$.value);
+  }
+
+  includedWeekDays$ = this._hideWeekends$.pipe(
+    map((hide) => (hide ? [1, 2, 3, 4, 5] : [0, 1, 2, 3, 4, 5, 6])),
+  );
 
   constructor() {
     // Reset to initial count when breakpoint changes, but only if user hasn't scrolled yet

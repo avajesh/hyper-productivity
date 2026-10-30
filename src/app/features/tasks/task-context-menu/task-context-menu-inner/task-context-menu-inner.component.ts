@@ -1,3 +1,7 @@
+import { DialogSaveTaskTemplateComponent } from '../../task-template/dialog-save-task-template/dialog-save-task-template.component';
+import { DialogManageTaskTemplatesComponent } from '../../task-template/dialog-manage-task-templates/dialog-manage-task-templates.component';
+import { canConvertTaskToSubTask } from '../../util/can-convert-task-to-sub-task';
+import { DialogMoveToSubtaskComponent } from '../../dialog-move-to-subtask/dialog-move-to-subtask.component';
 import { TaskPriorityIndicatorComponent } from '../../task-priority-indicator/task-priority-indicator.component';
 import {
   TASK_PRIORITY_LABEL_KEY,
@@ -604,6 +608,28 @@ export class TaskContextMenuInnerComponent implements AfterViewInit, OnDestroy {
     if (this.task) {
       this._taskService.zoomTask(this.task.id);
     }
+  }
+
+  canMoveToSubTask(): boolean {
+    return canConvertTaskToSubTask(this.task);
+  }
+
+  moveToSubTask(): void {
+    this._matDialog.open(DialogMoveToSubtaskComponent, {
+      data: { task: this.task },
+    });
+  }
+
+  saveAsTemplate(): void {
+    this._matDialog.open(DialogSaveTaskTemplateComponent, {
+      data: { task: this.task },
+    });
+  }
+
+  insertTemplateAsSubtasks(): void {
+    this._matDialog.open(DialogManageTaskTemplatesComponent, {
+      data: { targetParentId: this.task.id, targetProjectId: this.task.projectId },
+    });
   }
 
   outdentTask(): void {

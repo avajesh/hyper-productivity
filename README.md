@@ -41,9 +41,12 @@
 | **Subtask Nesting Depth** | ❌ **Strictly 1 flat level** (`!parentId`) | ✅ **Infinite Hierarchies** (`Task › Subtask › Sub-subtask › ...`) |
 | **Parent Task Time Tracking** | ❌ **Blocked** (Play button hidden; clicks force-redirected to 1st child) | ✅ **Independent Tracking** (Track management, research, or review directly on parents) |
 | **Time & Estimate Rollups** | ⚠️ Flat sum of direct subtasks only | ✅ **Recursive Aggregation** (Times and estimates bubble up the entire ancestor chain) |
+| **Task Hierarchy Templates** | ❌ None (Manual recreation) | ✅ **1-Click Tree Templates** (Save & instantiate full task hierarchies) |
+| **Effortless Reparenting** | ❌ Drag & drop only | ✅ **"Move as Subtask to..."** (Searchable picker with cycle protection) |
+| **Planner 5-Day Work Week** | ❌ 7-day view only | ✅ **Hide Weekends Toggle** (Instant 5-day Mon–Fri work schedule) |
+| **Trash Bin / Soft Delete** | ⚠️ Buried inside History | ✅ **1-Click Sidebar Trash Bin** (30-day safety net & tree restore) |
 | **Tree Breadcrumb Trail** | ❌ None | ✅ **Interactive Breadcrumbs** in Detail Panel (`Parent › Child › Grandchild`) |
 | **Focus Subtree View** | ❌ None | ✅ **"Zoom Into Task"** mode to isolate any sub-project |
-| **Level Reparenting** | ❌ Manual drag only | ✅ **"Move Up One Level"** outdent shortcut & cycle prevention |
 | **Visual Focus Themes** | Standard Material palettes | ✅ Curated palettes like **Everforest** (emerald/teal) & **Zen** for eye comfort |
 | **Privacy & Offline** | 100% Local-first | ✅ **100% Local-first, zero telemetry, offline-by-default** |
 
@@ -73,13 +76,24 @@ Creating deep subtasks is fast, intuitive, and keyboard-friendly:
 3. **Keyboard Shortcut:** Highlight any subtask in the list and press **`A`** or **`Ctrl + Enter`** (`Cmd + Enter` on macOS).
 4. **Drag & Drop:** Simply drag any task and drop it into another subtask's expanded children list.
 
-### 5. 🔌 Powerful Integrations for Developers & Creators
+### 5. 📋 Reusable Task Hierarchy Templates
+Save any task and its entire nested hierarchy into a reusable template with notes, checklist subtasks, and time estimates:
+* **Save as Template:** Right-click any task &rarr; click **"Save as template"**.
+* **Template Drawer:** Access your template library anytime from the sidebar or task menus.
+* **Instant Instantiation:** Generate complex project checklists or multi-level sprint tasks into Today or any project in one click.
+
+### 6. ⚡ Frictionless Ergonomics
+* **"Move as Subtask to...":** Instantly nest any task under another with a fast search dialog—no fragile dragging across long screens.
+* **Planner 5-Day Work Week:** Switch between 5-Day (Mon–Fri) and 7-Day view with a single click in the Planner toolbar.
+* **Direct-Access Trash Bin:** 1-click access to **Recently Deleted** right from the main navigation sidebar to safeguard your deep hierarchies.
+
+### 7. 🔌 Powerful Integrations for Developers & Creators
 Auto-import tasks and keep your workflow synchronized without opening a dozen browser tabs:
 * **Jira:** Two-way sync, transitions, and automatic worklog submission.
 * **GitHub & GitLab:** Search and import issues assigned to you or across repositories.
 * **OpenProject & CalDAV / iCal:** Connect your project management milestones and calendar schedules.
 
-### 6. 🛡️ 100% Local-First, Private & Free Forever
+### 8. 🛡️ 100% Local-First, Private & Free Forever
 * **Your Data Stays on Your Device:** All tasks, time entries, and project notes are stored in local IndexedDB storage.
 * **No Telemetry, No Accounts, No Paywalls:** No mandatory sign-ups, tracking scripts, or premium tiers.
 * **Optional Encrypted Sync:** When you want your data across multiple devices, sync peer-to-peer using WebDAV, Google Drive, Dropbox, or your private SuperSync server.

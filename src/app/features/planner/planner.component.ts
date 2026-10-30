@@ -1,4 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LS } from '../../core/persistence/storage-keys.const';
 import { Store } from '@ngrx/store';
 import { DateService } from '../../core/date/date.service';
 import { PlannerActions } from './store/planner.actions';
@@ -23,6 +28,10 @@ import { selectPlannerDayMap } from './store/planner.selectors';
     PlannerPlanViewComponent,
     CdkScrollable,
     PlannerCalendarNavComponent,
+    MatButton,
+    MatIcon,
+    MatTooltip,
+    TranslatePipe,
   ],
 })
 export class PlannerComponent {
@@ -32,6 +41,13 @@ export class PlannerComponent {
   layoutService = inject(LayoutService);
 
   readonly T = T;
+  readonly hideWeekends = toSignal(this._plannerService.hideWeekends$, {
+    initialValue: localStorage.getItem(LS.PLANNER_HIDE_WEEKENDS) === 'true',
+  });
+
+  toggleHideWeekends(): void {
+    this._plannerService.toggleHideWeekends();
+  }
 
   private _days = toSignal(this._plannerService.days$, { initialValue: [] });
   private _plannerDayMap = toSignal(this._store.select(selectPlannerDayMap), {

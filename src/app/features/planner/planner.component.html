@@ -1,3 +1,18 @@
+<div class="planner-header-bar">
+  <div class="planner-actions">
+    <button
+      mat-button
+      type="button"
+      class="toggle-weekends-btn"
+      [class.is-active]="hideWeekends()"
+      (click)="toggleHideWeekends()"
+      [matTooltip]="(hideWeekends() ? T.F.PLANNER.SHOW_WEEKENDS : T.F.PLANNER.HIDE_WEEKENDS) | translate"
+    >
+      <mat-icon>{{ hideWeekends() ? 'weekend' : 'work' }}</mat-icon>
+      <span>{{ (hideWeekends() ? T.F.PLANNER.FIVE_DAY_VIEW : T.F.PLANNER.SEVEN_DAY_VIEW) | translate }}</span>
+    </button>
+  </div>
+</div>
 @if (layoutService.isXs()) {
   <planner-calendar-nav
     [visibleDayDate]="planView.visibleDayDate()"

@@ -221,6 +221,39 @@
       </span>
     </button>
   }
+  @if (isAdvancedControls() && !task.isDone && canMoveToSubTask()) {
+    <button
+      (click)="moveToSubTask()"
+      mat-menu-item
+    >
+      <span class="menuItemLeft">
+        <mat-icon>subdirectory_arrow_right</mat-icon>
+        {{ 'Move as subtask to...' }}
+      </span>
+    </button>
+  }
+  @if (isAdvancedControls() && !task.isDone) {
+    <button
+      (click)="saveAsTemplate()"
+      mat-menu-item
+    >
+      <span class="menuItemLeft">
+        <mat-icon>bookmark_add</mat-icon>
+        {{ 'Save as template' }}
+      </span>
+    </button>
+  }
+  @if (isAdvancedControls() && !task.isDone) {
+    <button
+      (click)="insertTemplateAsSubtasks()"
+      mat-menu-item
+    >
+      <span class="menuItemLeft">
+        <mat-icon>auto_awesome</mat-icon>
+        {{ 'Insert template as subtasks...' }}
+      </span>
+    </button>
+  }
 
   @if (!task.subTaskIds.length) {
     <button

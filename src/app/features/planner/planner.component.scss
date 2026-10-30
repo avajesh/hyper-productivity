@@ -3,6 +3,35 @@
   flex-direction: column;
   height: 100%;
 
+  .planner-header-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 6px 16px;
+    border-bottom: 1px solid var(--c-border, rgba(0, 0, 0, 0.08));
+    background: inherit;
+
+    .toggle-weekends-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.85;
+      transition:
+        opacity 0.2s ease,
+        color 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &.is-active {
+        color: var(--c-primary, #059669);
+      }
+    }
+  }
+
   planner-plan-view {
     flex: 1;
     min-height: 0;

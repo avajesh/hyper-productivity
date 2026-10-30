@@ -935,6 +935,10 @@
       }
     },
     "PLANNER": {
+      "SHOW_WEEKENDS": "Show weekends (7-day view)",
+      "HIDE_WEEKENDS": "Hide weekends (5-day view)",
+      "FIVE_DAY_VIEW": "5-Day View",
+      "SEVEN_DAY_VIEW": "7-Day View",
       "D": {
         "ADD_PLANNED": {
           "RE_PLAN_ALL": "Reschedule all"

@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-header-icon">bookmark_add</mat-icon>
+  <span>Save as template</span>
+</h2>
+
+<mat-dialog-content>
+  <p class="dialog-description">
+    Save <strong>{{ data.task.title }}</strong> and all its subtasks as a reusable template.
+  </p>
+
+  <form
+    #formEl="ngForm"
+    (ngSubmit)="formEl.valid && save()"
+  >
+    <mat-form-field
+      appearance="outline"
+      class="full-width"
+    >
+      <mat-label>Template Name</mat-label>
+      <input
+        matInput
+        type="text"
+        [ngModel]="templateTitle()"
+        (ngModelChange)="templateTitle.set($event)"
+        required
+        autofocus
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="full-width"
+    >
+      <mat-label>Description (optional)</mat-label>
+      <input
+        matInput
+        type="text"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+        placeholder="e.g. Standard release checklist"
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    type="button"
+    (click)="close()"
+  >
+    {{ T.G.CANCEL | translate }}
+  </button>
+  <button
+    mat-button
+    color="primary"
+    type="button"
+    (click)="save()"
+    [disabled]="!templateTitle().trim()"
+  >
+    {{ T.G.SAVE | translate }}
+  </button>
+</mat-dialog-actions>

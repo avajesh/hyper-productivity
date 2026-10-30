@@ -1,3 +1,5 @@
+import { DialogManageTaskTemplatesComponent } from '../../features/tasks/task-template/dialog-manage-task-templates/dialog-manage-task-templates.component';
+import { DialogRecentlyDeletedComponent } from '../../features/tasks/recently-deleted/dialog-recently-deleted/dialog-recently-deleted.component';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
@@ -232,6 +234,22 @@ export class MagicNavConfigService {
 
       // Separator
       { type: 'separator', id: 'sep-3', mtAuto: true },
+
+      {
+        type: 'action',
+        id: 'task-templates',
+        label: 'Task Templates',
+        icon: 'auto_awesome',
+        action: () => this._matDialog.open(DialogManageTaskTemplatesComponent),
+      },
+      {
+        type: 'action',
+        id: 'recently-deleted',
+        label: 'Recently Deleted',
+        icon: 'delete_sweep',
+        action: () =>
+          this._matDialog.open(DialogRecentlyDeletedComponent, { restoreFocus: true }),
+      },
 
       // App Section
       ...(this.isSearchEnabled()

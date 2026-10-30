@@ -81,3 +81,39 @@ Hyper Productivity provides four convenient ways to create nested subtasks:
 3. **Keyboard Shortcut:** With any subtask highlighted, press **`A`** or **`Ctrl + Enter`** (`Cmd + Enter` on macOS).
 4. **Drag and Drop:** Drag a task into any open subtask's drop area.
 
+
+---
+
+## 5. Effortless Reparenting ("Move as subtask to...")
+
+Dragging tasks across long lists or on touchscreen devices often results in accidental drops or misaligned nesting. Hyper Productivity introduces **"Move as subtask to..."**:
+- **Accessible Anywhere:** Available directly in the context menu for any task.
+- **Searchable Selector:** An autocomplete dialog allows quick searching across all active tasks.
+- **Cycle Prevention:** Uses strict ancestor walking (`canApplyConvertToSubTask`) to mathematically eliminate cyclical nesting.
+- **Hierarchy Breadcrumbs:** Displays full parent paths (`Parent › Subtask`) for candidate parents in the selector, so you know exactly where the task will land.
+
+---
+
+## 6. Reusable Task Hierarchy Templates
+
+Complex tasks frequently follow predictable blueprints (e.g., *Product Release Checklist*, *Bug Investigation*, *Client Onboarding*, *Sprint Retrospective*).
+- **Save as Template:** Right-click any task (and its arbitrary depth of subtasks) &rarr; select **`Save as template`**.
+- **Template Library:** Access the **Task Templates** drawer directly from the main sidebar or task context menus.
+- **Deep Instantiation:** With one click, instantiate a complete task tree with notes, time estimates, and nested subtasks into your current project or as child tasks under an existing parent.
+
+---
+
+## 7. Planner 5-Day Work Week (Hide Weekends)
+
+For professionals who operate on a Monday–Friday schedule, weekend columns consume valuable screen width:
+- **Instant View Toggle:** A dedicated toggle button in the Planner header allows switching between **5-Day View** (Monday–Friday) and **7-Day View** (full week).
+- **Persistent Preference:** Remembers your view mode locally without cloud or sync interference.
+
+---
+
+## 8. Direct-Access Trash Bin (Recently Deleted)
+
+Accidental deletion of a high-level task with nested subtasks shouldn't cause permanent data loss:
+- **1-Click Sidebar Access:** The **Recently Deleted** drawer is directly available from the navigation sidebar.
+- **30-Day Retention:** Retains deleted tasks and complete subtrees for 30 days.
+- **Full Hierarchy Restoration:** Restoring a parent task automatically restores its complete nested subtask tree and time tracking history.
